@@ -30,7 +30,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/cormorant_garamond_medium"
-        android:text="Planta "
+        android:text="PLANTA"
         android:textColor="#3E535D"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"

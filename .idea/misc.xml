@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/font/.xml" value="0.2835897435897436" />
+        <entry key="app/src/main/res/font/cormorant_garamond.xml" value="0.18020833333333333" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11854103343465046" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/button_shape.xml" value="0.12537993920972645" />
       </map>
     </option>
   </component>
