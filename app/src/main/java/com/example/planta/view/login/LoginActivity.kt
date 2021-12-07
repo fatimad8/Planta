@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.planta.R
 import com.example.planta.view.MainActivity
+import com.example.planta.view.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
         var emailEditText=findViewById<EditText>(R.id.editTextLogEmail)
         var passEditText= findViewById<EditText>(R.id.editTextLogPass)
         val vm:loginViewModel by viewModels()
+        var signUp=findViewById<TextView>(R.id.textViewSignUp)
 
 
         buttonLogin.setOnClickListener {
@@ -32,5 +35,12 @@ class LoginActivity : AppCompatActivity() {
                 })
 
         }
+
+
+        signUp.setOnClickListener {
+            startActivity(Intent(this,RegisterActivity::class.java))
+        }
     }
+
+
 }
