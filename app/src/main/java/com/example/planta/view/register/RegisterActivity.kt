@@ -17,29 +17,35 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        val regButton=findViewById<Button>(R.id.buttonReg)
-        val fname=findViewById<EditText>(R.id.editTextRegFullname)
-        val email= findViewById<EditText>(R.id.editTextRegEmail)
-        val pass= findViewById<EditText>(R.id.editTextRegPass)
+        val regButton = findViewById<Button>(R.id.buttonReg)
+        val fname = findViewById<EditText>(R.id.editTextRegFullname)
+        val email = findViewById<EditText>(R.id.editTextRegEmail)
+        val pass = findViewById<EditText>(R.id.editTextRegPass)
         val login = findViewById<TextView>(R.id.textViewLogin)
         val vm: RegisterViewModel by viewModels()
 
 
         regButton.setOnClickListener {
-            vm.register(fname.text.toString(),email.text.toString(),pass.text.toString())
-                .observe(this,{
-                    if(it){
-                        startActivity(Intent(this, LoginActivity::class.java))
-                        Toast.makeText(this,"Register Success", Toast.LENGTH_LONG).show()
-                    }else{
-                        Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()
-                    }
-                })
+            if(email.text.isEmpty()||pass.text.isEmpty()||fname.text.isEmpty()){
+                Toast.makeText(this, "Please Fill all Fields", Toast.LENGTH_SHORT).show()
+            }else{
+                vm.register(fname.text.toString(),email.text.toString(),pass.text.toString())
+                    .observe(this,{
+                        if(it){
+                            startActivity(Intent(this, LoginActivity::class.java))
+                            Toast.makeText(this,"Register Success", Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+            }
+
         }
 
 
+
         login.setOnClickListener {
-            startActivity(Intent(this,LoginActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 }

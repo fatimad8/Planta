@@ -13,72 +13,68 @@ import com.google.firebase.ktx.Firebase
 
 class UserRepository {
 
-    fun sign(email: String, pass: String):Boolean{
-        ///var user= MutableLiveData<FirebaseUser>()
+    fun sign(email: String, pass: String):LiveData<Boolean>{
         var auth = Firebase.auth
-        var flag= false
-        var user:FirebaseUser
-        auth.signInWithEmailAndPassword(email, pass)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    user = auth.currentUser!!
-                    flag=true
-                    println("Login Success " + user?.uid)
-                } else {
-                   flag
-                    println("login failed:"+task.exception)
+        var flag =MutableLiveData<Boolean>()
+         if(email.isNotEmpty()&&pass.isNotEmpty()){
+            auth.signInWithEmailAndPassword(email, pass)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        auth.currentUser!!
+                        flag.postValue(true)
+                        println("it is true")
+                     }else{
+                         flag.postValue(false)
+                    }
+                }.addOnFailureListener {
+                    println("exception:$it")
                 }
-            }
-         return flag
-    }
+        }
 
-
-    fun register(name:String,email: String, pass: String):Boolean{
-        var auth= Firebase.auth
-        var flag=false
-
-        auth.createUserWithEmailAndPassword(email,pass)
-            .addOnCompleteListener { task->
-
-                if(task.isSuccessful){
-
-                    println("User has been registered successfully with UID "+ auth.currentUser?.uid)
-                    flag=true
-
-                    val u = hashMapOf(
-                        "email" to auth.currentUser?.email,
-                        "firstname" to name.toString()
-
-                    )
-
-                    var db= Firebase.firestore
-
-                    db.collection("users").document(auth.currentUser?.uid.toString())
-                        .set(u)
-                }else{
-                    flag=false
-
-                    println("Error")
-                }
-            }.addOnFailureListener {
-                println(it.message)
-            }
         return flag
     }
 
 
-    fun resetPassword(email: String):Boolean{
-        var mAuth: FirebaseAuth? = null
-        var flag=false
-        mAuth = FirebaseAuth.getInstance()
-        mAuth!!.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    flag=true
-                  } else {
-                    flag=false
+    fun register(name: String, email: String, pass: String): MutableLiveData<Boolean> {
+        var auth = Firebase.auth
+        var flag = MutableLiveData<Boolean>()
+        if (email.isNotEmpty() && pass.isNotEmpty() && name.isNotEmpty()) {
+            auth.createUserWithEmailAndPassword(email, pass)
+                .addOnCompleteListener { task ->
+
+                    if (task.isSuccessful) {
+                         flag.postValue(true)
+                        val u = hashMapOf(
+                            "email" to auth.currentUser?.email,
+                            "firstname" to name.toString()
+                        )
+                        var db = Firebase.firestore
+
+                        db.collection("users").document(auth.currentUser?.uid.toString())
+                            .set(u)
+                    } else {
+                        flag.postValue(false)
+                     }
                 }
-            }
+                .addOnFailureListener {
+                    println(it.message)
+                }
+        }
+
+        return flag
+    }
+
+
+    fun resetPassword(email: String):MutableLiveData<Boolean> {
+        var mAuth=Firebase.auth
+        var flag = MutableLiveData<Boolean>()
+        if(email.isNotEmpty()){
+            mAuth = FirebaseAuth.getInstance()
+            mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener { task ->
+                    flag.postValue(true)
+                 }
+        }
         return flag
     }
 

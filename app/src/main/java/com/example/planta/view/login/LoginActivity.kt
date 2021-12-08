@@ -28,20 +28,26 @@ class LoginActivity : AppCompatActivity() {
 
 
         buttonLogin.setOnClickListener {
-            vm.sign(emailEditText.text.toString(), passEditText.text.toString())
-                .observe(this, {
-                    if (it) {
-                        startActivity(Intent(this, MainActivity::class.java))
-                        Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(this, "wrong username & password!", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                })
+            if(emailEditText.text.isEmpty()||passEditText.text.isEmpty()){
+                Toast.makeText(this, "Please Fill all Fields", Toast.LENGTH_SHORT).show()
+            }else{
+                vm.sign(emailEditText.text.toString(), passEditText.text.toString())
+                    .observe(this, {
+                        println("result:$it")
+                        if (it) {
+                            startActivity(Intent(this, MainActivity::class.java))
+                            Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
+
+                        } else {
+                            Toast.makeText(this, "wrong username & password!", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    })
+            }
+
+
 
         }
-
-
         signUp.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }

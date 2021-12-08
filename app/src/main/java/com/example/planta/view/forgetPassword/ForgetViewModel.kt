@@ -1,23 +1,22 @@
-package com.example.planta.view.register
+package com.example.planta.view.forgetPassword
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.planta.repository.UserRepository
 
-class RegisterViewModel : ViewModel() {
-    fun register(name: String, email: String, pass: String): LiveData<Boolean> {
+class ForgetViewModel:ViewModel() {
+
+    fun resetPassword(email: String): LiveData<Boolean> {
         var mLiveData = MutableLiveData<Boolean>()
-        UserRepository().register(name, email, pass).observeForever {
-            if (it){
+
+        UserRepository().resetPassword(email).observeForever {
+            if(it)
                 mLiveData.postValue(true)
-            }
             else {
                 mLiveData.postValue(false)
             }
         }
         return mLiveData
     }
-
-
 }

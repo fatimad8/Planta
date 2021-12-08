@@ -1,5 +1,6 @@
 package com.example.planta.view.login
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,28 +11,22 @@ class loginViewModel : ViewModel() {
 
     fun sign(email: String, password: String): LiveData<Boolean> {
         var mLiveData = MutableLiveData<Boolean>()
+
         UserRepository().sign(email, password)
-        if (email.isNotEmpty())
-            mLiveData.postValue(true)
-        else {
+            .observeForever {
+                if(it){
+                    mLiveData.postValue(true)
+                }else{
+                    mLiveData.postValue(false)
+                }
 
-            mLiveData.postValue(false)
-        }
-
-        return mLiveData
-    }
-
-
-    fun resetPassword(email: String):LiveData<Boolean>{
-        var mLiveData = MutableLiveData<Boolean>()
-        UserRepository().resetPassword(email)
-        if (email.isNotEmpty())
-            mLiveData.postValue(true)
-        else {
-
-            mLiveData.postValue(false)
-        }
+            }
 
         return mLiveData
     }
+
+
+
+
+
 }
