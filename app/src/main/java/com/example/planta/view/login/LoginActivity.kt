@@ -10,27 +10,32 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.planta.R
 import com.example.planta.view.MainActivity
+import com.example.planta.view.forgetPassword.forgetPassActivity
 import com.example.planta.view.register.RegisterActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        var buttonLogin=findViewById<Button>(R.id.buttonLogin)
-        var emailEditText=findViewById<EditText>(R.id.editTextLogEmail)
-        var passEditText= findViewById<EditText>(R.id.editTextLogPass)
-        val vm:loginViewModel by viewModels()
-        var signUp=findViewById<TextView>(R.id.textViewSignUp)
+        val buttonLogin = findViewById<Button>(R.id.buttonLogin)
+        val emailEditText = findViewById<EditText>(R.id.editTextLogEmail)
+        val passEditText = findViewById<EditText>(R.id.editTextLogPass)
+        val signUp = findViewById<TextView>(R.id.textViewSignUp)
+        val forgetPass = findViewById<TextView>(R.id.textViewForgetPass)
+
+        val vm: loginViewModel by viewModels()
 
 
         buttonLogin.setOnClickListener {
-            vm.sign(emailEditText.text.toString(),passEditText.text.toString())
-                .observe(this,{
-                    if(it){
+            vm.sign(emailEditText.text.toString(), passEditText.text.toString())
+                .observe(this, {
+                    if (it) {
                         startActivity(Intent(this, MainActivity::class.java))
-                        Toast.makeText(this,"Login Success",Toast.LENGTH_LONG).show()
-                    }else{
-                        Toast.makeText(this, "wrong username & password!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(this, "wrong username & password!", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 })
 
@@ -38,9 +43,15 @@ class LoginActivity : AppCompatActivity() {
 
 
         signUp.setOnClickListener {
-            startActivity(Intent(this,RegisterActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
+
+
+        forgetPass.setOnClickListener {
+            startActivity(Intent(this, forgetPassActivity::class.java))
+
+        }
+
+
     }
-
-
 }

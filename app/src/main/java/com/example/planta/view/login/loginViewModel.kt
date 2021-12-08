@@ -20,4 +20,18 @@ class loginViewModel : ViewModel() {
 
         return mLiveData
     }
+
+
+    fun resetPassword(email: String):LiveData<Boolean>{
+        var mLiveData = MutableLiveData<Boolean>()
+        UserRepository().resetPassword(email)
+        if (email.isNotEmpty())
+            mLiveData.postValue(true)
+        else {
+
+            mLiveData.postValue(false)
+        }
+
+        return mLiveData
+    }
 }

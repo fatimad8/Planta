@@ -29,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
             vm.register(fname.text.toString(),email.text.toString(),pass.text.toString())
                 .observe(this,{
                     if(it){
-                        startActivity(Intent(this, MainActivity::class.java))
+                        startActivity(Intent(this, LoginActivity::class.java))
                         Toast.makeText(this,"Register Success", Toast.LENGTH_LONG).show()
                     }else{
                         Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()

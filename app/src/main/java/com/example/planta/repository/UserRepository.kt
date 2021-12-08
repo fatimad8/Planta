@@ -1,9 +1,11 @@
 package com.example.planta.repository
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.planta.network.UserService
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -60,6 +62,22 @@ class UserRepository {
                 }
             }.addOnFailureListener {
                 println(it.message)
+            }
+        return flag
+    }
+
+
+    fun resetPassword(email: String):Boolean{
+        var mAuth: FirebaseAuth? = null
+        var flag=false
+        mAuth = FirebaseAuth.getInstance()
+        mAuth!!.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    flag=true
+                  } else {
+                    flag=false
+                }
             }
         return flag
     }

@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Planta">
         <activity
+            android:name=".view.forgetPassword.forgetPassActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.forgetPassword.ForgetPassActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.register.RegisterActivity"
             android:exported="false" />
         <activity
