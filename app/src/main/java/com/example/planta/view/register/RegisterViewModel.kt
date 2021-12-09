@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.planta.repository.UserRepository
 
 class RegisterViewModel : ViewModel() {
-    fun register(name: String, email: String, pass: String): LiveData<Boolean> {
+    fun register(name: String, email: String, pass: String):LiveData<Boolean> {
         var mLiveData = MutableLiveData<Boolean>()
         UserRepository().register(name, email, pass).observeForever {
             if (it){

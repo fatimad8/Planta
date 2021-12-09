@@ -37,21 +37,25 @@ class UserRepository {
 
     fun register(name: String, email: String, pass: String): MutableLiveData<Boolean> {
         var auth = Firebase.auth
+        var db = Firebase.firestore
         var flag = MutableLiveData<Boolean>()
         if (email.isNotEmpty() && pass.isNotEmpty() && name.isNotEmpty()) {
             auth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
-                         flag.postValue(true)
-                        val u = hashMapOf(
-                            "email" to auth.currentUser?.email,
-                            "firstname" to name.toString()
-                        )
-                        var db = Firebase.firestore
 
-                        db.collection("users").document(auth.currentUser?.uid.toString())
-                            .set(u)
+                        flag.postValue(true)
+
+                         val u = hashMapOf(
+                            "email" to auth.currentUser?.email.toString(),
+                            "fullname" to name
+                        )
+
+                        //var uid=auth.currentUser?.uid
+                        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+                            db.collection("users").document(uid)
+                                .set(u)
                     } else {
                         flag.postValue(false)
                      }

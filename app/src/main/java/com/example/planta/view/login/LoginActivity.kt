@@ -9,10 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.planta.R
-import com.example.planta.view.MainActivity
+import com.example.planta.view.Home.MainActivity
 import com.example.planta.view.forgetPassword.forgetPassActivity
 import com.example.planta.view.register.RegisterActivity
-import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

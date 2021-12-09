@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.planta.R
-import com.example.planta.view.MainActivity
 import com.example.planta.view.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {

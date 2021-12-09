@@ -1,4 +1,4 @@
-package com.example.planta.view
+package com.example.planta.view.Home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

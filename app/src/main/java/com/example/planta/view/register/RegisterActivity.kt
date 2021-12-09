@@ -9,9 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.planta.R
-import com.example.planta.view.MainActivity
 import com.example.planta.view.login.LoginActivity
-import com.example.planta.view.login.loginViewModel
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
