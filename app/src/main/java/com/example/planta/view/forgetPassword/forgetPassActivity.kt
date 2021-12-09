@@ -1,5 +1,6 @@
 package com.example.planta.view.forgetPassword
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -18,6 +19,7 @@ class forgetPassActivity : AppCompatActivity() {
 
 
         val mToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.mtoolbar)
+        mToolbar.setTitleTextColor(Color.WHITE)
 
         val restPass=ResetFragment()
 
