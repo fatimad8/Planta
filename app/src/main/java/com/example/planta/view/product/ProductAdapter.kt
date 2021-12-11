@@ -1,5 +1,6 @@
 package com.example.planta.view.product
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +20,16 @@ class ProductAdapter(var data: List<Product>) : RecyclerView.Adapter<ProductAdap
     override fun onBindViewHolder(holder: ProductAdapterHolder, position: Int) {
         holder.productName.text=data[position].name
         holder.productPrice.text=data[position].price
-        holder.productStock.text=data[position].inStock
+        //holder.productStock.text=data[position].inStock
         Picasso.get().load(data[position].photo).into(holder.productImage)
+
+        if(data[position].inStock==true){
+            holder.productStock.text="In stock"
+            holder.productStock.setTextColor(Color.parseColor("#6D953F"))
+        }else{
+            holder.productStock.text="Out of stock"
+            holder.productStock.setTextColor(Color.parseColor("#DF3D31"))
+        }
 
     }
 
@@ -31,7 +40,7 @@ class ProductAdapter(var data: List<Product>) : RecyclerView.Adapter<ProductAdap
 
 class ProductAdapterHolder(v: View) : RecyclerView.ViewHolder(v) {
     var productName=v.findViewById<TextView>(R.id.textViewProductName)
-    var productPrice=v.findViewById<TextView>(R.id.textViewProductName)
+    var productPrice=v.findViewById<TextView>(R.id.textViewProductPrice)
     var productStock=v.findViewById<TextView>(R.id.textViewInStock)
     var productImage=v.findViewById<ImageView>(R.id.imageViewProduct)
 }

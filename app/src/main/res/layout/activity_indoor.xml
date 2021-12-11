@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mRecyclerView"
+                android:id="@+id/inRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="745dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

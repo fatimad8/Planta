@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import com.example.planta.R
+import com.example.planta.view.product.AccessoriesActivity
 import com.example.planta.view.product.IndoorActivity
+import com.example.planta.view.product.OutdoorActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,9 +48,13 @@ class HomeFragment : Fragment() {
         }
 
 
-        outdoor.setOnClickListener {  }
+        outdoor.setOnClickListener {
+            startActivity(Intent(context, OutdoorActivity::class.java))
+        }
 
-        accessories.setOnClickListener {  }
+        accessories.setOnClickListener {
+            startActivity(Intent(context,AccessoriesActivity::class.java))
+        }
 
         return v
     }

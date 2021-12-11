@@ -7,10 +7,26 @@ import com.example.planta.model.Product
 import com.example.planta.repository.ProductRepository
 
 class productViewModel : ViewModel() {
+    var productRepository=ProductRepository()
 
-    fun getIndoor(category: String): LiveData<List<Product>> {
-        var mLiveData = MutableLiveData<List<Product>>()
-        ProductRepository().getIndoor(category)
-        return mLiveData
+
+
+    fun getProducts(): LiveData<List<Product>> {
+        return productRepository.getAllProduct()
     }
+
+    fun getIndoor():LiveData<List<Product>> {
+        return productRepository.getIndoor()
+    }
+
+    fun getOutdoor():LiveData<List<Product>> {
+        return productRepository.getOutdoor()
+    }
+
+
+    fun getAccessories():LiveData<List<Product>> {
+        return productRepository.getAccessories()
+    }
+
+
 }

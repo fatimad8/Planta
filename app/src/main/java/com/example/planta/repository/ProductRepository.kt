@@ -1,5 +1,6 @@
 package com.example.planta.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.planta.model.Product
 import com.example.planta.network.API
@@ -12,12 +13,40 @@ class ProductRepository {
 
     val prdouctService = API.getInstence().create(ProductService::class.java)
 
-    fun getIndoor(category: String): MutableLiveData<List<Product>> {
-        var mLiveData = MutableLiveData<List<Product>>()
-        prdouctService.getIndoor(category)
+
+
+
+
+    fun getAllProduct(): MutableLiveData<List<Product>>{
+
+        var mutableLiveData=MutableLiveData<List<Product>>()
+
+
+         prdouctService.getAllProducts()
+           .enqueue(object : Callback<List<Product>> {
+            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
+                mutableLiveData.postValue(response.body())
+            }
+
+            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mutableLiveData
+    }
+
+
+    fun getIndoor(): LiveData<List<Product>> {
+        var mutableLiveData = MutableLiveData<List<Product>>()
+
+        prdouctService.getIndoor()
             .enqueue(object : Callback<List<Product>> {
-                override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
-                    mLiveData.postValue(response.body())
+                override fun onResponse(
+                    call: Call<List<Product>>,
+                    response: Response<List<Product>>
+                ) {
+                    mutableLiveData.postValue(response.body())
                 }
 
                 override fun onFailure(call: Call<List<Product>>, t: Throwable) {
@@ -25,6 +54,48 @@ class ProductRepository {
                 }
 
             })
-        return mLiveData
+        return mutableLiveData
+    }
+
+
+    fun getOutdoor(): LiveData<List<Product>> {
+        var mutableLiveData = MutableLiveData<List<Product>>()
+
+        prdouctService.getOutndoor()
+            .enqueue(object : Callback<List<Product>> {
+                override fun onResponse(
+                    call: Call<List<Product>>,
+                    response: Response<List<Product>>
+                ) {
+                    mutableLiveData.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        return mutableLiveData
+    }
+
+
+    fun getAccessories(): LiveData<List<Product>> {
+        var mutableLiveData = MutableLiveData<List<Product>>()
+
+        prdouctService.getAccessories()
+            .enqueue(object : Callback<List<Product>> {
+                override fun onResponse(
+                    call: Call<List<Product>>,
+                    response: Response<List<Product>>
+                ) {
+                    mutableLiveData.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        return mutableLiveData
     }
 }

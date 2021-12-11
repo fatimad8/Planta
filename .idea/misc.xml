@@ -5,10 +5,12 @@
       <map>
         <entry key="app/src/main/res/font/.xml" value="0.2835897435897436" />
         <entry key="app/src/main/res/font/cormorant_garamond.xml" value="0.18020833333333333" />
+        <entry key="app/src/main/res/layout/activity_accessories.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_forget_pass2.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/activity_indoor.xml" value="0.15092592592592594" />
+        <entry key="app/src/main/res/layout/activity_indoor.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11854103343465046" />
+        <entry key="app/src/main/res/layout/activity_outdoor.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="app/src/main/res/layout/button_shape.xml" value="0.12537993920972645" />
@@ -18,7 +20,7 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/fragment_reset.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.20677083333333332" />
-        <entry key="app/src/main/res/layout/raw_plant_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/raw_plant_item.xml" value="0.5" />
       </map>
     </option>
   </component>
