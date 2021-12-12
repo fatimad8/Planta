@@ -22,13 +22,13 @@ class forgetPassActivity : AppCompatActivity() {
         mToolbar.setTitleTextColor(Color.WHITE)
 
         val restPass=ResetFragment()
-
+        setSupportActionBar(mToolbar)
 
         mToolbar.setNavigationOnClickListener {
             finish()
         }
 
-        setSupportActionBar(mToolbar)
+
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.mFrameLayout,restPass)

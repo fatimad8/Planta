@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".view.product.AccessoriesActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/accToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3E535D"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24" />
 
     <ScrollView
         android:id="@+id/mScrollView"
@@ -14,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/accToolbar">
 
 
         <LinearLayout
@@ -25,8 +38,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/accesRecylerView"
                 android:layout_width="match_parent"
-                android:layout_height="745dp"
-                android:layout_marginTop="0dp" />
+                android:layout_height="match_parent" />
         </LinearLayout>
 
     </ScrollView>

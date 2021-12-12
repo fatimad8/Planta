@@ -9,13 +9,15 @@
 
         android:id="@+id/CardViewProduct"
         android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,16 +52,17 @@
                 app:layout_constraintBottom_toTopOf="@+id/textViewInStock"
                 app:layout_constraintEnd_toStartOf="@+id/textViewProductPrice"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewProduct" />
+                app:layout_constraintTop_toBottomOf="@+id/imageViewProduct"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textViewProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
-                android:fontFamily="monospace"
-                android:text="100SR"
+                android:fontFamily="@font/cairo_extralight"
+                android:text="990SR"
                 android:textColor="#465D68"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -71,8 +74,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="TextView"
                 android:textColor="#DF3D31"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewProductName" />
         </androidx.constraintlayout.widget.ConstraintLayout>

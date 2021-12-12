@@ -22,12 +22,12 @@ class MainActivity : AppCompatActivity() {
         mToolbar.title="Planta"
         mToolbar.setTitleTextColor(Color.WHITE)
 
-
+        setSupportActionBar(mToolbar)
         mToolbar.setNavigationOnClickListener {
             finish()
         }
 
-        setSupportActionBar(mToolbar)
+
 
         var icon = arrayOf(
             R.drawable.ic_baseline_home_24,

@@ -1,5 +1,6 @@
 package com.example.planta.view.product
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -15,6 +16,16 @@ class OutdoorActivity : AppCompatActivity() {
 
         val vm: productViewModel by viewModels()
 
+        val mToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.outToolbar)
+        mToolbar.setTitle("Outdoor Plant")
+
+        mToolbar.setTitleTextColor(Color.WHITE)
+
+        setSupportActionBar(mToolbar)
+
+        mToolbar.setNavigationOnClickListener {
+            finish()
+        }
 
         var mRecyclerView = findViewById<RecyclerView>(R.id.outRecylerView)
         mRecyclerView.layoutManager= GridLayoutManager(this,2)

@@ -5,6 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.product.OutdoorActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/outToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24" />
+
     <ScrollView
         android:id="@+id/mScrollView"
         android:layout_width="match_parent"
@@ -13,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/outToolbar">
 
 
         <LinearLayout
@@ -24,7 +37,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/outRecylerView"
                 android:layout_width="match_parent"
-                android:layout_height="745dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
         </LinearLayout>
