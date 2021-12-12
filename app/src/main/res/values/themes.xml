@@ -11,9 +11,10 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">#455a64</item>
-        <item name="fontFamily">
-            @font/cormorant_garamond_medium
-        </item>
+<!--        <item name="fontFamily">-->
+<!--             < @font/cormorant_garamond_medium>-->
+<!--        </item>-->
+        <item name="fontFamily">@font/montserrat</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

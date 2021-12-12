@@ -3,6 +3,8 @@ package com.example.planta.view.Home
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.planta.view.Home.cart.CartFragment
+import com.example.planta.view.Home.profile.ProfileFragment
 
 class HomeAdapter(activity: FragmentActivity): FragmentStateAdapter(activity) {
 
