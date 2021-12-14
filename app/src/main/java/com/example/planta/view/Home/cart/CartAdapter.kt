@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planta.R
+import com.example.planta.model.Cart
 import com.example.planta.model.Product
+import com.squareup.picasso.Picasso
 
 class CartAdapter(var data: List<Product>) : RecyclerView.Adapter<CartAdapterHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapterHolder {
@@ -19,7 +22,10 @@ class CartAdapter(var data: List<Product>) : RecyclerView.Adapter<CartAdapterHol
     override fun onBindViewHolder(holder: CartAdapterHolder, position: Int) {
 
         holder.proName.text=data[position].name
+        println("name:"+data[position].name)
         holder.price.text=data[position].price
+        Picasso.get().load(data[position].photo).into(holder.cartPhoto)
+
     }
 
     override fun getItemCount(): Int {
@@ -32,6 +38,7 @@ class CartAdapterHolder(v: View) : RecyclerView.ViewHolder(v) {
     var spinner=v.findViewById<Spinner>(R.id.spinnerCart)
     var proName= v.findViewById<TextView>(R.id.textViewCartProName)
     var price= v.findViewById<TextView>(R.id.textViewCartPrice)
+    var cartPhoto= v.findViewById<ImageView>(R.id.imageViewCartPhoto)
 
 
 }

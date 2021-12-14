@@ -52,6 +52,7 @@ class DetailsActivity : AppCompatActivity() {
         } else {
             productStock.text = "Out of stock"
             productStock.setTextColor(Color.parseColor("#DF3D31"))
+            addbtn.isEnabled=false
 
         }
 
@@ -83,9 +84,6 @@ class DetailsActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
-
         }
 
 

@@ -98,4 +98,25 @@ class ProductRepository {
             })
         return mutableLiveData
     }
+
+
+    fun search( key:String):MutableLiveData<List<Product>>{
+        var mutableLiveData = MutableLiveData<List<Product>>()
+        prdouctService.search(key)
+            .enqueue(object : Callback<List<Product>> {
+                override fun onResponse(
+                    call: Call<List<Product>>,
+                    response: Response<List<Product>>
+                ) {
+                    mutableLiveData.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        return mutableLiveData
+
+    }
 }

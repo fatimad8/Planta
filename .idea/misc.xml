@@ -29,6 +29,8 @@
         <entry key="app/src/main/res/layout/list_item.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/raw_cart_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/raw_plant_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/raw_search_item.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.20677083333333332" />
       </map>
     </option>
   </component>
