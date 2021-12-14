@@ -12,19 +12,19 @@ interface ProductService {
 
 
 
-    @GET("product")
+    @GET("products")
     fun getAllProducts(): Call<List<Product>>
 
-    @GET("product/?category=indoor")
+    @GET("products/?category=indoor")
     fun getIndoor( ) :Call<List<Product>>
 
-    @GET("product/?category=Outdoor")
+    @GET("products/?category=Outdoor")
     fun getOutndoor( ) :Call<List<Product>>
 
-    @GET("product/?category=Accessories")
+    @GET("products/?category=Accessories")
     fun getAccessories( ) :Call<List<Product>>
 
-    @GET("product")
+    @GET("products")
     fun search(@Query("name")key:String): Call<List<Product>>
 
 

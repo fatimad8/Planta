@@ -7,7 +7,7 @@ class API {
 
     companion object{
         private val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://61b0a8873c954f001722a555.mockapi.io/")
+            .baseUrl("https://61b85f9964e4a10017d18f12.mockapi.io/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

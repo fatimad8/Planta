@@ -32,14 +32,6 @@ class ProductAdapter(var data: List<Product>) : RecyclerView.Adapter<ProductAdap
             intent.putExtra("product", data[position])
             holder.itemView.context.startActivity(intent)
         }
-//        holder.itemView.setOnClickListener {
-//
-//            Log.d("Khaled","Product is clicked")
-//            var intent = Intent(holder.itemView.context, DetailsActivity::class.java)
-//            intent.putExtra("product", data[position])
-//
-//            holder.itemView.context.startActivity(intent)
-//        }
 
 
         if (data[position].inStock == true) {

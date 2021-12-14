@@ -2,11 +2,13 @@ package com.example.planta.view.details
 
 import android.graphics.Color
 import android.media.Image
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.planta.R
 import com.example.planta.model.Product
@@ -15,8 +17,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import xyz.hanks.library.bang.SmallBangView
+import java.time.LocalDate
+import java.util.*
 
 class DetailsActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -42,9 +47,12 @@ class DetailsActivity : AppCompatActivity() {
 
         Picasso.get().load(product.photo).into(productPhoto)
         prodductName.text = product.name
-        prodductPrice.text = product.price
+        prodductPrice.text = product.price.toString()
         prodductDes.text = product.description
         var pId=product.id
+        var price= product.price
+        val date=LocalDate.now()
+
 
         if (product.inStock == true) {
             productStock.text = "In Stock"
@@ -78,7 +86,7 @@ class DetailsActivity : AppCompatActivity() {
 
            var uid= auth.currentUser?.uid
             if (uid != null) {
-                vm.addToCart(pId,uid).observeForever {
+                vm.addToCart(date.toString(),uid,price).observeForever {
                     if(it){
                         Toast.makeText(this, "added successfully", Toast.LENGTH_SHORT).show()
                     }

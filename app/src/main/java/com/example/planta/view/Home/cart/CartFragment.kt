@@ -35,27 +35,28 @@ class CartFragment : Fragment() {
         cRecylerView.layoutManager = LinearLayoutManager(context)
         var uid = auth.currentUser?.uid
         if (uid != null) {
-            vm.getUserCart(uid).observeForever {
-                it
-                print("cart:$it")
-
-                for (p in it) {
-                    pIdList.add(p.pId.toString())
-                    print("product id:$pIdList")
-
-                }
-                var listOfItems = listOf<Product>()
-                for(item in pIdList){
-                    vm.getCartItem(item).observeForever{
-                        listOfItems = it
-//                        cRecylerView.adapter = CartAdapter(it)
-                    }
-                    cRecylerView.adapter = CartAdapter(listOfItems)
-
-
-                }
-
-
+//
+//            vm.getUserCart(uid).observeForever {
+//                it
+//                print("cart:$it")
+//
+//                for (p in it) {
+//                    pIdList.add(p.pId.toString())
+//                    print("product id:$pIdList")
+//
+//                }
+//                var listOfItems = listOf<Product>()
+//                for(item in pIdList){
+//                    vm.getCartItem(item).observeForever{
+//                        listOfItems = it
+////                        cRecylerView.adapter = CartAdapter(it)
+//                    }
+//                    cRecylerView.adapter = CartAdapter(listOfItems)
+//
+//
+//                }
+//
+//
 //                for (item in pIdList) {
 //                    print("item:$item")
 //                    itemList.add(item)
@@ -63,13 +64,13 @@ class CartFragment : Fragment() {
 //                        cRecylerView.adapter = CartAdapter(it)
 //                    }
             }
-
-        }
         return v
+        }
+
     }
 
 
-}
+
 
 
 
