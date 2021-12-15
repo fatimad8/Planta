@@ -19,5 +19,18 @@ class RegisterViewModel : ViewModel() {
         return mLiveData
     }
 
+    fun addUser(fId:String,id:String,name:String):LiveData<Boolean>{
+        var mLiveData= MutableLiveData<Boolean>()
+        UserRepository().addUser(fId, id, name).observeForever {
+            if(it.fb_id.isNotEmpty()){
+                mLiveData.postValue(true)
+            }else{
+                mLiveData.postValue(false)
+            }
+
+        }
+        return  mLiveData
+    }
+
 
 }

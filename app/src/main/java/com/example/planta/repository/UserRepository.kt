@@ -4,13 +4,22 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.planta.model.User
+import com.example.planta.network.API
+import com.example.planta.network.UserService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class UserRepository {
+
+    var userService = API.getInstence().create(UserService::class.java)
+
 
     fun sign(email: String, pass: String):LiveData<Boolean>{
         var auth = Firebase.auth
@@ -65,6 +74,28 @@ class UserRepository {
         }
 
         return flag
+    }
+
+    fun addUser(fId:String,id:String,name:String):LiveData<User>{
+        var mLiveData = MutableLiveData<User>()
+        userService.addUser(User(fId,id,name))
+            .enqueue(object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        mLiveData.postValue(response.body())
+                    } else {
+                        mLiveData.postValue(User("", "", ""))
+                    }
+                }
+
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+        return mLiveData
+
     }
 
 

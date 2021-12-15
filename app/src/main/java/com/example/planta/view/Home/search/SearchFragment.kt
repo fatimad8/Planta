@@ -46,8 +46,10 @@ class SearchFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String): Boolean {
                  vm2.search(newText).observe(viewLifecycleOwner, { list ->
+                     if(list!=null){
+                         searchReclerView.adapter = SearchAdapter1(list)
+                     }
 
-                    searchReclerView.adapter = SearchAdapter1(list)
                 })
                 return true
             }
