@@ -3,6 +3,7 @@ package com.example.planta.view.register
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.planta.model.User
 import com.example.planta.repository.UserRepository
 
 class RegisterViewModel : ViewModel() {
@@ -19,9 +20,9 @@ class RegisterViewModel : ViewModel() {
         return mLiveData
     }
 
-    fun addUser(fId:String,id:String,name:String):LiveData<Boolean>{
+    fun addUser(user: User):LiveData<Boolean>{
         var mLiveData= MutableLiveData<Boolean>()
-        UserRepository().addUser(fId, id, name).observeForever {
+        UserRepository().addUser(user).observeForever {
             if(it.fb_id.isNotEmpty()){
                 mLiveData.postValue(true)
             }else{

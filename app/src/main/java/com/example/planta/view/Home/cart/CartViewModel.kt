@@ -9,9 +9,9 @@ import com.example.planta.repository.CartRepository
 
 class CartViewModel:ViewModel() {
 
-    fun addToCart(date: String,uId:String,price:String): LiveData<Boolean> {
+    fun addToCart(id:String,date: String,uId:String,price:String,qun:Int): LiveData<Boolean> {
         var mLiveData= MutableLiveData<Boolean>()
-        CartRepository().addToCart(date, uId, price)
+        CartRepository().addToCart(id,date,uId,price,qun)
         .observeForever {
             if(it.uesrId.isNotEmpty()){
                 mLiveData.postValue(true)

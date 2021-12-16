@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.planta.R
 import com.example.planta.model.Product
+import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.Home.cart.CartViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -42,6 +43,7 @@ class DetailsActivity : AppCompatActivity() {
         var addbtn = findViewById<Button>(R.id.buttonAddCart)
 
 
+
         var product = intent.getSerializableExtra("product") as Product
 
 
@@ -52,6 +54,7 @@ class DetailsActivity : AppCompatActivity() {
         var pId=product.id
         var price= product.price
         val date=LocalDate.now()
+        var item:Any=0
 
 
         if (product.inStock == true) {
@@ -71,7 +74,10 @@ class DetailsActivity : AppCompatActivity() {
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                var item = parent.getItemAtPosition(pos).toString()
+                 item = parent.getItemAtPosition(pos)
+                println("item:$item")
+
+
 
             }
 
@@ -83,10 +89,11 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         addbtn.setOnClickListener {
+            var id= SharedPreferencesHelper.saveUserId(this,auth.currentUser?.uid.toString())
 
-           var uid= auth.currentUser?.uid
+            var uid= auth.currentUser?.uid
             if (uid != null) {
-                vm.addToCart(date.toString(),uid,price).observeForever {
+                vm.addToCart(id.toString(),date.toString(),uid,price, item as Int).observeForever {
                     if(it){
                         Toast.makeText(this, "added successfully", Toast.LENGTH_SHORT).show()
                     }

@@ -1,5 +1,6 @@
 package com.example.planta.repository
 
+import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -7,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.planta.model.User
 import com.example.planta.network.API
 import com.example.planta.network.UserService
+import com.example.planta.util.SharedPreferencesHelper
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -21,18 +23,41 @@ class UserRepository {
     var userService = API.getInstence().create(UserService::class.java)
 
 
-    fun sign(email: String, pass: String):LiveData<Boolean>{
+    fun sign(email: String, pass: String): LiveData<Boolean> {
         var auth = Firebase.auth
-        var flag =MutableLiveData<Boolean>()
-         if(email.isNotEmpty()&&pass.isNotEmpty()){
+        var mLiveData = MutableLiveData<User>()
+        var flag = MutableLiveData<Boolean>()
+        if (email.isNotEmpty() && pass.isNotEmpty()) {
             auth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         auth.currentUser!!
-                        flag.postValue(true)
-                        println("it is true")
-                     }else{
-                         flag.postValue(false)
+
+                        userService.getUserId(auth.currentUser?.uid.toString())
+                            .enqueue(object : Callback<List<User>>{
+                                override fun onResponse(
+                                    call: Call<List<User>>,
+                                    response: Response<List<User>>
+                                ) {
+                                    if (response.isSuccessful) {
+
+                                        //save id to shared preference
+
+                                        flag.postValue(true)
+
+                                    } else {
+                                        //mLiveData.postValue(User("", "", ""))
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                                    TODO("Not yet implemented")
+                                }
+
+                            })
+
+                    } else {
+                        flag.postValue(false)
                     }
                 }.addOnFailureListener {
                     println("exception:$it")
@@ -55,18 +80,18 @@ class UserRepository {
 
                         flag.postValue(true)
 
-                         val u = hashMapOf(
+                        val u = hashMapOf(
                             "email" to auth.currentUser?.email.toString(),
                             "fullname" to name
                         )
 
                         //var uid=auth.currentUser?.uid
                         val uid = FirebaseAuth.getInstance().currentUser!!.uid
-                            db.collection("users").document(uid)
-                                .set(u)
+                        db.collection("users").document(uid)
+                            .set(u)
                     } else {
                         flag.postValue(false)
-                     }
+                    }
                 }
                 .addOnFailureListener {
                     println(it.message)
@@ -76,9 +101,9 @@ class UserRepository {
         return flag
     }
 
-    fun addUser(fId:String,id:String,name:String):LiveData<User>{
+    fun addUser(user:User): LiveData<User> {
         var mLiveData = MutableLiveData<User>()
-        userService.addUser(User(fId,id,name))
+        userService.addUser(user)
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
@@ -99,18 +124,29 @@ class UserRepository {
     }
 
 
-    fun resetPassword(email: String):MutableLiveData<Boolean> {
-        var mAuth=Firebase.auth
+    fun resetPassword(email: String): MutableLiveData<Boolean> {
+        var mAuth = Firebase.auth
         var flag = MutableLiveData<Boolean>()
-        if(email.isNotEmpty()){
+        if (email.isNotEmpty()) {
             mAuth = FirebaseAuth.getInstance()
             mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     flag.postValue(true)
-                 }
+                }
         }
         return flag
     }
 
+
+    fun checkLogin(user:FirebaseUser?):MutableLiveData<Boolean>{
+        var mLiveData=MutableLiveData<Boolean>()
+
+        if(user==null){
+            mLiveData.postValue(false)
+        }else{
+            mLiveData.postValue(true)
+        }
+        return mLiveData
+    }
 
 }

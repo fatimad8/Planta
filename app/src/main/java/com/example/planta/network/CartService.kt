@@ -10,12 +10,13 @@ import retrofit2.http.GET
 
 interface CartService {
 
-    @POST("order")
-    fun addToCart(@Body order: Order): Call<Order>
+
+
+    @POST("uesrs/{id}/order")
+    fun addToCart(@Path("id")id:String, @Body order: Order): Call<Order>
 
     @GET("order")
     fun getUserCart(@Query("uesrId") uId: String): Call<List<Cart>>
-
 
     @GET("products")
     fun getCartItem(@Query("id") id:String): Call<List<Product>>

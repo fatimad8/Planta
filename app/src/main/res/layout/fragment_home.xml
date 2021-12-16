@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".view.Home.HomeFragment">
+    tools:context=".view.Home.MainScreen.HomeFragment">
 
 
     <ScrollView
@@ -54,7 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/indoor" />
+                    android:src="@drawable/indoor1"
+                    tools:srcCompat="@drawable/indoor1" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -91,7 +92,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/screen_shot_1443_05_05_at_12_26_31_pm" />
+                    android:src="@drawable/outdoor2"
+                    tools:srcCompat="@drawable/outdoor2" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -129,7 +131,7 @@
                     android:id="@+id/imageView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/screen_shot_1443_05_05_at_1_35_20_pm" />
             </com.google.android.material.card.MaterialCardView>
 

@@ -16,15 +16,15 @@ import java.util.*
 class CartRepository {
     val cartService = API.getInstence().create(CartService::class.java)
 
-    fun addToCart(date: String,uId:String,price:String): LiveData<Order> {
+    fun addToCart(id:String,date: String,uId:String,price:String,qun:Int): LiveData<Order> {
         var mLiveData = MutableLiveData<Order>()
-        cartService.addToCart(Order("1",date, price,uId))
+        cartService.addToCart(id,Order("1",date,qun,price,uId))
             .enqueue(object : Callback<Order> {
                 override fun onResponse(call: Call<Order>, response: Response<Order>) {
                     if (response.isSuccessful) {
                         mLiveData.postValue(response.body())
                     } else {
-                        mLiveData.postValue(Order("", "", "",""))
+                        mLiveData.postValue(Order("", "", 0,"",""))
                     }
                 }
 

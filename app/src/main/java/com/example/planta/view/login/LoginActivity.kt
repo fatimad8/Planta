@@ -9,7 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.planta.R
-import com.example.planta.view.Home.MainActivity
+import com.example.planta.util.SharedPreferencesHelper
+import com.example.planta.view.Home.MainScreen.MainActivity
 import com.example.planta.view.forgetPassword.forgetPassActivity
 import com.example.planta.view.register.RegisterActivity
 
@@ -34,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
                     .observe(this, {
                         println("result:$it")
                         if (it) {
+                            SharedPreferencesHelper.getUserId(this)
                             startActivity(Intent(this, MainActivity::class.java))
                             Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
 

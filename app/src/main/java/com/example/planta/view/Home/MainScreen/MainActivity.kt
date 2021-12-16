@@ -1,11 +1,10 @@
-package com.example.planta.view.Home
+package com.example.planta.view.Home.MainScreen
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.planta.R
-import com.example.planta.view.forgetPassword.ResetFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
