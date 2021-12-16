@@ -89,11 +89,10 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         addbtn.setOnClickListener {
-            var id= SharedPreferencesHelper.saveUserId(this,auth.currentUser?.uid.toString())
-
+            var id= SharedPreferencesHelper.getUserId(this)
             var uid= auth.currentUser?.uid
             if (uid != null) {
-                vm.addToCart(id.toString(),date.toString(),uid,price, item as Int).observeForever {
+                vm.addToCart(id,date.toString(),uid,price, item as Int).observeForever {
                     if(it){
                         Toast.makeText(this, "added successfully", Toast.LENGTH_SHORT).show()
                     }

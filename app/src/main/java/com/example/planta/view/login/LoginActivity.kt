@@ -33,9 +33,14 @@ class LoginActivity : AppCompatActivity() {
             }else{
                 vm.sign(emailEditText.text.toString(), passEditText.text.toString())
                     .observe(this, {
-                        println("result:$it")
-                        if (it) {
-                            SharedPreferencesHelper.getUserId(this)
+                        if (it.isNotEmpty()) {
+                            var id = ""
+                            vm.getUserById(it).observe(this,{
+                                id=it[0].id
+                                println("user id: $id")
+                                SharedPreferencesHelper.saveUserId(this,id)
+                            })
+                            var userId=SharedPreferencesHelper.getUserId(this)
                             startActivity(Intent(this, MainActivity::class.java))
                             Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
 

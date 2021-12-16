@@ -21,43 +21,18 @@ import retrofit2.Response
 class UserRepository {
 
     var userService = API.getInstence().create(UserService::class.java)
+    var auth = Firebase.auth
 
+    fun sign(email: String, pass: String): LiveData<String> {
 
-    fun sign(email: String, pass: String): LiveData<Boolean> {
-        var auth = Firebase.auth
         var mLiveData = MutableLiveData<User>()
-        var flag = MutableLiveData<Boolean>()
+        var flag = MutableLiveData<String>()
         if (email.isNotEmpty() && pass.isNotEmpty()) {
             auth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        auth.currentUser!!
-
-                        userService.getUserId(auth.currentUser?.uid.toString())
-                            .enqueue(object : Callback<List<User>>{
-                                override fun onResponse(
-                                    call: Call<List<User>>,
-                                    response: Response<List<User>>
-                                ) {
-                                    if (response.isSuccessful) {
-
-                                        //save id to shared preference
-
-                                        flag.postValue(true)
-
-                                    } else {
-                                        //mLiveData.postValue(User("", "", ""))
-                                    }
-                                }
-
-                                override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                                    TODO("Not yet implemented")
-                                }
-
-                            })
-
-                    } else {
-                        flag.postValue(false)
+                        auth.currentUser!!.uid
+                        flag.postValue(auth.currentUser!!.uid)
                     }
                 }.addOnFailureListener {
                     println("exception:$it")
@@ -101,7 +76,7 @@ class UserRepository {
         return flag
     }
 
-    fun addUser(user:User): LiveData<User> {
+    fun addUser(user: User): LiveData<User> {
         var mLiveData = MutableLiveData<User>()
         userService.addUser(user)
             .enqueue(object : Callback<User> {
@@ -138,15 +113,36 @@ class UserRepository {
     }
 
 
-    fun checkLogin(user:FirebaseUser?):MutableLiveData<Boolean>{
-        var mLiveData=MutableLiveData<Boolean>()
+    fun checkLogin(user: FirebaseUser?): MutableLiveData<Boolean> {
+        var mLiveData = MutableLiveData<Boolean>()
 
-        if(user==null){
+        if (user == null) {
             mLiveData.postValue(false)
-        }else{
+        } else {
             mLiveData.postValue(true)
         }
         return mLiveData
     }
 
+
+    fun getUserById(fb_id: String): MutableLiveData<List<User>> {
+        var mLiveData = MutableLiveData<List<User>>()
+
+        userService.getUserById(fb_id)
+            .enqueue(object : Callback<List<User>> {
+                override fun onResponse(
+                    call: Call<List<User>>,
+                    response: Response<List<User>>) {
+                    mLiveData.postValue(response.body())
+                }
+
+
+                override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+
+            })
+        return mLiveData
+    }
 }

@@ -12,5 +12,5 @@ interface UserService {
     fun addUser(@Body user: User): Call<User>
 
     @GET("uesrs")
-    fun getUserId(@Query("fb_id")fb_id:String):Call<List<User>>
+    fun getUserById(@Query("fb_id")fb_id:String):Call<List<User>>
 }

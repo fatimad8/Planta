@@ -40,9 +40,13 @@ class RegisterActivity : AppCompatActivity() {
                                 vm.addUser(user)
                                     .observe(this,{
                                         if(it){
-                                            var id = user.id
-                                            SharedPreferencesHelper.saveUserId(this,id)
-                                            startActivity(Intent(this, LoginActivity::class.java))
+//                                            var id = ""
+//                                            vm.getUserById(auth.currentUser?.uid.toString()).observe(this,{
+//                                                id=it[0].id
+//                                                println("user id: $id")
+//                                                SharedPreferencesHelper.saveUserId(this,id)
+//                                            })
+                                             startActivity(Intent(this, LoginActivity::class.java))
                                             Toast.makeText(this,"Register Success", Toast.LENGTH_LONG).show()
                                         }
                                     })
