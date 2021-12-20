@@ -23,7 +23,7 @@ class CartAdapter(var data: List<Product>) : RecyclerView.Adapter<CartAdapterHol
 
         holder.proName.text=data[position].name
         println("name:"+data[position].name)
-        holder.price.text=data[position].price
+        holder.price.text=data[position].price.toString()
         Picasso.get().load(data[position].photo).into(holder.cartPhoto)
 
     }

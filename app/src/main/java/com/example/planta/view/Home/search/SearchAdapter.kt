@@ -21,7 +21,7 @@ class SearchAdapter1(var data: List<Product>) : RecyclerView.Adapter<SearchAdapt
 
     override fun onBindViewHolder(holder: SearchAdapterHolder, position: Int) {
         holder.searchName.text = data[position].name
-        holder.searchPrice.text = data[position].price
+        holder.searchPrice.text = data[position].price.toString()
         Picasso.get().load(data[position].photo).into(holder.searchImage)
 
         holder.searchCard.setOnClickListener {

@@ -1,16 +1,15 @@
 package com.example.planta.view.details
 
 import android.graphics.Color
-import android.media.Image
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import com.example.planta.R
+import com.example.planta.model.Item
 import com.example.planta.model.Product
 import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.Home.cart.CartViewModel
@@ -19,7 +18,6 @@ import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import xyz.hanks.library.bang.SmallBangView
 import java.time.LocalDate
-import java.util.*
 
 class DetailsActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -29,32 +27,39 @@ class DetailsActivity : AppCompatActivity() {
 
         val vm: CartViewModel by viewModels()
 
-        var auth = Firebase.auth
+        val auth = Firebase.auth
 
 
-        var wishList = findViewById<SmallBangView>(R.id.like_heart)
-        var close = findViewById<ImageView>(R.id.imageViewClose)
-        var productPhoto = findViewById<ImageView>(R.id.imageViewDetailsPhoto)
-        var prodductName = findViewById<TextView>(R.id.textViewDetName)
-        var prodductPrice = findViewById<TextView>(R.id.textViewDetPrice)
-        var prodductDes = findViewById<TextView>(R.id.textViewDetDesc)
-        var productStock = findViewById<TextView>(R.id.textViewDetStock)
-        var spinner = findViewById<Spinner>(R.id.spinner)
-        var addbtn = findViewById<Button>(R.id.buttonAddCart)
+        val wishList = findViewById<SmallBangView>(R.id.like_heart)
+        val close = findViewById<ImageView>(R.id.imageViewClose)
+        val productPhoto = findViewById<ImageView>(R.id.imageViewDetailsPhoto)
+        val prodductName = findViewById<TextView>(R.id.textViewDetName)
+        val prodductPrice = findViewById<TextView>(R.id.textViewDetPrice)
+        val prodductDes = findViewById<TextView>(R.id.textViewDetDesc)
+        val productStock = findViewById<TextView>(R.id.textViewDetStock)
+        val spinner = findViewById<Spinner>(R.id.spinner)
+        val addbtn = findViewById<Button>(R.id.buttonAddCart)
+
+        val id = SharedPreferencesHelper.getUserId(this)
+        val uid = auth.currentUser?.uid
+        var oId = ""
+        val currentdate = LocalDate.now().toString()
 
 
+        val product = intent.getSerializableExtra("product") as Product
 
-        var product = intent.getSerializableExtra("product") as Product
+
+        // var product_item = intent.getSerializableExtra("item") as Item
 
 
         Picasso.get().load(product.photo).into(productPhoto)
         prodductName.text = product.name
         prodductPrice.text = product.price.toString()
         prodductDes.text = product.description
-        var pId=product.id
-        var price= product.price
-        val date=LocalDate.now()
-        var item:Any=0
+        var pId = product.id
+        val price = product.price
+        val date = LocalDate.now()
+        var item: Any = 0
 
 
         if (product.inStock == true) {
@@ -63,20 +68,19 @@ class DetailsActivity : AppCompatActivity() {
         } else {
             productStock.text = "Out of stock"
             productStock.setTextColor(Color.parseColor("#DF3D31"))
-            addbtn.isEnabled=false
+            addbtn.isEnabled = false
 
         }
 
 
-        var quntList = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val quntList = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
         spinner.adapter = ArrayAdapter<Int>(this, android.R.layout.simple_spinner_item, quntList)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                 item = parent.getItemAtPosition(pos)
+                item = parent.getItemAtPosition(pos)
                 println("item:$item")
-
 
 
             }
@@ -89,27 +93,108 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         addbtn.setOnClickListener {
-            var id= SharedPreferencesHelper.getUserId(this)
-            var uid= auth.currentUser?.uid
-            if (uid != null) {
-                vm.addToCart(id,date.toString(),uid,price, item as Int).observeForever {
-                    if(it){
-                        Toast.makeText(this, "added successfully", Toast.LENGTH_SHORT).show()
+
+
+            if (SharedPreferencesHelper.getOrderId(this) == "null") {
+                vm.createNewOrder(id, date.toString(), uid!!, price, item as Int).observeForever {
+                    if (it != null) {
+                        SharedPreferencesHelper.saveOrderId(this, it.id)
+                        Toast.makeText(this, "new order", Toast.LENGTH_SHORT).show()
+                        vm.addProductItem(
+                            id,
+                            it.id,
+                            Item(
+                                it.id,
+                                product.category,
+                                currentdate,
+                                product.description,
+                                "",
+                                product.name,
+                                product.photo,
+                                product.price,
+                                product.quantity
+                            )
+                        ).observeForever {
+                            if (it)
+                                Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
+                                    .show()
+
+//
+
+
+                        }
                     }
+
+
                 }
-            }
-        }
-
-
-        wishList.setOnClickListener {
-
-            if (wishList.isSelected) {
-                wishList.setSelected(false)
 
             } else {
-                wishList.setSelected(true)
+                var lastOrderId = SharedPreferencesHelper.getOrderId(this)
+
+//                vm.getOrderId(lastOrderId).observeForever {
+//                    oId = it[0].id
+//                    println(oId)
+//                    SharedPreferencesHelper.saveOrderId(this, oId)
+//
+//                }
+
+
+                vm.addProductItem(
+                    id,
+                    lastOrderId,
+                    Item(
+                        lastOrderId,
+                        product.category,
+                        currentdate,
+                        product.description,
+                        "",
+                        product.name,
+                        product.photo,
+                        product.price,
+                        product.quantity
+                    )
+                ).observeForever {
+                    if (it)
+                        Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
+                            .show()
+
+
+                }
+
+
+//
+//                        }
+
+//                 var order=Order(oId)
+//                var total_price = + Integer.valueOf(order.total_price)
+//
+//                vm.updateTotalPrice(id,oId,total_price)
+            }
+
+//            var id= SharedPreferencesHelper.getUserId(this)
+//            var uid= auth.currentUser?.uid
+//            if (uid != null) {
+//                vm.addToCart(id,date.toString(),uid,price, item as Int).observeForever {
+//                    if(it){
+//                        Toast.makeText(this, "added successfully", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+
+
+            wishList.setOnClickListener {
+
+                if (wishList.isSelected) {
+                    wishList.setSelected(false)
+
+                } else {
+                    wishList.setSelected(true)
+                }
+
             }
 
         }
     }
 }
+
+

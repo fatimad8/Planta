@@ -2,29 +2,33 @@ package com.example.planta.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.planta.model.Cart
+import com.example.planta.model.Item
 import com.example.planta.model.Order
-import com.example.planta.model.Product
+import com.example.planta.model.User
 import com.example.planta.network.API
 import com.example.planta.network.CartService
-import com.example.planta.network.ProductService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class CartRepository {
     val cartService = API.getInstence().create(CartService::class.java)
 
-    fun addToCart(id:String,date: String,uId:String,price:String,qun:Int): LiveData<Order> {
+    fun createNewOrder(
+        id: String,
+        date: String,
+        uId: String,
+        price: String,
+        qun: Int
+    ): LiveData<Order> {
         var mLiveData = MutableLiveData<Order>()
-        cartService.addToCart(id,Order("1",date,qun,price,uId))
+        cartService.createNewOrder(id, Order("1", date, qun, price, uId))
             .enqueue(object : Callback<Order> {
                 override fun onResponse(call: Call<Order>, response: Response<Order>) {
                     if (response.isSuccessful) {
                         mLiveData.postValue(response.body())
                     } else {
-                        mLiveData.postValue(Order("", "", 0,"",""))
+                        mLiveData.postValue(Order("", "", 0, "", ""))
                     }
                 }
 
@@ -37,6 +41,80 @@ class CartRepository {
         return mLiveData
 
     }
+
+
+
+    fun addProductItem(uId: String,oId: String,item: Item):LiveData<Item>{
+        var mLiveData = MutableLiveData<Item>()
+        cartService.addProductItem(uId,oId,item).enqueue(object : Callback<Item> {
+            override fun onResponse(call: Call<Item>, response: Response<Item>) {
+                if (response.isSuccessful) {
+                    mLiveData.postValue(response.body())
+                } else {
+                    //mLiveData.postValue(Item("", "", "", "", "","","",0,0))
+                }
+            }
+
+            override fun onFailure(call: Call<Item>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        return mLiveData
+
+
+    }
+
+
+    fun updateTotalPrice(uId: String, oId: String, price: Int): LiveData<Order> {
+        var mLiveData = MutableLiveData<Order>()
+        cartService.updateToatlPrice(uId, oId, price).enqueue(object : Callback<Order> {
+            override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                if (response.isSuccessful) {
+                    mLiveData.postValue(response.body())
+                } else {
+                    mLiveData.postValue(Order("", "", 0, "", ""))
+                }
+            }
+
+            override fun onFailure(call: Call<Order>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        return mLiveData
+
+    }
+
+
+    fun getOrderId(userId: String): MutableLiveData<List<Order>> {
+        var mLiveData = MutableLiveData<List<Order>>()
+
+        cartService.getOrderId(userId,userId)
+            .enqueue(object : Callback<List<Order>> {
+                override fun onResponse(
+                    call: Call<List<Order>>,
+                    response: Response<List<Order>>
+                ) {
+                    mLiveData.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<List<Order>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        return mLiveData
+    }
+
+
+
+
+
+
+
 
 //    fun getUserCart(uId: String):LiveData<List<Cart>>{
 //        var mLiveData = MutableLiveData<List<Cart>>()

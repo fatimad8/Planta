@@ -24,12 +24,13 @@ class ProductAdapter(var data: List<Product>) : RecyclerView.Adapter<ProductAdap
 
     override fun onBindViewHolder(holder: ProductAdapterHolder, position: Int) {
         holder.productName.text = data[position].name
-        holder.productPrice.text = data[position].price
+        holder.productPrice.text = data[position].price.toString()
         Picasso.get().load(data[position].photo).into(holder.productImage)
 
         holder.productCard.setOnClickListener {
             var intent = Intent(holder.itemView.context, DetailsActivity::class.java)
             intent.putExtra("product", data[position])
+
             holder.itemView.context.startActivity(intent)
         }
 
