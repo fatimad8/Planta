@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.planta.R
 import com.example.planta.model.Item
+import com.example.planta.model.Order
 import com.example.planta.model.Product
 import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.Home.cart.CartViewModel
@@ -46,6 +47,8 @@ class DetailsActivity : AppCompatActivity() {
         var totalOrderPrice=0
         var oId=""
         val currentdate = LocalDate.now().toString()
+        var order=Order("","",0,"","")
+
 
 
         val product = intent.getSerializableExtra("product") as Product
@@ -121,24 +124,20 @@ class DetailsActivity : AppCompatActivity() {
                                     .show()
                         }
 
-//                        totalOrderPrice= Integer.valueOf(it.total_price)
-//                        total_price = total_price+totalOrderPrice
-//                        vm.updateTotalPrice(id,it.id,total_price)
-                    }
 
+//                        var itemPrice=it.total_price.substringBefore(" ")
+//                        totalOrderPrice+= Integer.valueOf(itemPrice)
+////                        total_price += totalOrderPrice
+//                        order=Order(it.id,it.order_date,it.quantity,totalOrderPrice.toString(),it.uesrId)
+//                        vm.updateTotalPrice(id,it.id,order).observeForever {
+//
+//                        }
+                    }
 
                 }
 
             } else {
                 var lastOrderId = SharedPreferencesHelper.getOrderId(this)
-
-//                vm.getOrderId(lastOrderId).observeForever {
-//                    oId = it[0].id
-//                    println(oId)
-//                    SharedPreferencesHelper.saveOrderId(this, oId)
-//
-//                }
-
 
                 vm.addProductItem(
                     id,
@@ -159,8 +158,8 @@ class DetailsActivity : AppCompatActivity() {
                         Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
                             .show()
 
-//                    total_price = total_price+totalOrderPrice
-//                    vm.updateTotalPrice(id,lastOrderId,total_price)
+
+//                     vm.updateTotalPrice(id,lastOrderId,order)
 
                 }
 

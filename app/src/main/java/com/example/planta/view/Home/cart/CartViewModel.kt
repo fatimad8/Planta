@@ -9,55 +9,65 @@ import com.example.planta.repository.UserRepository
 
 class CartViewModel:ViewModel() {
 
-    fun createNewOrder(id:String, date: String, uId:String, price:String, qun:Int): LiveData<Order> {
-        var mLiveData= MutableLiveData<Order>()
-        CartRepository().createNewOrder(id,date,uId,price,qun)
-        .observeForever {
-            if(it != null){
-                mLiveData.postValue(it)
-            }else{
-                mLiveData.postValue(Order("","",0,"",""))
-            }
+    fun createNewOrder(
+        id: String,
+        date: String,
+        uId: String,
+        price: String,
+        qun: Int
+    ): LiveData<Order> {
+        var mLiveData = MutableLiveData<Order>()
+        CartRepository().createNewOrder(id, date, uId, price, qun)
+            .observeForever {
+                if (it != null) {
+                    mLiveData.postValue(it)
+                } else {
+                    mLiveData.postValue(Order("", "", 0, "", ""))
+                }
 
-        }
-        return  mLiveData
+            }
+        return mLiveData
     }
 
 
-    fun addProductItem(uId: String,oId: String,item:Item):LiveData<Boolean>{
-        var mLiveData= MutableLiveData<Boolean>()
-        CartRepository().addProductItem(uId,oId,item)
+    fun addProductItem(uId: String, oId: String, item: Item): LiveData<Boolean> {
+        var mLiveData = MutableLiveData<Boolean>()
+        CartRepository().addProductItem(uId, oId, item)
             .observeForever {
-                if(it.orderId.isNotEmpty()){
+                if (it.orderId.isNotEmpty()) {
                     mLiveData.postValue(true)
-                }else{
+                } else {
                     mLiveData.postValue(false)
                 }
 
             }
-        return  mLiveData
+        return mLiveData
 
     }
 
-    fun updateTotalPrice(uId: String,oId:String,price: Int):LiveData<Boolean>{
-        var mLiveData= MutableLiveData<Boolean>()
-        CartRepository().updateTotalPrice(uId, oId, price)
+    fun updateTotalPrice(uId: String, oId: String, order: Order): LiveData<Boolean> {
+        var mLiveData = MutableLiveData<Boolean>()
+        CartRepository().updateTotalPrice(uId, oId, order)
             .observeForever {
-                if(it.uesrId.isNotEmpty()){
+                if (it.uesrId.isNotEmpty()) {
                     mLiveData.postValue(true)
-                }else{
+                } else {
                     mLiveData.postValue(false)
                 }
 
             }
-        return  mLiveData
+        return mLiveData
     }
 
 
-    fun getOrderId(userId:String):MutableLiveData<List<Order>>{
+    fun getOrderId(userId: String): MutableLiveData<List<Order>> {
         return CartRepository().getOrderId(userId)
     }
 
+
+    fun getUserCart(uId: String, oId: String): LiveData<List<Item>> {
+        return CartRepository().getUserCart(uId, oId)
+
     }
 
-
+}

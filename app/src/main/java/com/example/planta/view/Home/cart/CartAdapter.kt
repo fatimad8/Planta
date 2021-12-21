@@ -10,10 +10,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planta.R
 import com.example.planta.model.Cart
+import com.example.planta.model.Item
 import com.example.planta.model.Product
 import com.squareup.picasso.Picasso
 
-class CartAdapter(var data: List<Product>) : RecyclerView.Adapter<CartAdapterHolder>() {
+class CartAdapter(var data: List<Item>) : RecyclerView.Adapter<CartAdapterHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapterHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.raw_cart_item, null)
         return CartAdapterHolder(v)

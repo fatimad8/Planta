@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.planta.model.Item
 import com.example.planta.model.Order
+import com.example.planta.model.Product
 import com.example.planta.model.User
 import com.example.planta.network.API
 import com.example.planta.network.CartService
@@ -67,9 +68,9 @@ class CartRepository {
     }
 
 
-    fun updateTotalPrice(uId: String, oId: String, price: Int): LiveData<Order> {
+    fun updateTotalPrice(uId: String, oId: String, order: Order): LiveData<Order> {
         var mLiveData = MutableLiveData<Order>()
-        cartService.updateToatlPrice(uId, oId, price).enqueue(object : Callback<Order> {
+        cartService.updateToatlPrice(uId, oId, order).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 if (response.isSuccessful) {
                     mLiveData.postValue(response.body())
@@ -109,9 +110,26 @@ class CartRepository {
         return mLiveData
     }
 
+    fun getUserCart(uId: String, oId: String): LiveData<List<Item>>{
+        var mutableLiveData = MutableLiveData<List<Item>>()
 
+        cartService.getUserCart(uId,oId)
+            .enqueue(object : Callback<List<Item>> {
+                override fun onResponse(
+                    call: Call<List<Item>>,
+                    response: Response<List<Item>>
+                ) {
+                    mutableLiveData.postValue(response.body())
+                }
 
+                override fun onFailure(call: Call<List<Item>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
 
+            })
+        return mutableLiveData
+
+    }
 
 
 
