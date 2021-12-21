@@ -15,7 +15,7 @@ class loginViewModel : ViewModel() {
 
         UserRepository().sign(email, password)
             .observeForever {
-                if (it.isNotEmpty()) {
+                if (it != null) {
                     mLiveData.postValue(it)
                 }
 

@@ -33,9 +33,7 @@ class RegisterViewModel : ViewModel() {
         return  mLiveData
     }
 
-    fun getUserById(fb_id:String):MutableLiveData<List<User>>{
-        return UserRepository().getUserById(fb_id)
-    }
+
 
 
 }

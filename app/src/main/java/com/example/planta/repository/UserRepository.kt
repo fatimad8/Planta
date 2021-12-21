@@ -23,21 +23,20 @@ class UserRepository {
     var userService = API.getInstence().create(UserService::class.java)
     var auth = Firebase.auth
 
-    fun sign(email: String, pass: String): LiveData<String> {
+    fun sign(email: String, pass: String): MutableLiveData<String> {
 
         var mLiveData = MutableLiveData<User>()
         var flag = MutableLiveData<String>()
-        if (email.isNotEmpty() && pass.isNotEmpty()) {
             auth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        auth.currentUser!!.uid
-                        flag.postValue(auth.currentUser!!.uid)
+                         flag.postValue(auth.currentUser?.uid)
                     }
                 }.addOnFailureListener {
+                    flag.postValue("")
                     println("exception:$it")
                 }
-        }
+
 
         return flag
     }

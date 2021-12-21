@@ -42,7 +42,9 @@ class DetailsActivity : AppCompatActivity() {
 
         val id = SharedPreferencesHelper.getUserId(this)
         val uid = auth.currentUser?.uid
-        var oId = ""
+        var total_price =0
+        var totalOrderPrice=0
+        var oId=""
         val currentdate = LocalDate.now().toString()
 
 
@@ -94,7 +96,6 @@ class DetailsActivity : AppCompatActivity() {
 
         addbtn.setOnClickListener {
 
-
             if (SharedPreferencesHelper.getOrderId(this) == "null") {
                 vm.createNewOrder(id, date.toString(), uid!!, price, item as Int).observeForever {
                     if (it != null) {
@@ -118,11 +119,11 @@ class DetailsActivity : AppCompatActivity() {
                             if (it)
                                 Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
                                     .show()
-
-//
-
-
                         }
+
+//                        totalOrderPrice= Integer.valueOf(it.total_price)
+//                        total_price = total_price+totalOrderPrice
+//                        vm.updateTotalPrice(id,it.id,total_price)
                     }
 
 
@@ -158,6 +159,8 @@ class DetailsActivity : AppCompatActivity() {
                         Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
                             .show()
 
+//                    total_price = total_price+totalOrderPrice
+//                    vm.updateTotalPrice(id,lastOrderId,total_price)
 
                 }
 
@@ -167,7 +170,6 @@ class DetailsActivity : AppCompatActivity() {
 
 //                 var order=Order(oId)
 //                var total_price = + Integer.valueOf(order.total_price)
-//
 //                vm.updateTotalPrice(id,oId,total_price)
             }
 
