@@ -131,50 +131,32 @@ class CartRepository {
 
     }
 
+    fun deleteItem(uId: String, oId: String,itemId:String):MutableLiveData<Boolean>{
+        var mutableLiveData = MutableLiveData<Boolean>()
+        cartService.deleteItem(uId,oId, itemId).enqueue(object : Callback<Item> {
+            override fun onResponse(
+                call: Call<Item>,
+                response: Response<Item>
+            ) {
+                if(response.isSuccessful){
+                    mutableLiveData.postValue(true)
+                }else{
+                    mutableLiveData.postValue(false)
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<Item>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mutableLiveData
+
+    }
 
 
 
-//    fun getUserCart(uId: String):LiveData<List<Cart>>{
-//        var mLiveData = MutableLiveData<List<Cart>>()
-//        cartService.getUserCart(uId)
-//            .enqueue(object : Callback<List<Cart>> {
-//                override fun onResponse(call: Call<List<Cart>>, response: Response<List<Cart>>) {
-//                    if (response.isSuccessful) {
-//                        mLiveData.postValue(response.body())
-//                    } else {
-//                        mLiveData.postValue(listOf(Cart("", "", "")))
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<List<Cart>>, t: Throwable) {
-//                    TODO("Not yet implemented")
-//                }
-//
-//            })
-//
-//        return mLiveData
-//    }
-//
-//
-//
-//
-//    fun getCartItem(Id:String):LiveData<List<Product>>{
-//
-//        var mLiveData = MutableLiveData<List<Product>>()
-//        cartService.getCartItem(Id)
-//            .enqueue(object : Callback<List<Product>> {
-//                override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
-//                    if (response.isSuccessful) {
-//                        mLiveData.postValue(response.body())
-//                    }
-//                }
-//                override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-//                    TODO("Not yet implemented")
-//                }
-//
-//            })
-//
-//        return mLiveData
-//    }
 
 }

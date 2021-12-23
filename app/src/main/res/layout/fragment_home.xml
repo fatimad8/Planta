@@ -25,7 +25,7 @@
                 android:layout_width="382dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Indoor"
                 android:textColor="#3E535D"
@@ -53,9 +53,9 @@
                     android:id="@+id/imageView10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/indoor1"
-                    tools:srcCompat="@drawable/indoor1" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_3221"
+                    tools:srcCompat="@drawable/img_3221" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -91,9 +91,9 @@
                     android:id="@+id/imageView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/outdoor2"
-                    tools:srcCompat="@drawable/outdoor2" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_3231"
+                    tools:srcCompat="@drawable/img_3231" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -132,7 +132,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/screen_shot_1443_05_05_at_1_35_20_pm" />
+                    android:src="@drawable/img_323"
+                    app:srcCompat="@drawable/img_323"
+                    tools:srcCompat="@drawable/img_323" />
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>

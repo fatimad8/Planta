@@ -52,9 +52,9 @@ class DetailsActivity : AppCompatActivity() {
 
 
         val product = intent.getSerializableExtra("product") as Product
+         //var product_item = intent.getSerializableExtra("item") as Item
 
 
-        // var product_item = intent.getSerializableExtra("item") as Item
 
 
         Picasso.get().load(product.photo).into(productPhoto)
@@ -116,7 +116,8 @@ class DetailsActivity : AppCompatActivity() {
                                 product.name,
                                 product.photo,
                                 product.price,
-                                product.quantity
+                                (item as Int)
+                               //product.quantity
                             )
                         ).observeForever {
                             if (it)
@@ -151,7 +152,8 @@ class DetailsActivity : AppCompatActivity() {
                         product.name,
                         product.photo,
                         product.price,
-                        product.quantity
+                        (item as Int)
+                        //product.quantity
                     )
                 ).observeForever {
                     if (it)

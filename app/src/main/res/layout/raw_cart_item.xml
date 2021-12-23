@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cartCardView"
         android:layout_width="0dp"
         android:layout_height="160dp"
         android:layout_marginStart="8dp"
@@ -42,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="TextView"
                 android:textColor="#3E535D"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCartPhoto"
@@ -57,7 +58,7 @@
                 android:text="TextView"
                 android:textColor="#3E535D"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCartPhoto"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCartProName" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCart" />
 
             <Spinner
                 android:id="@+id/spinnerCart"
@@ -66,7 +67,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCartPhoto"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCartPrice" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewCartProName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

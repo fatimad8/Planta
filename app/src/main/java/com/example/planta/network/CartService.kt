@@ -25,6 +25,9 @@ interface CartService {
     @GET("uesrs/{id}/order/{id}/Product")
     fun getUserCart(@Path("id")uid:String,@Path("id")oId:String):Call<List<Item>>
 
+    @DELETE("uesrs/{id}/order/{id}/Product/{id1}")
+    fun deleteItem(@Path("id")uid:String,@Path("id")oId:String,@Path("id1")itemId:String):Call<Item>
+
 
 
 

@@ -70,4 +70,9 @@ class CartViewModel:ViewModel() {
 
     }
 
+    fun deleteItem(uId: String, oId: String,itemId:String):MutableLiveData<Boolean>{
+        var mLiveData = MutableLiveData<Boolean>()
+        return CartRepository().deleteItem(uId, oId, itemId)
+    }
+
 }
