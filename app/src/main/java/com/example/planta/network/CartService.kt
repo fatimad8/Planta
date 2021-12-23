@@ -28,6 +28,9 @@ interface CartService {
     @DELETE("uesrs/{id}/order/{id}/Product/{id1}")
     fun deleteItem(@Path("id")uid:String,@Path("id")oId:String,@Path("id1")itemId:String):Call<Item>
 
+    @PUT("uesrs/{id}/order/{id}/Product/{id1}")
+    fun updateCartQun(@Path("id")uid:String,@Path("id")oId:String,@Path("id1")itemId:String,@Body item: Item):Call<Item>
+
 
 
 

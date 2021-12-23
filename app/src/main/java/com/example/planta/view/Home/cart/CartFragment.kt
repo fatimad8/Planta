@@ -59,8 +59,7 @@ class CartFragment : Fragment() {
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                         pos = viewHolder.adapterPosition
                         var itemId = it[pos].id
-                        println("item id: $itemId")
-                        vm.deleteItem(uid, oid,itemId).observe(viewLifecycleOwner,{
+                         vm.deleteItem(uid, oid,itemId).observe(viewLifecycleOwner,{
 
                             if (it) {
                                 Toast.makeText(context, "deleted successfully", Toast.LENGTH_SHORT)
@@ -96,25 +95,6 @@ class CartFragment : Fragment() {
         return v
     }
 
-
-//    fun deleteItem(uid: String, oid: String, item: String) {
-//
-//        val alertBuilder = AlertDialog.Builder(context)
-//        alertBuilder.setTitle("Delete")
-//        alertBuilder.setMessage("Do you want to delete this item ?")
-//        alertBuilder.setPositiveButton("Delete") { _, _ ->
-//            if (::myAdapter.isInitialized) {
-//                myAdapter.deleteSelectedItem()
-//
-////                vm.deleteItem(uid, oid, item).observeForever {
-////                    if (it) {
-////                        Toast.makeText(context, "deleted successfully", Toast.LENGTH_SHORT).show()
-////                    }
-//            }
-//
-//
-//        }
-//    }
 
 
 }

@@ -156,6 +156,31 @@ class CartRepository {
 
     }
 
+    fun updateCartQun(uId: String, oId: String,itemId:String,item:Item):LiveData<Item>{
+        var mLiveData = MutableLiveData<Item>()
+         cartService.updateCartQun(uId,oId, itemId, item).enqueue(object : Callback<Item> {
+            override fun onResponse(
+                call: Call<Item>,
+                response: Response<Item>
+            ) {
+                if(response.isSuccessful){
+                    mLiveData.postValue(response.body())
+                }else{
+                    mLiveData.postValue(Item("","","","","","","","",0))
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<Item>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mLiveData
+
+    }
+
 
 
 
