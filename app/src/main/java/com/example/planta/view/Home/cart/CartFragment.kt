@@ -21,6 +21,9 @@ import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.cart.CartAdapter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import cn.pedant.SweetAlert.SweetAlertDialog
+import cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener
+
 
 class CartFragment : Fragment() {
 
@@ -43,7 +46,7 @@ class CartFragment : Fragment() {
         var cRecylerView = v.findViewById<RecyclerView>(R.id.cartRecylerView)
         var totalPrice = 0
         var totalQun = 0
-        var pos=0
+        var pos = 0
         cRecylerView.layoutManager = GridLayoutManager(context, 1)
         val vm: CartViewModel by viewModels()
         var uid = SharedPreferencesHelper.getUserId(context!!)
@@ -59,16 +62,33 @@ class CartFragment : Fragment() {
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                         pos = viewHolder.adapterPosition
                         var itemId = it[pos].id
-                         vm.deleteItem(uid, oid,itemId).observe(viewLifecycleOwner,{
 
-                            if (it) {
-                                Toast.makeText(context, "deleted successfully", Toast.LENGTH_SHORT)
-                                    .show()
+                        SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Are you sure?")
+                            .setConfirmText("Yes,delete it!")
+                            .setConfirmClickListener { sDialog ->
+                                sDialog
+                                    .setTitleText("Deleted!")
+                                    .setConfirmText("OK")
+                                    .setConfirmClickListener(null)
+                                    .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
+
+                                vm.deleteItem(uid, oid, itemId).observe(viewLifecycleOwner, {
+
+                                    if (it) {
+                                        sDialog
+                                            .setTitleText("Deleted!")
+                                            .setConfirmText("OK")
+                                            .setConfirmClickListener(null)
+                                            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
+                                    }
+
+                                    myAdapter.deleteItem(pos)
+
+                                })
+
                             }
-
-                            myAdapter.deleteItem(pos)
-
-                        })
+                            .show()
 
                     }
                 }
@@ -94,7 +114,6 @@ class CartFragment : Fragment() {
 
         return v
     }
-
 
 
 }

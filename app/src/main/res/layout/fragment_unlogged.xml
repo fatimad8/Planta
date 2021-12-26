@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_shape"
         android:text="Sign Up with email "
@@ -25,12 +25,13 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/login_4"
+        android:src="@drawable/planta_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/planta_login" />
 
     <TextView
         android:id="@+id/textView"
@@ -47,12 +48,13 @@
 
     <TextView
         android:id="@+id/textViewLoginHere"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="Login Here"
+        android:textAlignment="center"
         android:textColor="#3E535D"
         android:textSize="16sp"
         android:textStyle="bold"
