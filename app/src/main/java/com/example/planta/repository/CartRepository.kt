@@ -181,6 +181,28 @@ class CartRepository {
 
     }
 
+    fun getUserOrder(uId: String, oId: String): LiveData<Order>{
+        var mutableLiveData =MutableLiveData<Order>()
+
+        cartService.getUserOrder(uId,oId)
+            .enqueue(object : Callback<Order> {
+                override fun onResponse(
+                    call: Call<Order>,
+                    response: Response<Order>
+                ) {
+                    if(response.isSuccessful)
+                    mutableLiveData.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<Order>, t: Throwable) {
+                    t.printStackTrace()
+                 }
+
+            })
+        return mutableLiveData
+
+    }
+
 
 
 

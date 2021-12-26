@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.planta.R
 import com.example.planta.view.Home.cart.CartFragment
+import com.example.planta.view.Home.cart.CartHolderFragment
 import com.example.planta.view.Home.profile.LoggedFragment
 import com.example.planta.view.Home.profile.ProfileFragment
 import com.example.planta.view.Home.profile.ProfileViewModel
@@ -30,7 +31,7 @@ class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
         when (position) {
             0 -> return HomeFragment()
             1 -> return SearchFragment()
-            2 -> return CartFragment()
+            2 -> return CartHolderFragment()
             3 -> return ProfileFragment()
 
         }

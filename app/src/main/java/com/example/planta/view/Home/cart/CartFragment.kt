@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -31,6 +33,10 @@ class CartFragment : Fragment() {
     val vm: CartViewModel by viewModels()
     var auth = Firebase.auth
     private lateinit var myAdapter: CartAdapter
+    val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
+    var emptyCart=EmptyCartFragment()
+
+
 
 
     override fun onCreateView(
@@ -47,17 +53,16 @@ class CartFragment : Fragment() {
         var totalPrice = 0
         var totalQun = 0
         var pos = 0
+
         cRecylerView.layoutManager = GridLayoutManager(context, 1)
         val vm: CartViewModel by viewModels()
         var uid = SharedPreferencesHelper.getUserId(context!!)
         var oid = SharedPreferencesHelper.getOrderId(context!!)
-        //var itemId = ""
 
         vm.getUserCart(uid, oid).observeForever {
             if (it != null) {
                 var myAdapter = CartAdapter(it)
                 cRecylerView.adapter = myAdapter
-                //itemId=myAdapter.getID()
                 val swipeToDelete = object : SwipeToDeleteCallback(context!!) {
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                         pos = viewHolder.adapterPosition
@@ -89,29 +94,29 @@ class CartFragment : Fragment() {
 
                             }
                             .show()
-
                     }
                 }
                 val touchHelper = ItemTouchHelper(swipeToDelete)
                 touchHelper.attachToRecyclerView(cRecylerView)
 
-            }
-            for (p in it) {
-                var itemPrice = p.price.substringBefore(" ").toInt()
-                totalPrice += itemPrice * p.quantity
-                totalQun += p.quantity
+                for (p in it) {
+                    var itemPrice = p.price.substringBefore(" ").toInt()
+                    totalPrice += itemPrice * p.quantity
+                    totalQun += p.quantity
+
+                }
+
+                numOfProductTextView.text = "x" + totalQun.toString()
+                totalPriceTextView.text = "${totalPrice} SR"
 
             }
+            checkOutButton.setOnClickListener {
 
-            numOfProductTextView.text = "x" + totalQun.toString()
-            totalPriceTextView.text = "${totalPrice} SR"
+            }
+
+
 
         }
-        checkOutButton.setOnClickListener {
-
-        }
-
-
         return v
     }
 

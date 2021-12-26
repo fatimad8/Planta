@@ -90,4 +90,11 @@ class CartViewModel:ViewModel() {
         return mLiveData
     }
 
+
+    fun getUserOrder(uId: String, oId: String): LiveData<Order> {
+        return CartRepository().getUserOrder(uId, oId)
+
+    }
+
+
 }

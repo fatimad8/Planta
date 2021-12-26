@@ -46,7 +46,7 @@ class LoggedFragment : Fragment() {
             name.text=username
             email.text=result.getString("email")
             var listname=username.split(" ")
-            shortName.text=listname[0].first()+""+listname[1]?.first()
+            shortName.text=(listname[0].first()+""+listname[1]?.first()).toUpperCase()
 
         }
 

@@ -38,19 +38,14 @@ class ProfileFragment : Fragment() {
 
         vm.checkLogin(user).observe(this,{
             if(it){
-//                v=inflater.inflate(R.layout.fragment_logged, container, false)
-                supportFragmentManager
+                 supportFragmentManager
                     ?.replace(R.id.profileFrameLayout,logg)?.commit()
 
-                println("logg")
-            }else{
-
-                //v=inflater.inflate(R.layout.fragment_unlogged, container, false)
-                supportFragmentManager
+             }else{
+                 supportFragmentManager
                     ?.remove(logg)
                     ?.replace(R.id.profileFrameLayout, unlogg)?.commit()
-                println("unlogg")
-            }
+             }
         })
 
         return v

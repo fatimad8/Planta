@@ -34,8 +34,6 @@ class LoginActivity : AppCompatActivity() {
                 vm.sign(emailEditText.text.toString(), passEditText.text.toString())
                     .observe(this, {
                         if (it.isNotEmpty()) {
-                            //var id = ""
-                                it
                             vm.getUserById(it).observe(this,{
                                 var id=it[0].id
                                 println("user id: $id")

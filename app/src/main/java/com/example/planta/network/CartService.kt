@@ -31,6 +31,9 @@ interface CartService {
     @PUT("uesrs/{id}/order/{id}/Product/{id1}")
     fun updateCartQun(@Path("id")uid:String,@Path("id")oId:String,@Path("id1")itemId:String,@Body item: Item):Call<Item>
 
+    @GET("uesrs/{id}/order/{id}")
+    fun getUserOrder(@Path("id")uid:String,@Path("id")oId:String):Call<Order>
+
 
 
 
