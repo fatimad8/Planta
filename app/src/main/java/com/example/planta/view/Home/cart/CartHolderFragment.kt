@@ -10,6 +10,9 @@ import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.Home.profile.ProfileViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import android.R.string.no
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
 
 class CartHolderFragment : Fragment() {
@@ -22,6 +25,11 @@ class CartHolderFragment : Fragment() {
         // Inflate the layout for this fragment
         var v=  inflater.inflate(R.layout.fragment_cart_holder, container, false)
         val supportFragmentManager2 = activity?.supportFragmentManager?.beginTransaction()
+//        val fragMgr: FragmentManager =  getChildFragmentManager()
+//        fragMgr.beginTransaction()
+        val manager = childFragmentManager
+        val transaction: FragmentTransaction = manager.beginTransaction()
+
         var emptyCart=EmptyCartFragment()
         var cart=CartFragment()
         var auth= Firebase.auth
@@ -35,16 +43,14 @@ class CartHolderFragment : Fragment() {
                     SharedPreferencesHelper.getUserId(requireContext()),
                     SharedPreferencesHelper.getOrderId(requireContext())).observeForever {
                     if(it.size==0){
-                        supportFragmentManager2
-                            ?.replace(R.id.cFrameLayout,emptyCart)?.commit()
+                        transaction.replace(R.id.cFrameLayout,emptyCart).commit()
                     }else{
-                        supportFragmentManager2
-                            ?.replace(R.id.cFrameLayout,cart)?.commit()
+                        transaction.replace(R.id.cFrameLayout,cart).commit()
                     }
                 }
             }else{
-                supportFragmentManager2
-                    ?.replace(R.id.cFrameLayout,emptyCart)?.commit()
+                transaction
+                    .replace(R.id.cFrameLayout,emptyCart).commit()
             }
 
         }

@@ -11,13 +11,10 @@ class CartViewModel:ViewModel() {
 
     fun createNewOrder(
         id: String,
-        date: String,
-        uId: String,
-        price: String,
-        qun: Int
+       order:Order
     ): LiveData<Order> {
         var mLiveData = MutableLiveData<Order>()
-        CartRepository().createNewOrder(id, date, uId, price, qun)
+        CartRepository().createNewOrder(id,order)
             .observeForever {
                 if (it != null) {
                     mLiveData.postValue(it)
@@ -60,8 +57,8 @@ class CartViewModel:ViewModel() {
     }
 
 
-    fun getOrderId(userId: String): MutableLiveData<List<Order>> {
-        return CartRepository().getOrderId(userId)
+    fun getOrderId(userId: String,uid:String): MutableLiveData<List<Order>> {
+        return CartRepository().getOrderId(userId,uid)
     }
 
 

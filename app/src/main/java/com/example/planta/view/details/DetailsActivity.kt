@@ -9,11 +9,10 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.planta.R
-import com.example.planta.model.Item
-import com.example.planta.model.Order
-import com.example.planta.model.Product
+import com.example.planta.model.*
 import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.Home.cart.CartViewModel
+import com.example.planta.view.Home.profile.WishList.WishListViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
@@ -27,6 +26,8 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_details)
 
         val vm: CartViewModel by viewModels()
+        val vm2: WishListViewModel by viewModels()
+
 
         val auth = Firebase.auth
 
@@ -43,18 +44,15 @@ class DetailsActivity : AppCompatActivity() {
 
         val id = SharedPreferencesHelper.getUserId(this)
         val uid = auth.currentUser?.uid
-        var total_price =0
-        var totalOrderPrice=0
-        var oId=""
+        var total_price = 0
+        var totalOrderPrice = 0
+        var oId = ""
         val currentdate = LocalDate.now().toString()
-        var order=Order("","",0,"","")
-
+        var order = Order("", "", 0, "", "")
 
 
         val product = intent.getSerializableExtra("product") as Product
-         //var product_item = intent.getSerializableExtra("item") as Item
-
-
+        //var product_item = intent.getSerializableExtra("item") as Item
 
 
         Picasso.get().load(product.photo).into(productPhoto)
@@ -97,10 +95,17 @@ class DetailsActivity : AppCompatActivity() {
             finish()
         }
 
+
+//        addbtn.setOnClickListener {
+//         }
+
+
+
         addbtn.setOnClickListener {
 
             if (SharedPreferencesHelper.getOrderId(this) == "null") {
-                vm.createNewOrder(id, date.toString(), uid!!, price, item as Int).observeForever {
+                var order=Order("",date.toString(),item as Int,price,id)
+                vm.createNewOrder(id,order).observeForever {
                     if (it != null) {
                         SharedPreferencesHelper.saveOrderId(this, it.id)
                         Toast.makeText(this, "new order", Toast.LENGTH_SHORT).show()
@@ -117,8 +122,7 @@ class DetailsActivity : AppCompatActivity() {
                                 product.photo,
                                 product.price,
                                 (item as Int)
-                               //product.quantity
-                            )
+                             )
                         ).observeForever {
                             if (it)
                                 Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
@@ -153,47 +157,67 @@ class DetailsActivity : AppCompatActivity() {
                         product.photo,
                         product.price,
                         (item as Int)
-                        //product.quantity
-                    )
+                     )
                 ).observeForever {
                     if (it)
                         Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
                             .show()
-
-
-//                     vm.updateTotalPrice(id,lastOrderId,order)
-
                 }
+            }
+        }
 
 
-//
-//                        }
+        wishList.setOnClickListener {
+            if (SharedPreferencesHelper.getWishListId(this) == "null") {
+                vm2.WishList(id, WishList("", id)).observeForever {
+                    if (it != null) {
+                        SharedPreferencesHelper.saveWishId(this, it.id)
+                        vm2.addLikedItem(
+                            id,
+                            it.id,
+                            Liked(
+                                product.category,
+                                product.description,
+                                "",
+                                product.name,
+                                product.photo,
+                                product.price,
+                                product.quantity,
+                                it.id
+                            )
+                        )
+                            .observeForever {
+                                if (it) {
+                                    wishList.setSelected(true)
 
-//                 var order=Order(oId)
-//                var total_price = + Integer.valueOf(order.total_price)
-//                vm.updateTotalPrice(id,oId,total_price)
+                                } else {
+                                    wishList.setSelected(false)
+                                }
+
+                            }
+                    }
+                }
+            } else {
+                var lasWishId = SharedPreferencesHelper.getWishListId(this)
+                vm2.addLikedItem(
+                    id, lasWishId, Liked(
+                        product.category,
+                        product.description,
+                        "",
+                        product.name,
+                        product.photo,
+                        product.price,
+                        product.quantity,
+                        lasWishId
+                    )
+                )
             }
 
-//            var id= SharedPreferencesHelper.getUserId(this)
-//            var uid= auth.currentUser?.uid
-//            if (uid != null) {
-//                vm.addToCart(id,date.toString(),uid,price, item as Int).observeForever {
-//                    if(it){
-//                        Toast.makeText(this, "added successfully", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
+            if (wishList.isSelected) {
+                wishList.setSelected(false)
 
-
-            wishList.setOnClickListener {
-
-                if (wishList.isSelected) {
-                    wishList.setSelected(false)
-
-                } else {
-                    wishList.setSelected(true)
-                }
-
+            } else {
+                wishList.setSelected(true)
             }
 
         }

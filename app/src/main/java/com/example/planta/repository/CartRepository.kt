@@ -17,13 +17,10 @@ class CartRepository {
 
     fun createNewOrder(
         id: String,
-        date: String,
-        uId: String,
-        price: String,
-        qun: Int
+      order:Order
     ): LiveData<Order> {
         var mLiveData = MutableLiveData<Order>()
-        cartService.createNewOrder(id, Order("1", date, qun, price, uId))
+        cartService.createNewOrder(id, order)
             .enqueue(object : Callback<Order> {
                 override fun onResponse(call: Call<Order>, response: Response<Order>) {
                     if (response.isSuccessful) {
@@ -90,10 +87,10 @@ class CartRepository {
     }
 
 
-    fun getOrderId(userId: String): MutableLiveData<List<Order>> {
+    fun getOrderId(userId:String,uid:String): MutableLiveData<List<Order>> {
         var mLiveData = MutableLiveData<List<Order>>()
 
-        cartService.getOrderId(userId,userId)
+        cartService.getOrderId(userId,uid)
             .enqueue(object : Callback<List<Order>> {
                 override fun onResponse(
                     call: Call<List<Order>>,

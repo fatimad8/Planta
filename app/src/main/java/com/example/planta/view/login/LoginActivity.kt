@@ -11,6 +11,8 @@ import androidx.activity.viewModels
 import com.example.planta.R
 import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.Home.MainScreen.MainActivity
+import com.example.planta.view.Home.cart.CartViewModel
+import com.example.planta.view.Home.profile.WishList.WishListViewModel
 import com.example.planta.view.forgetPassword.forgetPassActivity
 import com.example.planta.view.register.RegisterActivity
 
@@ -25,6 +27,10 @@ class LoginActivity : AppCompatActivity() {
         val forgetPass = findViewById<TextView>(R.id.textViewForgetPass)
 
         val vm: loginViewModel by viewModels()
+        val vm2: CartViewModel by viewModels()
+        val vm3: WishListViewModel by viewModels()
+
+
 
 
         buttonLogin.setOnClickListener {
@@ -36,14 +42,31 @@ class LoginActivity : AppCompatActivity() {
                         if (it.isNotEmpty()) {
                             vm.getUserById(it).observe(this,{
                                 var id=it[0].id
-                                println("user id: $id")
                                 SharedPreferencesHelper.saveUserId(this,id)
+                                startActivity(Intent(this, MainActivity::class.java))
+                                Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
+
+                                var uid=SharedPreferencesHelper.getUserId(this)
+                                vm2.getOrderId(uid,uid).observe(this,{
+                                    if(it.size==0){
+                                        SharedPreferencesHelper.saveOrderId(this,"null")
+                                    }else{
+                                        var orderid=it[0].id
+                                        SharedPreferencesHelper.saveOrderId(this,orderid)
+                                    }
+                                })
+                                vm3.getUserWishByUid(uid,uid).observe(this,{
+                                    if(it.size==0){
+                                        SharedPreferencesHelper.saveWishId(this,"null")
+                                    }else{
+                                        SharedPreferencesHelper.saveWishId(this,it[0].id)
+                                    }
+                                })
+
                             })
-                             startActivity(Intent(this, MainActivity::class.java))
-                            Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
 
                         } else {
-                            Toast.makeText(this, "wrong username & password!", Toast.LENGTH_SHORT)
+                            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT)
                                 .show()
                         }
                     })

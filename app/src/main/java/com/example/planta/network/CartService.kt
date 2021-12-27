@@ -17,19 +17,19 @@ interface CartService {
     fun updateToatlPrice(@Path("id")uid:String,@Path("id")oid:String,@Body order: Order):Call<Order>
 
     @GET("uesrs/{id}/order")
-    fun getOrderId(@Path("id")id:String,@Query("uesrId")oId: String):Call<List<Order>>
+    fun getOrderId(@Path("id")id:String,@Query("uesrId")userId: String):Call<List<Order>>
 
-    @POST("uesrs/{id}/order/{id}/Product")
-    fun addProductItem(@Path("id")uid:String,@Path("id")oId:String,@Body item:Item):Call<Item>
+    @POST("uesrs/{id}/order/{uesrId}/Product")
+    fun addProductItem(@Path("id")uid:String, @Path("uesrId")oId:String, @Body item:Item):Call<Item>
 
-    @GET("uesrs/{id}/order/{id}/Product")
-    fun getUserCart(@Path("id")uid:String,@Path("id")oId:String):Call<List<Item>>
+    @GET("uesrs/{id}/order/{oid}/Product")
+    fun getUserCart(@Path("id")uid:String,@Path("oid")oId:String):Call<List<Item>>
 
-    @DELETE("uesrs/{id}/order/{id}/Product/{id1}")
-    fun deleteItem(@Path("id")uid:String,@Path("id")oId:String,@Path("id1")itemId:String):Call<Item>
+    @DELETE("uesrs/{id}/order/{oid}/Product/{id1}")
+    fun deleteItem(@Path("id")uid:String,@Path("oid")oId:String,@Path("id1")itemId:String):Call<Item>
 
-    @PUT("uesrs/{id}/order/{id}/Product/{id1}")
-    fun updateCartQun(@Path("id")uid:String,@Path("id")oId:String,@Path("id1")itemId:String,@Body item: Item):Call<Item>
+    @PUT("uesrs/{id}/order/{oid}/Product/{id1}")
+    fun updateCartQun(@Path("id")uid:String,@Path("oid")oId:String,@Path("id1")itemId:String,@Body item: Item):Call<Item>
 
     @GET("uesrs/{id}/order/{id}")
     fun getUserOrder(@Path("id")uid:String,@Path("id")oId:String):Call<Order>
