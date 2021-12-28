@@ -1,11 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/wishlist"
         android:enabled="true"
         android:icon="@drawable/wishlist"
         android:title="WishList"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/oHistory"
         android:enabled="true"
         android:icon="@drawable/box"
         android:title="Order History"/>

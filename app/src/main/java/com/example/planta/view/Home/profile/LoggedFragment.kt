@@ -11,9 +11,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.example.planta.R
 import com.example.planta.view.Home.MainScreen.MainActivity
+import com.example.planta.view.Home.profile.WishList.WishlistFragment
 import com.example.planta.view.login.loginViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
@@ -34,6 +36,9 @@ class LoggedFragment : Fragment() {
         var shortName=v.findViewById<TextView>(R.id.textViewShortName)
         var name= v.findViewById<TextView>(R.id.textViewUserName)
         var email=v.findViewById<TextView>(R.id.textViewUserEmail)
+
+        //val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
+
 
 
         shortName.text
@@ -56,21 +61,23 @@ class LoggedFragment : Fragment() {
             context?.startActivity(Intent(context,MainActivity::class.java))
         }
 
+        val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
+        supportFragmentManager?.replace(R.id.WframeLayout,WishlistFragment())?.commit()
 
-        bottomNavigationView.setOnNavigationItemReselectedListener {
-                item ->
+        bottomNavigationView.setOnNavigationItemReselectedListener { item ->
             when(item.itemId) {
-                R.id.item1 -> {
-                    // Respond to navigation item 1 click
+                R.id.wishlist -> {
+                    val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
+                    supportFragmentManager?.replace(R.id.WframeLayout,WishlistFragment())?.commit()
                     true
                 }
-                R.id.item2 -> {
+                R.id.oHistory -> {
                     // Respond to navigation item 2 click
                     true
                 }
                 else -> false
             }
-        }
+          }
 
 
 

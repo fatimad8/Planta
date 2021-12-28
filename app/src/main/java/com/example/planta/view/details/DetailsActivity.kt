@@ -38,11 +38,12 @@ class DetailsActivity : AppCompatActivity() {
         val prodductName = findViewById<TextView>(R.id.textViewDetName)
         val prodductPrice = findViewById<TextView>(R.id.textViewDetPrice)
         val prodductDes = findViewById<TextView>(R.id.textViewDetDesc)
-        val productStock = findViewById<TextView>(R.id.textViewDetStock)
+        val productStock = findViewById<TextView>(R.id.inStockTvDec)
         val spinner = findViewById<Spinner>(R.id.spinner)
         val addbtn = findViewById<Button>(R.id.buttonAddCart)
 
         val id = SharedPreferencesHelper.getUserId(this)
+        val wid= SharedPreferencesHelper.getWishListId(this)
         val uid = auth.currentUser?.uid
         var total_price = 0
         var totalOrderPrice = 0
@@ -73,6 +74,16 @@ class DetailsActivity : AppCompatActivity() {
             productStock.setTextColor(Color.parseColor("#DF3D31"))
             addbtn.isEnabled = false
 
+        }
+
+
+
+        WishListViewModel().getUserWishlist(id,wid).observeForever {
+            for(p in it){
+                if(p.name==product.name){
+                    wishList.isSelected=true
+                }
+            }
         }
 
 
@@ -168,55 +179,57 @@ class DetailsActivity : AppCompatActivity() {
 
 
         wishList.setOnClickListener {
-            if (SharedPreferencesHelper.getWishListId(this) == "null") {
-                vm2.WishList(id, WishList("", id)).observeForever {
-                    if (it != null) {
-                        SharedPreferencesHelper.saveWishId(this, it.id)
-                        vm2.addLikedItem(
-                            id,
-                            it.id,
-                            Liked(
-                                product.category,
-                                product.description,
-                                "",
-                                product.name,
-                                product.photo,
-                                product.price,
-                                product.quantity,
-                                it.id
-                            )
-                        )
-                            .observeForever {
-                                if (it) {
-                                    wishList.setSelected(true)
-
-                                } else {
-                                    wishList.setSelected(false)
-                                }
-
-                            }
-                    }
-                }
-            } else {
-                var lasWishId = SharedPreferencesHelper.getWishListId(this)
-                vm2.addLikedItem(
-                    id, lasWishId, Liked(
-                        product.category,
-                        product.description,
-                        "",
-                        product.name,
-                        product.photo,
-                        product.price,
-                        product.quantity,
-                        lasWishId
-                    )
-                )
-            }
-
             if (wishList.isSelected) {
                 wishList.setSelected(false)
 
+
             } else {
+                if (SharedPreferencesHelper.getWishListId(this) == "null") {
+                    vm2.WishList(id, WishList("", id)).observeForever {
+                        if (it != null) {
+                            SharedPreferencesHelper.saveWishId(this, it.id)
+                            vm2.addLikedItem(
+                                id,
+                                it.id,
+                                Liked(
+                                    product.category,
+                                    product.description,
+                                    "",
+                                    product.name,
+                                    product.photo,
+                                    product.price,
+                                    product.quantity,
+                                    it.id
+                                )
+                            )
+                                .observeForever {
+                                    if (it) {
+                                        wishList.setSelected(true)
+
+                                    } else {
+                                        wishList.setSelected(false)
+                                    }
+
+                                }
+                        }
+                    }
+                } else {
+                    var lasWishId = SharedPreferencesHelper.getWishListId(this)
+                    vm2.addLikedItem(
+                        id, lasWishId, Liked(
+                            product.category,
+                            product.description,
+                            "",
+                            product.name,
+                            product.photo,
+                            product.price,
+                            product.quantity,
+                            lasWishId
+                        )
+                    )
+                }
+
+
                 wishList.setSelected(true)
             }
 

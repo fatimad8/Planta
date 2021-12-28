@@ -8,7 +8,7 @@
     tools:context=".view.forgetPassword.InstructionFragment">
 
     <ImageView
-        android:id="@+id/imageViewWishLis"
+        android:id="@+id/imageInstructions"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginStart="16dp"
@@ -32,7 +32,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewWishLis" />
+        app:layout_constraintTop_toBottomOf="@+id/imageInstructions" />
 
     <TextView
         android:id="@+id/textView7"

@@ -15,8 +15,8 @@ interface WishListService {
     @POST("uesrs/{id}/wishlist/{wid}/Liked")
     fun addLikedItem(@Path("id")uid:String,@Path("wid")wId:String,@Body like: Liked):Call<Liked>
 
-    @GET("uesrs/{id}/wishlist/{id}/Liked")
-    fun getUserWishlist(@Path("id")uid:String,@Path("id")wId:String):Call<List<Liked>>
+    @GET("uesrs/{id}/wishlist/{wid}/Liked")
+    fun getUserWishlist(@Path("id")uid:String,@Path("wid")wId:String):Call<List<Liked>>
 
     @GET("uesrs/{id}/wishlist")
     fun getUserWishByUid(@Path("id") uid:String,@Query("uesrId") uesrId:String):Call<List<WishList>>

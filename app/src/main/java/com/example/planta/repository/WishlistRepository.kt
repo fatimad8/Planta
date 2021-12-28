@@ -54,7 +54,7 @@ class WishlistRepository {
         return mLiveData
     }
 
-    fun getUserWishList(uid: String, wid: String): LiveData<List<Liked>> {
+    fun getUserWishList(uid: String, wid: String):MutableLiveData<List<Liked>> {
         var mLiveData = MutableLiveData<List<Liked>>()
         wishService.getUserWishlist(uid, wid)
             .enqueue(object : Callback<List<Liked>> {
@@ -74,9 +74,9 @@ class WishlistRepository {
     }
 
 
-    fun getUserWishByUid(uid: String, userId: String): MutableLiveData<List<WishList>> {
+    fun getUserWishByUid(uid: String, wid: String): MutableLiveData<List<WishList>> {
         var mLiveData = MutableLiveData<List<WishList>>()
-        wishService.getUserWishByUid(uid, userId).enqueue(object : Callback<List<WishList>> {
+        wishService.getUserWishByUid(uid, wid).enqueue(object : Callback<List<WishList>> {
             override fun onResponse(
                 call: Call<List<WishList>>,
                 response: Response<List<WishList>>

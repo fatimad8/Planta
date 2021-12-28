@@ -39,6 +39,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_margin="8dp"
+                android:elevation="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -56,6 +57,7 @@
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
+                android:elevation="1dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/close_button" />
@@ -86,7 +88,8 @@
                 app:layout_constraintTop_toTopOf="@+id/textViewDetName" />
 
             <TextView
-                android:id="@+id/textViewDetStock"
+
+                android:id="@+id/inStockTvDec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -105,7 +108,7 @@
                 android:text="Select the quanity:"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDetStock" />
+                app:layout_constraintTop_toBottomOf="@+id/inStockTvDec" />
 
             <Spinner
                 android:id="@+id/spinner"

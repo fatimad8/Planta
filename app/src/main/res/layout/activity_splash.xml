@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".view.splash.SplashActivity">
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="268dp"
+        android:layout_height="264dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="260dp"
+        android:elevation="1dp"
+        app:layout_constraintStart_toStartOf="@+id/animationView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/trans" />
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:layout_width="260dp"
@@ -19,16 +30,6 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/plant" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="268dp"
-        android:layout_height="264dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="260dp"
-        app:layout_constraintStart_toStartOf="@+id/animationView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/trans" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

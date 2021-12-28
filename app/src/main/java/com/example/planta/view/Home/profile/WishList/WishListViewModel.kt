@@ -37,7 +37,7 @@ class WishListViewModel:ViewModel() {
         return mLiveData
     }
 
-    fun getUserWishlist(uid: String,wid: String):LiveData<List<Liked>>{
+    fun getUserWishlist(uid: String,wid: String):MutableLiveData<List<Liked>>{
         return WishlistRepository().getUserWishList(uid, wid)
     }
 
