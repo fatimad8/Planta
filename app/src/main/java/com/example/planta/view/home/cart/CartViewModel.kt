@@ -1,11 +1,10 @@
-package com.example.planta.view.Home.cart
+package com.example.planta.view.home.cart
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.planta.model.*
 import com.example.planta.repository.CartRepository
-import com.example.planta.repository.UserRepository
 
 class CartViewModel:ViewModel() {
 

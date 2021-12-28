@@ -1,6 +1,5 @@
-package com.example.planta.view.Home.profile
+package com.example.planta.view.home.profile.userProfile
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.planta.R
-import com.example.planta.view.forgetPassword.ResetFragment
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -31,7 +28,7 @@ class ProfileFragment : Fragment() {
 
         val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
 
-        var unlogg=UnloggedFragment()
+        var unlogg= UnloggedFragment()
 
         var logg = LoggedFragment()
 

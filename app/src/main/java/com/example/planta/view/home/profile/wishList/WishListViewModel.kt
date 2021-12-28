@@ -1,12 +1,10 @@
-package com.example.planta.view.Home.profile.WishList
+package com.example.planta.view.home.profile.wishList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.planta.model.Liked
-import com.example.planta.model.Order
 import com.example.planta.model.WishList
-import com.example.planta.repository.CartRepository
 import com.example.planta.repository.WishlistRepository
 
 class WishListViewModel:ViewModel() {
@@ -43,6 +41,14 @@ class WishListViewModel:ViewModel() {
 
     fun getUserWishByUid(uid:String,userId:String):MutableLiveData<List<WishList>>{
         return WishlistRepository().getUserWishByUid(uid, userId)
+    }
+
+    fun removeFromWishlist(uid: String,wid: String,lid:String):MutableLiveData<Boolean>{
+        return WishlistRepository().removeFromWishlist(uid, wid, lid)
+    }
+
+    fun getLidByName(uid: String,wid: String,name:String):MutableLiveData<List<Liked>>{
+        return WishlistRepository().getLidByName(uid,wid,name)
     }
 
 }

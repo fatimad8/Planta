@@ -1,23 +1,13 @@
-package com.example.planta.view.Home.search
+package com.example.planta.view.home.search
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.*
-import android.view.View.inflate
 import androidx.fragment.app.Fragment
-import android.widget.AdapterView
 import android.widget.SearchView
-import androidx.activity.viewModels
-import androidx.core.app.NavUtils
-import androidx.core.graphics.drawable.DrawableCompat.inflate
-import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planta.R
-import com.example.planta.model.Product
-import com.example.planta.view.product.ProductAdapter
 import com.example.planta.view.product.productViewModel
 
 

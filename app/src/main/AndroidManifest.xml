@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.Home.MainScreen.MainActivity"
+            android:name=".view.home.mainScreen.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

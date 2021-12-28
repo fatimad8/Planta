@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.profile
+package com.example.planta.view.home.profile.userProfile
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.planta.R
-import com.example.planta.view.Home.MainScreen.MainActivity
 import com.example.planta.view.login.LoginActivity
 import com.example.planta.view.register.RegisterActivity
 

@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.MainScreen
+package com.example.planta.view.home.mainScreen
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity

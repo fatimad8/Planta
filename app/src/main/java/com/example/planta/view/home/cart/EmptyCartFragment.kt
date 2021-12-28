@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.cart
+package com.example.planta.view.home.cart
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.planta.R
-import com.example.planta.view.Home.MainScreen.MainActivity
+import com.example.planta.view.home.mainScreen.MainActivity
 
 
 class EmptyCartFragment : Fragment() {

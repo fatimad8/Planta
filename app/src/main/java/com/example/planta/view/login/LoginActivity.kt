@@ -10,9 +10,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.planta.R
 import com.example.planta.util.SharedPreferencesHelper
-import com.example.planta.view.Home.MainScreen.MainActivity
-import com.example.planta.view.Home.cart.CartViewModel
-import com.example.planta.view.Home.profile.WishList.WishListViewModel
+import com.example.planta.view.home.mainScreen.MainActivity
+import com.example.planta.view.home.cart.CartViewModel
+import com.example.planta.view.home.profile.wishList.WishListViewModel
 import com.example.planta.view.forgetPassword.forgetPassActivity
 import com.example.planta.view.register.RegisterActivity
 

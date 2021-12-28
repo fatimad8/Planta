@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.cart
+package com.example.planta.view.home.cart
 
 import android.content.Context
 import android.graphics.Canvas

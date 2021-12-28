@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.MainScreen
+package com.example.planta.view.home.mainScreen
 
 import android.content.Intent
 import android.os.Bundle

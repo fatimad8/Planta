@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.profile
+package com.example.planta.view.home.profile.userProfile
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.cardview.widget.CardView
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.viewModels
 import com.example.planta.R
-import com.example.planta.view.Home.MainScreen.MainActivity
-import com.example.planta.view.Home.profile.WishList.WishlistFragment
-import com.example.planta.view.login.loginViewModel
+import com.example.planta.view.home.mainScreen.MainActivity
+import com.example.planta.view.home.profile.wishList.WishlistFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore

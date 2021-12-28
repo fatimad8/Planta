@@ -1,14 +1,11 @@
 package com.example.planta.view.splash
 
 import android.content.Intent
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.widget.TextView
 import com.example.planta.R
-import com.example.planta.view.Home.MainScreen.MainActivity
-import com.example.planta.view.login.LoginActivity
+import com.example.planta.view.home.mainScreen.MainActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

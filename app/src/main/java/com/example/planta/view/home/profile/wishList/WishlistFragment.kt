@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.profile.WishList
+package com.example.planta.view.home.profile.wishList
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,9 +24,12 @@ class WishlistFragment : Fragment() {
         var uid=SharedPreferencesHelper.getUserId(requireContext())
         var wid=SharedPreferencesHelper.getWishListId(requireContext())
         WishListViewModel().getUserWishlist(uid, wid).observe(viewLifecycleOwner,{
-            wRecyclerView.adapter=WishlistAdapter(it)
+            if(it!=null)
+                wRecyclerView.adapter=WishlistAdapter(it)
 
         })
+
+
 
 
         return v

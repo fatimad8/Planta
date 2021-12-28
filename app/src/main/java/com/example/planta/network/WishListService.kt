@@ -20,4 +20,10 @@ interface WishListService {
 
     @GET("uesrs/{id}/wishlist")
     fun getUserWishByUid(@Path("id") uid:String,@Query("uesrId") uesrId:String):Call<List<WishList>>
+
+    @DELETE("uesrs/{id}/wishlist/{wid}/Liked/{lid}")
+    fun removeFromWishlist(@Path("id")uid:String,@Path("wid")wId:String,@Path("lid") lid:String):Call<Liked>
+
+    @GET("uesrs/{id}/wishlist/{wid}/Liked")
+    fun getLidByName(@Path("id")uid:String,@Path("wid")wId:String,@Query("name") name:String):Call<List<Liked>>
 }

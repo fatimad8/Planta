@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.profile
+package com.example.planta.view.home.profile.userProfile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

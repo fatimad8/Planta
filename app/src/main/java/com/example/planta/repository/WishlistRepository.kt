@@ -93,4 +93,49 @@ class WishlistRepository {
     }
 
 
+    fun removeFromWishlist(uid: String,wid: String,lid:String):MutableLiveData<Boolean>{
+        var mutableLiveData = MutableLiveData<Boolean>()
+        wishService.removeFromWishlist(uid,wid, lid).enqueue(object : Callback<Liked> {
+            override fun onResponse(
+                call: Call<Liked>,
+                response: Response<Liked>
+            ) {
+                if(response.isSuccessful){
+                    mutableLiveData.postValue(true)
+                }else{
+                    mutableLiveData.postValue(false)
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<Liked>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mutableLiveData
+
+    }
+
+    fun getLidByName(uid: String,wid: String,name:String):MutableLiveData<List<Liked>>{
+        var mLiveData = MutableLiveData<List<Liked>>()
+        wishService.getLidByName(uid, wid,name)
+            .enqueue(object : Callback<List<Liked>> {
+                override fun onResponse(
+                    call: Call<List<Liked>>,
+                    response: Response<List<Liked>>
+                ) {
+                    mLiveData.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<List<Liked>>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        return mLiveData
+    }
+
+
 }

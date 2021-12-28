@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.search
+package com.example.planta.view.home.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.planta.R
 import com.example.planta.model.*
 import com.example.planta.util.SharedPreferencesHelper
-import com.example.planta.view.Home.cart.CartViewModel
-import com.example.planta.view.Home.profile.WishList.WishListViewModel
+import com.example.planta.view.home.cart.CartViewModel
+import com.example.planta.view.home.profile.wishList.WishListViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
@@ -107,11 +107,6 @@ class DetailsActivity : AppCompatActivity() {
         }
 
 
-//        addbtn.setOnClickListener {
-//         }
-
-
-
         addbtn.setOnClickListener {
 
             if (SharedPreferencesHelper.getOrderId(this) == "null") {
@@ -181,6 +176,12 @@ class DetailsActivity : AppCompatActivity() {
         wishList.setOnClickListener {
             if (wishList.isSelected) {
                 wishList.setSelected(false)
+                vm2.getLidByName(id,wid,product.name).observe(this,{
+                    var lid=it[0].id
+                    vm2.removeFromWishlist(id,wid,lid).observe(this,{
+                        wishList.isSelected=!it
+                    })
+                })
 
 
             } else {

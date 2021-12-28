@@ -1,4 +1,4 @@
-package com.example.planta.view.Home.cart
+package com.example.planta.view.home.cart
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.planta.R
 import com.example.planta.util.SharedPreferencesHelper
-import com.example.planta.view.Home.profile.ProfileViewModel
+import com.example.planta.view.home.profile.userProfile.ProfileViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import android.R.string.no
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
 

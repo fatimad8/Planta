@@ -1,7 +1,6 @@
 package com.example.planta.view.cart
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,10 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planta.R
-import com.example.planta.model.Cart
 import com.example.planta.model.Item
-import com.example.planta.model.Product
 import com.example.planta.util.SharedPreferencesHelper
-import com.example.planta.view.Home.cart.CartViewModel
-import com.example.planta.view.Home.cart.SwipeToDeleteCallback
-import com.example.planta.view.details.DetailsActivity
+import com.example.planta.view.home.cart.CartViewModel
+import com.example.planta.view.home.cart.SwipeToDeleteCallback
 import com.squareup.picasso.Picasso
 
 class CartAdapter(var data: List<Item>) : RecyclerView.Adapter<CartAdapterHolder>() {

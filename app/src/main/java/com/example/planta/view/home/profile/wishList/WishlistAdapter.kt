@@ -1,6 +1,5 @@
-package com.example.planta.view.Home.profile.WishList
+package com.example.planta.view.home.profile.wishList
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +33,15 @@ class WishlistAdapter(var data: List<Liked>) : RecyclerView.Adapter<WishlistAdap
                 }
             }
         }
+
+        holder.wishListHeart.setOnClickListener {
+            if(holder.wishListHeart.isSelected){
+                WishListViewModel().removeFromWishlist(uid,wid,data[position].id).observeForever {
+                    holder.wishListHeart.isSelected=!it
+                }
+            }
+        }
+
 
     }
 
