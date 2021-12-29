@@ -20,7 +20,7 @@ class HistoryDetailsAdapter(var data: List<HistoryItem>) :
     override fun onBindViewHolder(holder: HistoryDetailsAdapterHolder, position: Int) {
         holder.orderName.text=data[position].name
         holder.itemPrice.text=data[position].price.toString()
-        holder.orderQun.text=data[position].quantity.toString()
+        holder.orderQun.text="x"+data[position].quantity.toString()
         Picasso.get().load(data[position].photo).into(holder.orderImage)
 
     }

@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.planta.R
 import com.example.planta.view.home.mainScreen.MainActivity
+import com.example.planta.view.home.profile.orderHistory.OrderHistoryFragment
 import com.example.planta.view.home.profile.wishList.WishlistFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
@@ -67,10 +68,11 @@ class LoggedFragment : Fragment() {
                     true
                 }
                 R.id.oHistory -> {
-                    // Respond to navigation item 2 click
+                    val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
+                    supportFragmentManager?.replace(R.id.WframeLayout,OrderHistoryFragment())?.commit()
                     true
                 }
-                else -> false
+                else -> true
             }
           }
 

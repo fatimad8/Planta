@@ -39,4 +39,13 @@ class OrderHistoryViewModel:ViewModel() {
         return mLiveData
 
     }
+
+
+    fun getOrderHistory(uid: String):MutableLiveData<List<History>>{
+        return OrderHistoryRepository().getOrderHistory(uid)
+    }
+
+    fun getOrderItem(uid:String,hid:String):MutableLiveData<List<HistoryItem>>{
+       return OrderHistoryRepository().getOrderItem(uid, hid)
+    }
 }
