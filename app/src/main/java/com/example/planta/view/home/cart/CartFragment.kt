@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,6 +18,10 @@ import com.example.planta.view.cart.CartAdapter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.planta.model.History
+import com.example.planta.model.HistoryItem
+import com.example.planta.view.home.profile.orderHistory.OrderHistoryViewModel
+import java.time.LocalDate
 
 
 class CartFragment : Fragment() {
@@ -48,6 +53,8 @@ class CartFragment : Fragment() {
 
         cRecylerView.layoutManager = GridLayoutManager(context, 1)
         val vm: CartViewModel by viewModels()
+        val vm2: OrderHistoryViewModel by viewModels()
+
         var uid = SharedPreferencesHelper.getUserId(context!!)
         var oid = SharedPreferencesHelper.getOrderId(context!!)
 
@@ -108,8 +115,41 @@ class CartFragment : Fragment() {
         }
 
         checkOutButton.setOnClickListener {
+            vm2.createOrderHistory(uid, History(LocalDate.now().toString(), "", totalPrice, uid))
+                .observeForever { newHistory ->
+                    if (it != null) {
+                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show()
+                        vm.getUserCart(uid, oid).observeForever { cartItems ->
+                            if (cartItems != null) {
+                                for (item in cartItems) {
+
+                                    vm2.addOrderToHistory(
+                                        uid,
+                                        newHistory.id,
+                                        HistoryItem(
+                                            newHistory.id,
+                                            "",
+                                            item.name,
+                                            item.photo,
+                                            item.price ,
+                                            item.quantity
+                                        )
+                                    )
+                                        .observeForever{
+                                            if(it){
+                                                vm.deleteUserCart(uid,oid,item.id).observeForever {
+
+                                                }
+                                            }
+                                        }
+
+                                }
+                            }
+                        }
+                    }
 
 
+                }
         }
 
         return v

@@ -153,6 +153,31 @@ class CartRepository {
 
     }
 
+
+    fun deleteUserCart(uid: String,oId: String,pid:String):MutableLiveData<Boolean>{
+        var mutableLiveData = MutableLiveData<Boolean>()
+        cartService.deleteUserCart(uid,oId, pid).enqueue(object : Callback<Item> {
+            override fun onResponse(
+                call: Call<Item>,
+                response: Response<Item>
+            ) {
+                if(response.isSuccessful){
+                    mutableLiveData.postValue(true)
+                }else{
+                    mutableLiveData.postValue(false)
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<Item>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mutableLiveData
+    }
+
     fun updateCartQun(uId: String, oId: String,itemId:String,item:Item):LiveData<Item>{
         var mLiveData = MutableLiveData<Item>()
          cartService.updateCartQun(uId,oId, itemId, item).enqueue(object : Callback<Item> {

@@ -34,6 +34,11 @@ interface CartService {
     @GET("uesrs/{id}/order/{id}")
     fun getUserOrder(@Path("id")uid:String,@Path("id")oId:String):Call<Order>
 
+    @DELETE("uesrs/{id}/order/{oid}/Product/{pid}")
+    fun deleteUserCart(@Path("id")uid:String,@Path("oid")oid:String,@Path("pid")pid:String):Call<Item>
+
+
+
 
 
 

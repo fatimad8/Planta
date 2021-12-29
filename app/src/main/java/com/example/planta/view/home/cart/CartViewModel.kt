@@ -72,6 +72,12 @@ class CartViewModel:ViewModel() {
     }
 
 
+    fun deleteUserCart(uid:String,oId: String,pid:String):MutableLiveData<Boolean>{
+        return CartRepository().deleteUserCart(uid, oId, pid)
+
+    }
+
+
     fun updateCartQun(uId: String, oId: String,itemId:String,item: Item):LiveData<Boolean>{
         var mLiveData = MutableLiveData<Boolean>()
         CartRepository().updateCartQun(uId, oId, itemId,item)
