@@ -4,11 +4,14 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.*
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.widget.Button
+import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -18,40 +21,85 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.planta.R
 import com.example.planta.model.History
 import com.example.planta.model.HistoryItem
 import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.home.cart.CartViewModel
+import com.example.planta.view.home.mainScreen.MainActivity
 import com.example.planta.view.home.profile.orderHistory.OrderHistoryViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.time.LocalDate
 import java.util.*
 
 class ShippingLocationActivity : AppCompatActivity() {
+    lateinit var countryEdit:EditText
+    lateinit var cityEdit:EditText
+    lateinit var stateEdit:EditText
+    lateinit var codeEdit:EditText
+    lateinit var add:com.example.planta.model.Address
 
-    @RequiresApi(Build.VERSION_CODES.O)
+     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shipping_location)
-        var shipRecyclerView=findViewById<RecyclerView>(R.id.shipRecyclerView)
-        val vm: CartViewModel by viewModels()
-        val vm2: OrderHistoryViewModel by viewModels()
-        var buttonCountinue=findViewById<Button>(R.id.buttonCountinue)
-        shipRecyclerView.layoutManager=GridLayoutManager(this,1)
-        var uid=SharedPreferencesHelper.getUserId(this)
-        var oid=SharedPreferencesHelper.getOrderId(this)
-        var buttonAddAddress=findViewById<Button>(R.id.buttonAddAddress)
 
+         var shipRecyclerView=findViewById<RecyclerView>(R.id.shipRecyclerView)
+         var buttonCountinue=findViewById<Button>(R.id.buttonCountinue)
+         var buttonAddAddress=findViewById<Button>(R.id.buttonAddAddress)
+         var aToolbar=findViewById<androidx.appcompat.widget.Toolbar>(R.id.aToolbar)
+
+
+         var uid=SharedPreferencesHelper.getUserId(this)
+         var oid=SharedPreferencesHelper.getOrderId(this)
+
+         val vm: CartViewModel by viewModels()
+         val vm2: OrderHistoryViewModel by viewModels()
+         val vm3: AddressViewModel by viewModels()
+
+         aToolbar.title="My Address"
+         aToolbar.setTitleTextColor(Color.WHITE)
+
+         setSupportActionBar(aToolbar)
+         aToolbar.setNavigationOnClickListener {
+             finish()
+         }
+
+
+
+         shipRecyclerView.layoutManager=GridLayoutManager(this,1)
+
+         vm3.getUserAddress(uid).observeForever {
+
+             shipRecyclerView.adapter=AddressAdapter(it)
+
+         }
 
         buttonAddAddress.setOnClickListener {
             checkedPermision()
+            var bottomSheet=BottomSheetDialog(this)
+            bottomSheet.setContentView(R.layout.confirm_address_dialog)
+            bottomSheet.setCanceledOnTouchOutside(false)
+            var save=bottomSheet.findViewById<Button>(R.id.buttonSaveAddress)
+            countryEdit= bottomSheet.findViewById(R.id.counryEditText)!!
+            cityEdit=bottomSheet.findViewById(R.id.cityEditText)!!
+            stateEdit=bottomSheet.findViewById(R.id.stateEditText)!!
+            codeEdit=bottomSheet.findViewById(R.id.codeEditText)!!
+
+
+
+            save?.setOnClickListener {
+                 AddressViewModel().saveUserAddress(uid,add).observeForever {
+                     if(it)
+                         bottomSheet.dismiss()
+                }
+
+            }
+            bottomSheet.show()
+
         }
 
-
-
-
-
-       // shipRecyclerView.adapter=AddressAdapter()
 
         var totalPrice=intent.getIntExtra("totalPrice",0)
         buttonCountinue.setOnClickListener {
@@ -71,38 +119,40 @@ class ShippingLocationActivity : AppCompatActivity() {
                                             "",
                                             item.name,
                                             item.photo,
-                                            item.price ,
+                                            item.price,
                                             item.quantity
                                         )
                                     )
-                                        .observeForever{
-                                            if(it){
-                                                vm.deleteUserCart(uid,oid,item.id).observeForever {
+                                        .observeForever {
+                                            if (it) {
+                                                vm.deleteUserCart(uid, oid, item.id)
+                                                    .observeForever {
+                                                        SweetAlertDialog(
+                                                            this,
+                                                            SweetAlertDialog.SUCCESS_TYPE
+                                                        )
+                                                            .setTitleText("Order Complete")
+                                                            .setConfirmText("OK")
+                                                            .setConfirmClickListener {
+                                                                startActivity(
+                                                                    Intent(
+                                                                        this,
+                                                                        MainActivity::class.java
+                                                                    )
+                                                                )
 
-                                                 }
+                                                            }.show()
+                                                    }
                                             }
                                         }
-
                                 }
                             }
                         }
+
                     }
-
-
                 }
-
-
-
-
-
-
-
         }
-
-
-
     }
-
 
     fun checkedPermision(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
@@ -148,22 +198,17 @@ class ShippingLocationActivity : AppCompatActivity() {
                         val knownName: String = addresses[0]?.getFeatureName()
                         val uid=SharedPreferencesHelper.getUserId(this@ShippingLocationActivity)
 
-                        var add=com.example.planta.model.Address(city,country,state,"",postalCode,uid)
-
-
-
-
+                        add=com.example.planta.model.Address(city,country,state,"",postalCode,uid)
 
                         runOnUiThread {
-                            AddressViewModel().saveUserAddress(uid,add).observeForever {
-                                if(it)
-                                    Toast.makeText(this@ShippingLocationActivity, "Address Saved", Toast.LENGTH_SHORT).show()}
+                            countryEdit.text=Editable.Factory.getInstance().newEditable(country)
+                            stateEdit.text=Editable.Factory.getInstance().newEditable(state)
+                            cityEdit.text=Editable.Factory.getInstance().newEditable(city)
+                            codeEdit.text=Editable.Factory.getInstance().newEditable(postalCode)
                         }
                     }.start()
 
-
-                    //"${location.latitude}+${location.longitude}"
-                }
+                 }
 
             })
     }

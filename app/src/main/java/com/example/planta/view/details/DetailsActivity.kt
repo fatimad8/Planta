@@ -1,5 +1,6 @@
 package com.example.planta.view.details
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -41,6 +42,7 @@ class DetailsActivity : AppCompatActivity() {
         val productStock = findViewById<TextView>(R.id.inStockTvDec)
         val spinner = findViewById<Spinner>(R.id.spinner)
         val addbtn = findViewById<Button>(R.id.buttonAddCart)
+        val shareIcon=findViewById<ImageView>(R.id.imageViewShare)
 
         val id = SharedPreferencesHelper.getUserId(this)
         val wid= SharedPreferencesHelper.getWishListId(this)
@@ -76,6 +78,18 @@ class DetailsActivity : AppCompatActivity() {
 
         }
 
+
+        shareIcon.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "${product.name}\n${product.price}\n${product.description}")
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+
+        }
 
 
         WishListViewModel().getUserWishlist(id,wid).observeForever {
@@ -135,14 +149,6 @@ class DetailsActivity : AppCompatActivity() {
                                     .show()
                         }
 
-
-//                        var itemPrice=it.total_price.substringBefore(" ")
-//                        totalOrderPrice+= Integer.valueOf(itemPrice)
-////                        total_price += totalOrderPrice
-//                        order=Order(it.id,it.order_date,it.quantity,totalOrderPrice.toString(),it.uesrId)
-//                        vm.updateTotalPrice(id,it.id,order).observeForever {
-//
-//                        }
                     }
 
                 }

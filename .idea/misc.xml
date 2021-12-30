@@ -12,18 +12,20 @@
         <entry key="app/src/main/res/font/cormorant_garamond.xml" value="0.18020833333333333" />
         <entry key="app/src/main/res/layout/activity_accessories.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_details.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_forget_pass2.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_indoor.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11854103343465046" />
+        <entry key="app/src/main/res/layout/activity_map.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/activity_order_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_outdoor.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_shipping_location.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="app/src/main/res/layout/button_shape.xml" value="0.12537993920972645" />
-        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/confirm_address_dialog.xml" value="0.20677083333333332" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_cart_container.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/fragment_cart_holder.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/fragment_empty_cart.xml" value="0.25" />
@@ -38,13 +40,14 @@
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/history_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.20677083333333332" />
-        <entry key="app/src/main/res/layout/raw_address.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/raw_address.xml" value="0.25" />
         <entry key="app/src/main/res/layout/raw_cart_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/raw_history_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/raw_plant_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/raw_search_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/raw_wishlist_item.xml" value="0.22" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.20677083333333332" />
+        <entry key="app/src/main/res/menu/details_menu.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.20677083333333332" />
       </map>
     </option>

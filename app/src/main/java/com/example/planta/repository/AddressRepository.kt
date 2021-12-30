@@ -29,4 +29,20 @@ class AddressRepository {
         return mLiveData
     }
 
+    fun getUserAddress(uid:String):MutableLiveData<List<Address>>{
+        var mLiveData=MutableLiveData<List<Address>>()
+        addressService.getUserAddress(uid).enqueue(object : Callback<List<Address>> {
+            override fun onResponse(call: Call<List<Address>>, response: Response<List<Address>>) {
+                if(response.isSuccessful)
+                    mLiveData.postValue(response.body())
+            }
+
+            override fun onFailure(call: Call<List<Address>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return mLiveData
+    }
+
 }

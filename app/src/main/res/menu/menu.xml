@@ -4,7 +4,7 @@
     xmlns:appcompat="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_search"
+        android:id="@+id/share"
 
         android:icon="@drawable/ic_baseline_search_23"
 

@@ -21,4 +21,18 @@ class AddressViewModel:ViewModel() {
             }
         return mLiveData
     }
+
+    fun getUserAddress(uid:String):MutableLiveData<List<Address>>{
+        var mLiveData = MutableLiveData<List<Address>>()
+        AddressRepository().getUserAddress(uid)
+            .observeForever {
+                if (it!=null) {
+                    mLiveData.postValue(it)
+                } else {
+                    mLiveData.postValue(listOf(Address("","","","","","")))
+                }
+
+            }
+        return mLiveData
+    }
 }

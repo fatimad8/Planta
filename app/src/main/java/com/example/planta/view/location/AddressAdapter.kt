@@ -15,8 +15,7 @@ class AddressAdapter(var data: List<com.example.planta.model.Address>) : Recycle
     }
 
     override fun onBindViewHolder(holder: AddressAdapterHolder, position: Int) {
-        holder.userName.text=""
-        holder.address.text="${data[position].Country},${data[position].State},${data[position].City},${data[position].postalCode}"
+         holder.address.text="${data[position].Country}, ${data[position].State}, ${data[position].City}, ${data[position].postalCode}"
     }
 
     override fun getItemCount(): Int {
@@ -25,6 +24,5 @@ class AddressAdapter(var data: List<com.example.planta.model.Address>) : Recycle
 }
 
 class AddressAdapterHolder(v: View) : RecyclerView.ViewHolder(v) {
-    var userName=v.findViewById<TextView>(R.id.textViewUName)
-    var address=v.findViewById<TextView>(R.id.textViewAddress)
+     var address=v.findViewById<TextView>(R.id.textViewAddress)
 }

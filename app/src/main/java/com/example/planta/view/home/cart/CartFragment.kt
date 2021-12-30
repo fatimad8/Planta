@@ -43,9 +43,7 @@ class CartFragment : Fragment() {
     var auth = Firebase.auth
     private lateinit var myAdapter: CartAdapter
     val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
-    var emptyCart=EmptyCartFragment()
-
-
+    var emptyCart = EmptyCartFragment()
 
 
     override fun onCreateView(
@@ -123,49 +121,13 @@ class CartFragment : Fragment() {
             }
 
 
-
-
         }
 
         checkOutButton.setOnClickListener {
-//            vm2.createOrderHistory(uid, History(LocalDate.now().toString(), "", totalPrice, uid))
-//                .observeForever { newHistory ->
-//                    if (it != null) {
-//                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show()
-//                        vm.getUserCart(uid, oid).observeForever { cartItems ->
-//                            if (cartItems != null) {
-//                                for (item in cartItems) {
-//
-//                                    vm2.addOrderToHistory(
-//                                        uid,
-//                                        newHistory.id,
-//                                        HistoryItem(
-//                                            newHistory.id,
-//                                            "",
-//                                            item.name,
-//                                            item.photo,
-//                                            item.price ,
-//                                            item.quantity
-//                                        )
-//                                    )
-//                                        .observeForever{
-//                                            if(it){
-//                                                vm.deleteUserCart(uid,oid,item.id).observeForever {
 
-                                                    var i=Intent(context,ShippingLocationActivity::class.java)
-                                                    i.putExtra("totalPrice",totalPrice)
-                                                    startActivity(i)
-//                                                }
-//                                            }
-//                                        }
-//
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//
-//                }
+            var i = Intent(context, ShippingLocationActivity::class.java)
+            i.putExtra("totalPrice", totalPrice)
+            startActivity(i)
         }
 
         return v
