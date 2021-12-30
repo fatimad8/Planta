@@ -4,6 +4,8 @@
     package="com.example.planta">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,10 +16,10 @@
         android:theme="@style/Theme.Planta"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.home.profile.orderHistory.OrderDetailsActivity"
+            android:name=".view.location.ShippingLocationActivity"
             android:exported="false" />
         <activity
-            android:name=".view.cart.CartActivity"
+            android:name=".view.home.profile.orderHistory.OrderDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".view.details.DetailsActivity"

@@ -1,5 +1,11 @@
 package com.example.planta.view.home.cart
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context.LOCATION_SERVICE
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.*
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +14,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,7 +31,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.planta.model.History
 import com.example.planta.model.HistoryItem
 import com.example.planta.view.home.profile.orderHistory.OrderHistoryViewModel
+import com.example.planta.view.location.ShippingLocationActivity
 import java.time.LocalDate
+import java.util.*
 
 
 class CartFragment : Fragment() {
@@ -112,49 +124,52 @@ class CartFragment : Fragment() {
 
 
 
+
         }
 
         checkOutButton.setOnClickListener {
-            vm2.createOrderHistory(uid, History(LocalDate.now().toString(), "", totalPrice, uid))
-                .observeForever { newHistory ->
-                    if (it != null) {
-                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show()
-                        vm.getUserCart(uid, oid).observeForever { cartItems ->
-                            if (cartItems != null) {
-                                for (item in cartItems) {
+//            vm2.createOrderHistory(uid, History(LocalDate.now().toString(), "", totalPrice, uid))
+//                .observeForever { newHistory ->
+//                    if (it != null) {
+//                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show()
+//                        vm.getUserCart(uid, oid).observeForever { cartItems ->
+//                            if (cartItems != null) {
+//                                for (item in cartItems) {
+//
+//                                    vm2.addOrderToHistory(
+//                                        uid,
+//                                        newHistory.id,
+//                                        HistoryItem(
+//                                            newHistory.id,
+//                                            "",
+//                                            item.name,
+//                                            item.photo,
+//                                            item.price ,
+//                                            item.quantity
+//                                        )
+//                                    )
+//                                        .observeForever{
+//                                            if(it){
+//                                                vm.deleteUserCart(uid,oid,item.id).observeForever {
 
-                                    vm2.addOrderToHistory(
-                                        uid,
-                                        newHistory.id,
-                                        HistoryItem(
-                                            newHistory.id,
-                                            "",
-                                            item.name,
-                                            item.photo,
-                                            item.price ,
-                                            item.quantity
-                                        )
-                                    )
-                                        .observeForever{
-                                            if(it){
-                                                vm.deleteUserCart(uid,oid,item.id).observeForever {
-
-                                                }
-                                            }
-                                        }
-
-                                }
-                            }
-                        }
-                    }
-
-
-                }
+                                                    var i=Intent(context,ShippingLocationActivity::class.java)
+                                                    i.putExtra("totalPrice",totalPrice)
+                                                    startActivity(i)
+//                                                }
+//                                            }
+//                                        }
+//
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//
+//                }
         }
 
         return v
     }
-
 
 }
 
