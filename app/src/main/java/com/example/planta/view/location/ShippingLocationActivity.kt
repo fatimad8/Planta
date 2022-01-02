@@ -90,7 +90,8 @@ class ShippingLocationActivity : AppCompatActivity() {
 
 
             save?.setOnClickListener {
-                 AddressViewModel().saveUserAddress(uid,add).observeForever {
+                var userAddress=com.example.planta.model.Address(cityEdit.text.toString(),countryEdit.text.toString(),stateEdit.text.toString(),"",codeEdit.text.toString(),uid)
+                AddressViewModel().saveUserAddress(uid,userAddress).observeForever {
                      if(it)
                          bottomSheet.dismiss()
                 }
@@ -172,13 +173,13 @@ class ShippingLocationActivity : AppCompatActivity() {
     fun showLocation(){
         var locationManger=getSystemService(LOCATION_SERVICE)as? LocationManager
 
+
         locationManger?.
         requestLocationUpdates(
             LocationManager.GPS_PROVIDER,0,0f,
 
             object : LocationListener {
                 override fun onLocationChanged(location: Location) {
-
 
                     Thread(){
                         val geocoder: Geocoder
@@ -187,7 +188,6 @@ class ShippingLocationActivity : AppCompatActivity() {
                         geocoder = Geocoder(this@ShippingLocationActivity, Locale.getDefault())
 
                         addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1) // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
 
                         val address: String = addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
 
@@ -205,8 +205,11 @@ class ShippingLocationActivity : AppCompatActivity() {
                             stateEdit.text=Editable.Factory.getInstance().newEditable(state)
                             cityEdit.text=Editable.Factory.getInstance().newEditable(city)
                             codeEdit.text=Editable.Factory.getInstance().newEditable(postalCode)
+                            add=com.example.planta.model.Address(cityEdit.text.toString(),countryEdit.text.toString(),stateEdit.text.toString(),"",codeEdit.text.toString(),uid)
+                            locationManger.removeUpdates(this)
                         }
-                    }.start()
+
+                     }.start()
 
                  }
 
@@ -222,9 +225,9 @@ class ShippingLocationActivity : AppCompatActivity() {
             AlertDialog.Builder(this).apply {
                 title="warning"
                 setMessage("To access location go to setting-> allow location service")
-                setPositiveButton("Ok",{dialog, which->
+                setPositiveButton("Ok") { dialog, which ->
 
-                })
+                }
             }.show()
         }
     }

@@ -60,7 +60,7 @@ class LoggedFragment : Fragment() {
         val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
         supportFragmentManager?.replace(R.id.WframeLayout,WishlistFragment())?.commit()
 
-        bottomNavigationView.setOnNavigationItemReselectedListener { item ->
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.wishlist -> {
                     val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
