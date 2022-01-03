@@ -18,7 +18,7 @@ class OrderHistoryViewModel:ViewModel() {
                 if (it != null) {
                     mLiveData.postValue(it)
                 } else {
-                    mLiveData.postValue(History("", "", 0, ""))
+                    mLiveData.postValue(History("", "", 0, "",""))
                 }
 
             }

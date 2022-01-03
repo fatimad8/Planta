@@ -35,7 +35,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="42dp"
         android:layout_marginEnd="16dp"
-        android:text="Your shopping bag is empty."
+        android:text="@string/your_shopping_bag_is_empty"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_shape"
-        android:text="Start Shopping "
+        android:text="@string/start_shopping"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />

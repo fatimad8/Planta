@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
 
         regButton.setOnClickListener {
             if(email.text.isEmpty()||pass.text.isEmpty()||fname.text.isEmpty()){
-                Toast.makeText(this, "Please Fill all Fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.Please_Fill_all_Fields), Toast.LENGTH_SHORT).show()
             }else{
                 vm.register(fname.text.toString(),email.text.toString(),pass.text.toString())
                     .observe(this,{
@@ -41,13 +41,13 @@ class RegisterActivity : AppCompatActivity() {
                                     .observe(this,{
                                         if(it){
                                              startActivity(Intent(this, LoginActivity::class.java))
-                                            Toast.makeText(this,"Register Success", Toast.LENGTH_LONG).show()
+                                            Toast.makeText(this,getString(R.string.register_success), Toast.LENGTH_LONG).show()
                                         }
                                     })
                             startActivity(Intent(this, LoginActivity::class.java))
-                            Toast.makeText(this,"Register Success", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this,getString(R.string.register_success), Toast.LENGTH_LONG).show()
                         }else{
-                            Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, getString(R.string.register_failed), Toast.LENGTH_SHORT).show()
                         }
                     })
             }

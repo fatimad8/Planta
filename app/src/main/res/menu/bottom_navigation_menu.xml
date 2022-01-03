@@ -3,10 +3,10 @@
         android:id="@+id/wishlist"
         android:enabled="true"
         android:icon="@drawable/wishlist"
-        android:title="WishList"/>
+        android:title="@string/wishlist"/>
     <item
         android:id="@+id/oHistory"
         android:enabled="true"
         android:icon="@drawable/box"
-        android:title="Order History"/>
+        android:title="@string/order_history"/>
 </menu>

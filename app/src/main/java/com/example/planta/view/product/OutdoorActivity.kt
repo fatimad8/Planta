@@ -17,7 +17,7 @@ class OutdoorActivity : AppCompatActivity() {
         val vm: productViewModel by viewModels()
 
         val mToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.outToolbar)
-        mToolbar.setTitle("Outdoor Plant")
+        mToolbar.setTitle(getString(R.string.outdoor))
 
         mToolbar.setTitleTextColor(Color.WHITE)
 

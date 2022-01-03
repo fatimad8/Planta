@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         buttonLogin.setOnClickListener {
             if(emailEditText.text.isEmpty()||passEditText.text.isEmpty()){
-                Toast.makeText(this, "Please Fill all Fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.Please_Fill_all_Fields), Toast.LENGTH_SHORT).show()
             }else{
                 vm.sign(emailEditText.text.toString(), passEditText.text.toString())
                     .observe(this, {
@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                                 var id=it[0].id
                                 SharedPreferencesHelper.saveUserId(this,id)
                                 startActivity(Intent(this, MainActivity::class.java))
-                                Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_LONG).show()
 
                                 var uid=SharedPreferencesHelper.getUserId(this)
                                 vm2.getOrderId(uid,uid).observe(this,{
@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                             })
 
                         } else {
-                            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT)
+                            Toast.makeText(this, getString(R.string.login_failed), Toast.LENGTH_SHORT)
                                 .show()
                         }
                     })

@@ -34,10 +34,10 @@ class ProductAdapter(var data: List<Product>) : RecyclerView.Adapter<ProductAdap
 
 
         if (data[position].inStock == true) {
-            holder.productStock.text = "In stock"
+            holder.productStock.text = holder.productStock.context.getString(R.string.in_stock)
             holder.productStock.setTextColor(Color.parseColor("#6D953F"))
         } else {
-            holder.productStock.text = "Out of stock"
+            holder.productStock.text = holder.productStock.context.getString(R.string.out_of_stock)
             holder.productStock.setTextColor(Color.parseColor("#DF3D31"))
         }
 

@@ -16,7 +16,7 @@ class AccessoriesActivity : AppCompatActivity() {
         val vm: productViewModel by viewModels()
 
         val mToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.accToolbar)
-        mToolbar.setTitle("Accessories")
+        mToolbar.setTitle(getString(R.string.accessories))
 
         mToolbar.setTitleTextColor(Color.WHITE)
 

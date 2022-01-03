@@ -53,7 +53,7 @@ class LoggedFragment : Fragment() {
 
         logout.setOnClickListener {
             Firebase.auth.signOut()
-            Toast.makeText(context, "Logout successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.logout), Toast.LENGTH_SHORT).show()
             context?.startActivity(Intent(context,MainActivity::class.java))
         }
 

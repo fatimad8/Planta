@@ -27,7 +27,7 @@ class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
         when (position) {
             0 -> return HomeFragment()
             1 -> return SearchFragment()
-            2 -> return CartFragment()
+            2 -> return CartHolderFragment()
             3 -> return ProfileFragment()
 
         }
@@ -35,16 +35,4 @@ class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
         }
     }
 
-
-//    fun check(): Boolean {
-//        var flag =false
-//        ProfileViewModel().checkLogin(Firebase.auth.currentUser).observeForever {
-//            if(it){
-//                flag=true
-//            }else{
-//                flag=false
-//            }
-//        }
-//        return flag
-//    }
 

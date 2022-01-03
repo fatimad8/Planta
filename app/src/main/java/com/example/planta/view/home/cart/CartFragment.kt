@@ -78,12 +78,12 @@ class CartFragment : Fragment() {
                         var itemId = it[pos].id
 
                         SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText("Are you sure?")
-                            .setConfirmText("Yes,delete it!")
+                            .setTitleText(getString(R.string.are_you_sure))
+                            .setConfirmText(getString(R.string.yes_delete_it))
                             .setConfirmClickListener { sDialog ->
                                 sDialog
-                                    .setTitleText("Deleted!")
-                                    .setConfirmText("OK")
+                                    .setTitleText(getString(R.string.deleted))
+                                    .setConfirmText(getString(R.string.ok))
                                     .setConfirmClickListener(null)
                                     .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
 
@@ -91,8 +91,8 @@ class CartFragment : Fragment() {
 
                                     if (it) {
                                         sDialog
-                                            .setTitleText("Deleted!")
-                                            .setConfirmText("OK")
+                                            .setTitleText(R.string.deleted)
+                                            .setConfirmText(getString(R.string.ok))
                                             .setConfirmClickListener(null)
                                             .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
                                     }

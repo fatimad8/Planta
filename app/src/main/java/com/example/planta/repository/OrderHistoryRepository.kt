@@ -21,7 +21,7 @@ class OrderHistoryRepository {
                 if (response.isSuccessful) {
                     mLiveData.postValue(response.body())
                 } else {
-                    mLiveData.postValue(History("", "", 0, ""))
+                    mLiveData.postValue(History("", "", 0, "",""))
                 }
             }
 

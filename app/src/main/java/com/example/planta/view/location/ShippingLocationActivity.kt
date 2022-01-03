@@ -29,6 +29,7 @@ import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.home.cart.CartViewModel
 import com.example.planta.view.home.mainScreen.MainActivity
 import com.example.planta.view.home.profile.orderHistory.OrderHistoryViewModel
+import com.example.planta.view.notification.Notification
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.time.LocalDate
 import java.util.*
@@ -39,8 +40,10 @@ class ShippingLocationActivity : AppCompatActivity() {
     lateinit var stateEdit:EditText
     lateinit var codeEdit:EditText
     lateinit var add:com.example.planta.model.Address
+    lateinit var address:String
 
-     @RequiresApi(Build.VERSION_CODES.O)
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shipping_location)
@@ -58,7 +61,7 @@ class ShippingLocationActivity : AppCompatActivity() {
          val vm2: OrderHistoryViewModel by viewModels()
          val vm3: AddressViewModel by viewModels()
 
-         aToolbar.title="My Address"
+         aToolbar.title=getString(R.string.myAddress)
          aToolbar.setTitleTextColor(Color.WHITE)
 
          setSupportActionBar(aToolbar)
@@ -73,6 +76,8 @@ class ShippingLocationActivity : AppCompatActivity() {
          vm3.getUserAddress(uid).observeForever {
 
              shipRecyclerView.adapter=AddressAdapter(it)
+             address=AddressAdapter(it).getAddress()
+
 
          }
 
@@ -104,10 +109,13 @@ class ShippingLocationActivity : AppCompatActivity() {
 
         var totalPrice=intent.getIntExtra("totalPrice",0)
         buttonCountinue.setOnClickListener {
-            vm2.createOrderHistory(uid, History(LocalDate.now().toString(), "", totalPrice, uid))
+//            var serviceIntent = Intent(this, Notification::class.java)
+//            startService(serviceIntent)
+            //var a=intent.getStringExtra("address")
+              vm2.createOrderHistory(uid, History(LocalDate.now().toString(), "", totalPrice, uid,address))
                 .observeForever { newHistory ->
                     if (it != null) {
-                        Toast.makeText(this, "Added Successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.item_added), Toast.LENGTH_SHORT).show()
                         vm.getUserCart(uid, oid).observeForever { cartItems ->
                             if (cartItems != null) {
                                 for (item in cartItems) {
@@ -128,12 +136,13 @@ class ShippingLocationActivity : AppCompatActivity() {
                                             if (it) {
                                                 vm.deleteUserCart(uid, oid, item.id)
                                                     .observeForever {
+
                                                         SweetAlertDialog(
                                                             this,
                                                             SweetAlertDialog.SUCCESS_TYPE
                                                         )
-                                                            .setTitleText("Order Complete")
-                                                            .setConfirmText("OK")
+                                                            .setTitleText(getString(R.string.order_complete))
+                                                            .setConfirmText(getString(R.string.ok))
                                                             .setConfirmClickListener {
                                                                 startActivity(
                                                                     Intent(
@@ -223,9 +232,9 @@ class ShippingLocationActivity : AppCompatActivity() {
             showLocation()
         }else{
             AlertDialog.Builder(this).apply {
-                title="warning"
-                setMessage("To access location go to setting-> allow location service")
-                setPositiveButton("Ok") { dialog, which ->
+                title=getString(R.string.warning)
+                setMessage(getString(R.string.access_location))
+                setPositiveButton(getString(R.string.ok)) { dialog, which ->
 
                 }
             }.show()

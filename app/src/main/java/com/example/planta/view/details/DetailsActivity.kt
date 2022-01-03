@@ -69,10 +69,10 @@ class DetailsActivity : AppCompatActivity() {
 
 
         if (product.inStock == true) {
-            productStock.text = "In Stock"
+            productStock.text = getString(R.string.in_stock)
             productStock.setTextColor(Color.parseColor("#6D953F"))
         } else {
-            productStock.text = "Out of stock"
+            productStock.text = getString(R.string.out_of_stock)
             productStock.setTextColor(Color.parseColor("#DF3D31"))
             addbtn.isEnabled = false
 
@@ -93,11 +93,14 @@ class DetailsActivity : AppCompatActivity() {
 
 
         WishListViewModel().getUserWishlist(id,wid).observeForever {
-            for(p in it){
-                if(p.name==product.name){
-                    wishList.isSelected=true
+            if(it!=null){
+                for(p in it){
+                    if(p.name==product.name){
+                        wishList.isSelected=true
+                    }
                 }
             }
+
         }
 
 
@@ -128,7 +131,7 @@ class DetailsActivity : AppCompatActivity() {
                 vm.createNewOrder(id,order).observeForever {
                     if (it != null) {
                         SharedPreferencesHelper.saveOrderId(this, it.id)
-                        Toast.makeText(this, "new order", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.new_order), Toast.LENGTH_SHORT).show()
                         vm.addProductItem(
                             id,
                             it.id,
@@ -145,7 +148,7 @@ class DetailsActivity : AppCompatActivity() {
                              )
                         ).observeForever {
                             if (it)
-                                Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
+                                Toast.makeText(this, getString(R.string.item_added), Toast.LENGTH_SHORT)
                                     .show()
                         }
 
@@ -172,7 +175,7 @@ class DetailsActivity : AppCompatActivity() {
                      )
                 ).observeForever {
                     if (it)
-                        Toast.makeText(this, "Item added successfully", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, getString(R.string.item_added), Toast.LENGTH_SHORT)
                             .show()
                 }
             }

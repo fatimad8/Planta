@@ -40,7 +40,7 @@ class CartHolderFragment : Fragment() {
                 CartViewModel().getUserCart(
                     SharedPreferencesHelper.getUserId(requireContext()),
                     SharedPreferencesHelper.getOrderId(requireContext())).observeForever {
-                    if(it.size==0){
+                    if(it.isNullOrEmpty()){
                         transaction.replace(R.id.cFrameLayout,emptyCart).commit()
                     }else{
                         transaction.replace(R.id.cFrameLayout,cart).commit()

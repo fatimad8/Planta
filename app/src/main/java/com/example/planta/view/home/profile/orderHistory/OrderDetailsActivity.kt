@@ -20,7 +20,7 @@ class OrderDetailsActivity : AppCompatActivity() {
         var orderTotalPrice=findViewById<TextView>(R.id.OrderPrice)
         var oToolbar=findViewById<androidx.appcompat.widget.Toolbar>(R.id.oToolbar)
 
-        oToolbar.title="My Orders"
+        oToolbar.title=getString(R.string.order_history)
         oToolbar.setTitleTextColor(Color.WHITE)
 
         setSupportActionBar(oToolbar)

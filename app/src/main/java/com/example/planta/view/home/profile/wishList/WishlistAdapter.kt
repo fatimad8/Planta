@@ -7,12 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planta.R
+import com.example.planta.model.Item
 import com.example.planta.model.Liked
 import com.example.planta.util.SharedPreferencesHelper
 import com.squareup.picasso.Picasso
 import xyz.hanks.library.bang.SmallBangView
 
 class WishlistAdapter(var data: List<Liked>) : RecyclerView.Adapter<WishlistAdapterHolder>() {
+    private var listData: MutableList<Item> = data as MutableList<Item>
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistAdapterHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.raw_wishlist_item, null)
         return WishlistAdapterHolder(v)
@@ -38,6 +41,8 @@ class WishlistAdapter(var data: List<Liked>) : RecyclerView.Adapter<WishlistAdap
             if(holder.wishListHeart.isSelected){
                 WishListViewModel().removeFromWishlist(uid,wid,data[position].id).observeForever {
                     holder.wishListHeart.isSelected=!it
+                    listData.removeAt(position)
+                    notifyDataSetChanged()
                 }
             }
         }

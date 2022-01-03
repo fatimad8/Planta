@@ -8,7 +8,7 @@
 
         android:icon="@drawable/ic_baseline_search_23"
 
-        android:title="search"
+        android:title="@string/search"
 
         appcompat:actionViewClass="android.support.v7.widget.SearchView"
         appcompat:showAsAction="always" />

@@ -34,7 +34,7 @@ class ResetFragment : Fragment() {
 
         sendButton.setOnClickListener {
             if(email.text.isEmpty()){
-                Toast.makeText(context, "Please enter email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.please_enter_email), Toast.LENGTH_SHORT).show()
             }else{
                 vm.resetPassword(email.text.toString())
                     .observe(this, {
@@ -42,7 +42,7 @@ class ResetFragment : Fragment() {
                             supportFragmentManager
                                 ?.replace(R.id.mFrameLayout, instruction)?.commit()
                         } else {
-                            Toast.makeText(context, "Failed to sent", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, getString(R.string.failed_to_sent), Toast.LENGTH_SHORT).show()
                         }
                     })
             }

@@ -18,7 +18,7 @@ class IndoorActivity : AppCompatActivity() {
 
 
         val mToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.inToolbar)
-        mToolbar.setTitle("Indoor Plant")
+        mToolbar.setTitle(getString(R.string.indoor))
         mToolbar.setTitleTextColor(Color.WHITE)
 
         setSupportActionBar(mToolbar)
