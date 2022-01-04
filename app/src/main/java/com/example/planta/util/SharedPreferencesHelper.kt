@@ -9,6 +9,7 @@ class SharedPreferencesHelper {
         var prefname = "userId"
         var orderPref = "orderId"
         var wishPref  ="wishId"
+        var addressPref="address"
 
         fun saveUserId(context: Context, uid: String): Unit {
             var prefs = context.getSharedPreferences(prefname, Context.MODE_PRIVATE)
@@ -48,6 +49,19 @@ class SharedPreferencesHelper {
             var prefs = context.getSharedPreferences(wishPref, Context.MODE_PRIVATE)
             var wid = prefs.getString("wish","null")
             return wid!!
+        }
+
+        fun saveAddress(context: Context,address:String){
+            var prefs=context.getSharedPreferences(addressPref,Context.MODE_PRIVATE)
+            prefs.edit()
+                .putString("address",address)
+                .commit()
+        }
+
+        fun getAddress(context: Context):String{
+            var prefs = context.getSharedPreferences(addressPref, Context.MODE_PRIVATE)
+            var address = prefs.getString("address","null")
+            return address!!
         }
 
 

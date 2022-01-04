@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Planta"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.home.cart.OrderSummaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.location.MapActivity"
             android:exported="false" />
         <activity

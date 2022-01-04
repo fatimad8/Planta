@@ -1,5 +1,6 @@
 package com.example.planta.view.home.profile.userProfile
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +23,6 @@ class ProfileFragment : Fragment() {
         var v = inflater.inflate(R.layout.fragment_profile, container, false)
         var auth= Firebase.auth
         var user= auth.currentUser
-
 
         val vm : ProfileViewModel by viewModels()
 

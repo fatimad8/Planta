@@ -6,14 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planta.R
+import com.example.planta.util.SharedPreferencesHelper
+import com.example.planta.view.home.cart.OrderSummaryActivity
+import okhttp3.internal.notifyAll
+
+
+var mSelectedItem = -1
 
 class AddressAdapter(var data: List<com.example.planta.model.Address>) : RecyclerView.Adapter<AddressAdapterHolder>() {
-    var addr:String=" "
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressAdapterHolder {
+     var addr:String=" "
+     var rbChecked: RadioButton? = null
+     var rbPosoition = 0
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressAdapterHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.raw_address, null)
         return AddressAdapterHolder(v)
     }
@@ -22,17 +31,27 @@ class AddressAdapter(var data: List<com.example.planta.model.Address>) : Recycle
         holder.address.text="${data[position].Country}, ${data[position].State}, ${data[position].City}, ${data[position].postalCode}"
 
 
-//        addr="${data[position].Country}, ${data[position].State}, ${data[position].City}, ${data[position].postalCode}"
-//        var intent= Intent(holder.addressBox.context,ShippingLocationActivity::class.java)
-//        intent.putExtra("address",addr)
-//        holder.addressBox.context.startActivity(intent)
-
-       if (holder.addressBox.isChecked) {
-           addr="${data[position].Country}, ${data[position].State}, ${data[position].City}, ${data[position].postalCode}"
-       }
-
-
+    holder.selected.setOnCheckedChangeListener { compoundButton, b ->
+        if (rbChecked !== null) {
+            rbChecked!!.isChecked = false
+        }
+        rbChecked = holder.selected
+          addr="${data[holder.adapterPosition].Country}, ${data[holder.adapterPosition].State},  ${data[holder.adapterPosition].City},  ${data[holder.adapterPosition].postalCode}"
+          SharedPreferencesHelper.saveAddress(holder.address.context,addr)
     }
+
+//                 addr="${data[position].Country}, ${data[position].State}, ${data[position].City}, ${data[position].postalCode}"
+//                val intent= Intent(holder.addressBox.context,OrderSummaryActivity::class.java)
+//                intent.putExtra("address",addr)
+//                holder.addressBox.context.startActivity(intent)
+
+            }
+
+
+
+
+
+
 
     override fun getItemCount(): Int {
         return data.size
@@ -41,9 +60,11 @@ class AddressAdapter(var data: List<com.example.planta.model.Address>) : Recycle
     fun getAddress():String{
         return addr
     }
+
+
 }
 
 class AddressAdapterHolder(v: View) : RecyclerView.ViewHolder(v) {
-     var address=v.findViewById<TextView>(R.id.textViewAddress)
-    var addressBox=v.findViewById<CheckBox>(R.id.addressCheckBox)
+    var address = v.findViewById<TextView>(R.id.textViewAddress)
+    var selected = v.findViewById<RadioButton>(R.id.addressRadioButton)
 }

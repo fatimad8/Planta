@@ -3,6 +3,8 @@ package com.example.planta.view.home.mainScreen
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.viewpager2.widget.ViewPager2
 import com.example.planta.R
 import com.google.android.material.tabs.TabLayout
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
         var icon = arrayOf(
             R.drawable.ic_baseline_home_24,
             R.drawable.ic_baseline_search_24,
@@ -40,5 +43,21 @@ class MainActivity : AppCompatActivity() {
 
         }.attach()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.profile_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.language ->{
+
+
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

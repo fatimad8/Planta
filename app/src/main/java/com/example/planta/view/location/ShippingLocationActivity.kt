@@ -27,6 +27,7 @@ import com.example.planta.model.History
 import com.example.planta.model.HistoryItem
 import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.home.cart.CartViewModel
+import com.example.planta.view.home.cart.OrderSummaryActivity
 import com.example.planta.view.home.mainScreen.MainActivity
 import com.example.planta.view.home.profile.orderHistory.OrderHistoryViewModel
 import com.example.planta.view.notification.Notification
@@ -40,7 +41,7 @@ class ShippingLocationActivity : AppCompatActivity() {
     lateinit var stateEdit:EditText
     lateinit var codeEdit:EditText
     lateinit var add:com.example.planta.model.Address
-    lateinit var address:String
+    lateinit var addre:String
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -52,6 +53,8 @@ class ShippingLocationActivity : AppCompatActivity() {
          var buttonCountinue=findViewById<Button>(R.id.buttonCountinue)
          var buttonAddAddress=findViewById<Button>(R.id.buttonAddAddress)
          var aToolbar=findViewById<androidx.appcompat.widget.Toolbar>(R.id.aToolbar)
+
+        var address:String=" "
 
 
          var uid=SharedPreferencesHelper.getUserId(this)
@@ -76,7 +79,7 @@ class ShippingLocationActivity : AppCompatActivity() {
          vm3.getUserAddress(uid).observeForever {
 
              shipRecyclerView.adapter=AddressAdapter(it)
-             address=AddressAdapter(it).getAddress()
+              address=AddressAdapter(it).addr
 
 
          }
@@ -109,59 +112,65 @@ class ShippingLocationActivity : AppCompatActivity() {
 
         var totalPrice=intent.getIntExtra("totalPrice",0)
         buttonCountinue.setOnClickListener {
-//            var serviceIntent = Intent(this, Notification::class.java)
-//            startService(serviceIntent)
-            //var a=intent.getStringExtra("address")
-              vm2.createOrderHistory(uid, History(LocalDate.now().toString(), "", totalPrice, uid,address))
-                .observeForever { newHistory ->
-                    if (it != null) {
-                        Toast.makeText(this, getString(R.string.item_added), Toast.LENGTH_SHORT).show()
-                        vm.getUserCart(uid, oid).observeForever { cartItems ->
-                            if (cartItems != null) {
-                                for (item in cartItems) {
+            var i= Intent(this, OrderSummaryActivity::class.java)
+            i.putExtra("totalPrice", totalPrice)
+            i.putExtra("address",address)
+            startActivity(i)
 
-                                    vm2.addOrderToHistory(
-                                        uid,
-                                        newHistory.id,
-                                        HistoryItem(
-                                            newHistory.id,
-                                            "",
-                                            item.name,
-                                            item.photo,
-                                            item.price,
-                                            item.quantity
-                                        )
-                                    )
-                                        .observeForever {
-                                            if (it) {
-                                                vm.deleteUserCart(uid, oid, item.id)
-                                                    .observeForever {
 
-                                                        SweetAlertDialog(
-                                                            this,
-                                                            SweetAlertDialog.SUCCESS_TYPE
-                                                        )
-                                                            .setTitleText(getString(R.string.order_complete))
-                                                            .setConfirmText(getString(R.string.ok))
-                                                            .setConfirmClickListener {
-                                                                startActivity(
-                                                                    Intent(
-                                                                        this,
-                                                                        MainActivity::class.java
-                                                                    )
-                                                                )
 
-                                                            }.show()
-                                                    }
-                                            }
-                                        }
-                                }
-                            }
-                        }
-
-                    }
-                }
         }
+
+//              vm2.createOrderHistory(uid, History(LocalDate.now().toString(), "", totalPrice, uid,addre))
+//                .observeForever { newHistory ->
+//                    if (it != null) {
+//                        Toast.makeText(this, getString(R.string.item_added), Toast.LENGTH_SHORT).show()
+//                        vm.getUserCart(uid, oid).observeForever { cartItems ->
+//                            if (cartItems != null) {
+//                                for (item in cartItems) {
+//
+//                                    vm2.addOrderToHistory(
+//                                        uid,
+//                                        newHistory.id,
+//                                        HistoryItem(
+//                                            newHistory.id,
+//                                            "",
+//                                            item.name,
+//                                            item.photo,
+//                                            item.price,
+//                                            item.quantity
+//                                        )
+//                                    )
+//                                        .observeForever {
+//                                            if (it) {
+//                                                vm.deleteUserCart(uid, oid, item.id)
+//                                                    .observeForever {
+//
+//                                                        SweetAlertDialog(
+//                                                            this,
+//                                                            SweetAlertDialog.SUCCESS_TYPE
+//                                                        )
+//                                                            .setTitleText(getString(R.string.order_complete))
+//                                                            .setConfirmText(getString(R.string.ok))
+//                                                            .setConfirmClickListener {
+//                                                                startActivity(
+//                                                                    Intent(
+//                                                                        this,
+//                                                                        MainActivity::class.java
+//                                                                    )
+//                                                                )
+//
+//                                                            }.show()
+//                                                    }
+//                                            }
+//                                        }
+//                                }
+//                            }
+//                        }
+//
+//                    }
+//                }
+//        }
     }
 
     fun checkedPermision(){

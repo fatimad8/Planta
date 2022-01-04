@@ -19,6 +19,7 @@ class OrderDetailsActivity : AppCompatActivity() {
         var ordernumber=findViewById<TextView>(R.id.OrderId)
         var orderTotalPrice=findViewById<TextView>(R.id.OrderPrice)
         var oToolbar=findViewById<androidx.appcompat.widget.Toolbar>(R.id.oToolbar)
+        var shippedTo=findViewById<TextView>(R.id.textViewShipped)
 
         oToolbar.title=getString(R.string.order_history)
         oToolbar.setTitleTextColor(Color.WHITE)
@@ -34,6 +35,7 @@ class OrderDetailsActivity : AppCompatActivity() {
         date.text=history.createdAt
         ordernumber.text=history.id
         orderTotalPrice.text=history.total_price.toString()+" SR"
+        shippedTo.text=history.Address
 
         oRecyclerView.layoutManager=GridLayoutManager(this,1)
 
