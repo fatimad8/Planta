@@ -20,6 +20,8 @@ class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
     //val vm: ProfileViewModel by viewMo
 
     override fun getItemCount(): Int {
+
+
         return 4
     }
 

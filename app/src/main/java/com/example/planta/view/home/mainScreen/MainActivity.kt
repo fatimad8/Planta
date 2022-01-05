@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.example.planta.R
+import com.example.planta.util.LocalizationUtil
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
+    lateinit var mToolbar:Toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,8 +23,8 @@ class MainActivity : AppCompatActivity() {
         mViewPager.adapter= HomeAdapter(this)
 
 
-        val mToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.mtoolbar2)
-        mToolbar.title="Planta"
+         mToolbar = findViewById<Toolbar>(R.id.mtoolbar2)
+        mToolbar.title=getString(R.string.planta)
         mToolbar.setTitleTextColor(Color.WHITE)
 
         setSupportActionBar(mToolbar)
@@ -53,6 +57,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.language ->{
+
+                if(mToolbar.title=="Planta")
+                LocalizationUtil.changeLanguage(this,"ar")
+                else
+                    LocalizationUtil.changeLanguage(this,"en")
+
 
 
 

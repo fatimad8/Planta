@@ -68,5 +68,6 @@
     <string name="register_success">تم التسجيل بنجاح</string>
     <string name="register_failed">فشل التسجيل</string>
     <string name="search">البحث</string>
-    <string name="CheckOut">CheckOut</string>
+    <string name="CheckOut">الدفع</string>
+    <string name="planta">نباتة</string>
 </resources>
