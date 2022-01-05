@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.example.planta.R
 import com.example.planta.util.LocalizationUtil
+import com.example.planta.util.SharedPreferencesHelper
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
         var mTablayout = findViewById<TabLayout>(R.id.mTabLayout)
         var mViewPager = findViewById<ViewPager2>(R.id.mViewPager)
         mViewPager.adapter= HomeAdapter(this)
@@ -31,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         mToolbar.setNavigationOnClickListener {
             finish()
         }
+
+
 
 
 
@@ -58,10 +64,18 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.language ->{
 
-                if(mToolbar.title=="Planta")
-                LocalizationUtil.changeLanguage(this,"ar")
-                else
+                if(mToolbar.title=="Planta"){
+                    LocalizationUtil.changeLanguage(this,"ar")
+                    SharedPreferencesHelper.saveLanguage(this,"ar")
+                }
+
+                else{
                     LocalizationUtil.changeLanguage(this,"en")
+                    SharedPreferencesHelper.saveLanguage(this,"en")
+
+                }
+
+
 
 
 

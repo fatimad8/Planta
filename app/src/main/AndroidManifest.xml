@@ -19,9 +19,6 @@
             android:name=".view.home.cart.OrderSummaryActivity"
             android:exported="false" />
         <activity
-            android:name=".view.location.MapActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.location.ShippingLocationActivity"
             android:exported="false" />
         <activity
