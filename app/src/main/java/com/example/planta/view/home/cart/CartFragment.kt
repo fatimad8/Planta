@@ -70,53 +70,56 @@ class CartFragment : Fragment() {
 
         vm.getUserCart(uid, oid).observeForever {
             if (it != null) {
-                var myAdapter = CartAdapter(it)
-                cRecylerView.adapter = myAdapter
-                val swipeToDelete = object : SwipeToDeleteCallback(context!!) {
-                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                        pos = viewHolder.adapterPosition
-                        var itemId = it[pos].id
+                if (oid !="null"){
+                    var myAdapter = CartAdapter(it)
+                    cRecylerView.adapter = myAdapter
+                    val swipeToDelete = object : SwipeToDeleteCallback(context!!) {
+                        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                            pos = viewHolder.adapterPosition
+                            var itemId = it[pos].id
 
-                        SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText(getString(R.string.are_you_sure))
-                            .setConfirmText(getString(R.string.yes_delete_it))
-                            .setConfirmClickListener { sDialog ->
-                                sDialog
-                                    .setTitleText(getString(R.string.deleted))
-                                    .setConfirmText(getString(R.string.ok))
-                                    .setConfirmClickListener(null)
-                                    .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
+                            SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText(getString(R.string.are_you_sure))
+                                .setConfirmText(getString(R.string.yes_delete_it))
+                                .setConfirmClickListener { sDialog ->
+                                    sDialog
+                                        .setTitleText(getString(R.string.deleted))
+                                        .setConfirmText(getString(R.string.ok))
+                                        .setConfirmClickListener(null)
+                                        .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
 
-                                vm.deleteItem(uid, oid, itemId).observe(viewLifecycleOwner, {
+                                    vm.deleteItem(uid, oid, itemId).observe(viewLifecycleOwner, {
 
-                                    if (it) {
-                                        sDialog
-                                            .setTitleText(R.string.deleted)
-                                            .setConfirmText(getString(R.string.ok))
-                                            .setConfirmClickListener(null)
-                                            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
-                                    }
+                                        if (it) {
+                                            sDialog
+                                                .setTitleText(R.string.deleted)
+                                                .setConfirmText(getString(R.string.ok))
+                                                .setConfirmClickListener(null)
+                                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
+                                        }
 
-                                    myAdapter.deleteItem(pos)
+                                        myAdapter.deleteItem(pos)
 
-                                })
+                                    })
 
-                            }
-                            .show()
+                                }
+                                .show()
+                        }
                     }
+                    val touchHelper = ItemTouchHelper(swipeToDelete)
+                    touchHelper.attachToRecyclerView(cRecylerView)
+
+                    for (p in it) {
+                        var itemPrice = p.price.substringBefore(" ").toInt()
+                        totalPrice += itemPrice * p.quantity
+                        totalQun += p.quantity
+
+                    }
+
+                    numOfProductTextView.text = "x" + totalQun.toString()
+                    totalPriceTextView.text = "${totalPrice} SR"
                 }
-                val touchHelper = ItemTouchHelper(swipeToDelete)
-                touchHelper.attachToRecyclerView(cRecylerView)
 
-                for (p in it) {
-                    var itemPrice = p.price.substringBefore(" ").toInt()
-                    totalPrice += itemPrice * p.quantity
-                    totalQun += p.quantity
-
-                }
-
-                numOfProductTextView.text = "x" + totalQun.toString()
-                totalPriceTextView.text = "${totalPrice} SR"
 
             }
 

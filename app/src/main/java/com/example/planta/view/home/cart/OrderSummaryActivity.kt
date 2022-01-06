@@ -95,24 +95,44 @@ class OrderSummaryActivity : AppCompatActivity() {
                                     )
                                         .observeForever {
                                             if (it) {
-                                                vm.deleteUserCart(uid, oid, item.id)
-                                                    .observeForever {
-
-                                                        SweetAlertDialog(
-                                                            this,
-                                                            SweetAlertDialog.SUCCESS_TYPE
-                                                        )
-                                                            .setTitleText(getString(R.string.order_complete))
-                                                            .setConfirmText(getString(R.string.ok))
-                                                            .setConfirmClickListener {
-                                                                startActivity(
-                                                                    Intent(
-                                                                        this,
-                                                                        MainActivity::class.java
+                                                SweetAlertDialog(
+                                                                this,
+                                                                SweetAlertDialog.SUCCESS_TYPE
+                                                            )
+                                                                .setTitleText(getString(R.string.order_complete))
+                                                                .setConfirmText(getString(R.string.ok))
+                                                                .setConfirmClickListener {
+                                                                    startActivity(
+                                                                        Intent(
+                                                                            this,
+                                                                            MainActivity::class.java
+                                                                        )
                                                                     )
-                                                                )
 
-                                                            }.show()
+                                                                }.show()
+                                                        }
+
+//                                                vm.deleteUserCart(uid, oid)
+//                                                    .observeForever {
+//                                                        if(it){
+//                                                            SweetAlertDialog(
+//                                                                this,
+//                                                                SweetAlertDialog.SUCCESS_TYPE
+//                                                            )
+//                                                                .setTitleText(getString(R.string.order_complete))
+//                                                                .setConfirmText(getString(R.string.ok))
+//                                                                .setConfirmClickListener {
+//                                                                    startActivity(
+//                                                                        Intent(
+//                                                                            this,
+//                                                                            MainActivity::class.java
+//                                                                        )
+//                                                                    )
+//
+//                                                                }.show()
+//                                                        }
+                                                        SharedPreferencesHelper.saveOrderId(this,"null")
+
                                                     }
                                             }
                                         }
@@ -129,5 +149,5 @@ class OrderSummaryActivity : AppCompatActivity() {
         }
 
 
-    }
-}
+
+

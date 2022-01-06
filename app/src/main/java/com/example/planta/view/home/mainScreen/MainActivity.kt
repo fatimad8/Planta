@@ -32,9 +32,9 @@ class MainActivity : AppCompatActivity() {
         mToolbar.setTitleTextColor(Color.WHITE)
 
         setSupportActionBar(mToolbar)
-        mToolbar.setNavigationOnClickListener {
-            finish()
-        }
+//        mToolbar.setNavigationOnClickListener {
+//            finish()
+//        }
 
 
 

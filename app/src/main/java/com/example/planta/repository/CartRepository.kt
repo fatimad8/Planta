@@ -154,9 +154,9 @@ class CartRepository {
     }
 
 
-    fun deleteUserCart(uid: String,oId: String,pid:String):MutableLiveData<Boolean>{
+    fun deleteUserCart(uid: String,oId: String):MutableLiveData<Boolean>{
         var mutableLiveData = MutableLiveData<Boolean>()
-        cartService.deleteUserCart(uid,oId, pid).enqueue(object : Callback<Item> {
+        cartService.deleteUserCart(uid,oId).enqueue(object : Callback<Item> {
             override fun onResponse(
                 call: Call<Item>,
                 response: Response<Item>
