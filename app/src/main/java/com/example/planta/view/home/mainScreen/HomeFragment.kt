@@ -41,8 +41,8 @@ class HomeFragment : Fragment() {
         var v = inflater.inflate(R.layout.fragment_home, container, false)
 
 
-            val serviceIntent = Intent(context, NotificationsService::class.java)
-            context?.startService(serviceIntent)
+//            val serviceIntent = Intent(context, NotificationsService::class.java)
+//            context?.startService(serviceIntent)
 //           setNotification()
 
 

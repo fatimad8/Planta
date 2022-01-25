@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.planta.R
 import com.example.planta.model.*
 import com.example.planta.util.SharedPreferencesHelper
@@ -125,13 +126,17 @@ class DetailsActivity : AppCompatActivity() {
 
 
         addbtn.setOnClickListener {
-
+            if(SharedPreferencesHelper.getUserId(this).equals("null")){
+                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText("Please Login to add to cart")
+                    .show()}
             if (SharedPreferencesHelper.getOrderId(this) == "null") {
                 var order=Order("",date.toString(),item as Int,price,id)
                 vm.createNewOrder(id,order).observeForever {
                     if (it != null) {
                         SharedPreferencesHelper.saveOrderId(this, it.id)
-                        Toast.makeText(this, getString(R.string.new_order), Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, getString(R.string.new_order), Toast.LENGTH_SHORT).show()
                         vm.addProductItem(
                             id,
                             it.id,
@@ -183,6 +188,13 @@ class DetailsActivity : AppCompatActivity() {
 
 
         wishList.setOnClickListener {
+
+            if(SharedPreferencesHelper.getUserId(this).equals("null")){
+                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText("Please Login to add to wishlist")
+                    .show()}
+
             if (wishList.isSelected) {
                 wishList.setSelected(false)
                 vm2.getLidByName(id,wid,product.name).observe(this,{

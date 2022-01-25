@@ -55,7 +55,10 @@ class LoggedFragment : Fragment() {
 
         logout.setOnClickListener {
             Firebase.auth.signOut()
-
+            SharedPreferencesHelper.saveUserId(requireContext(),"null")
+            SharedPreferencesHelper.saveOrderId(requireContext(),"null")
+            SharedPreferencesHelper.saveWishId(requireContext(),"null")
+            SharedPreferencesHelper.saveLanguage(requireContext(),"null")
             Toast.makeText(context, getString(R.string.logout), Toast.LENGTH_SHORT).show()
             context?.startActivity(Intent(context,MainActivity::class.java))
         }
