@@ -8,9 +8,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doAfterTextChanged
 import com.example.planta.R
 import com.example.planta.model.User
 import com.example.planta.util.SharedPreferencesHelper
+import com.example.planta.util.ValidatorHelper
 import com.example.planta.view.login.LoginActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -28,6 +31,23 @@ class RegisterActivity : AppCompatActivity() {
         var auth = Firebase.auth
 
 
+        email.addTextChangedListener {
+            if(it!!.isEmpty())
+                email.error="Required"
+           else if(!ValidatorHelper.emailValidatore(email.text.toString()))
+                email.error="Invalid email format"
+
+        }
+
+
+        pass.addTextChangedListener {
+            if(it!!.isEmpty())
+                pass.error="Required"
+            else if(!ValidatorHelper.passwordValidator(pass.text.toString()))
+                pass.error="must be at least 7"
+
+        }
+
 
         regButton.setOnClickListener {
             if(email.text.isEmpty()||pass.text.isEmpty()||fname.text.isEmpty()){
@@ -40,8 +60,10 @@ class RegisterActivity : AppCompatActivity() {
                                 vm.addUser(user)
                                     .observe(this,{
                                         if(it){
-                                             startActivity(Intent(this, LoginActivity::class.java))
-                                            Toast.makeText(this,getString(R.string.register_success), Toast.LENGTH_LONG).show()
+                                            if(ValidatorHelper.emailValidatore(email.text.toString())&&ValidatorHelper.passwordValidator(pass.text.toString())){
+                                                startActivity(Intent(this, LoginActivity::class.java))
+                                                Toast.makeText(this,getString(R.string.register_success), Toast.LENGTH_LONG).show()
+                                            }
                                         }
                                     })
                             startActivity(Intent(this, LoginActivity::class.java))

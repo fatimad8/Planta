@@ -16,13 +16,13 @@
         <entry key="app/src/main/res/layout/activity_forget_pass.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/activity_forget_pass2.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_indoor.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/activity_order_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_order_summary.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_outdoor.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_shipping_location.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="app/src/main/res/layout/button_shape.xml" value="0.12537993920972645" />

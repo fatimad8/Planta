@@ -35,11 +35,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mToolbar)
 
 
-
-
-
-
-
         var icon = arrayOf(
             R.drawable.ic_baseline_home_24,
             R.drawable.ic_baseline_search_24,
@@ -53,31 +48,5 @@ class MainActivity : AppCompatActivity() {
         }.attach()
 
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.profile_menu,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.language ->{
-
-                if(mToolbar.title=="Planta"){
-                    LocalizationUtil.changeLanguage(this,"ar")
-                    SharedPreferencesHelper.saveLanguage(this,"ar")
-                }
-
-                else{
-                    LocalizationUtil.changeLanguage(this,"en")
-                    SharedPreferencesHelper.saveLanguage(this,"en")
-
-                }
-
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 
 }

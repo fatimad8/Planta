@@ -15,16 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Planta"
         android:usesCleartextTraffic="true">
-
+        <service
+            android:name=".util.MyFirebaseService"
+            android:enabled="true"
+            android:exported="true"></service>
         <service
             android:name=".view.notification.NotificationsService"
             android:enabled="true"
-            android:exported="true"/>
-
-        <receiver
-            android:name=".view.notification.NotificationReceiver"
-            android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".view.home.cart.OrderSummaryActivity"

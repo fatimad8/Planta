@@ -8,8 +8,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import com.example.planta.R
 import com.example.planta.util.SharedPreferencesHelper
+import com.example.planta.util.ValidatorHelper
 import com.example.planta.view.home.mainScreen.MainActivity
 import com.example.planta.view.home.cart.CartViewModel
 import com.example.planta.view.home.profile.wishList.WishListViewModel
@@ -31,6 +33,16 @@ class LoginActivity : AppCompatActivity() {
         val vm3: WishListViewModel by viewModels()
 
 
+        emailEditText.addTextChangedListener {
+            if(it!!.isEmpty())
+                emailEditText.error="Required"
+            else if(!ValidatorHelper.emailValidatore(emailEditText.text.toString()))
+                emailEditText.error="Invalid email format"
+
+        }
+
+
+
 
 
         buttonLogin.setOnClickListener {
@@ -40,28 +52,29 @@ class LoginActivity : AppCompatActivity() {
                 vm.sign(emailEditText.text.toString(), passEditText.text.toString())
                     .observe(this, {
                         if (it.isNotEmpty()) {
+                            //if(ValidatorHelper.emailValidatore(emailEditText.text.toString()))
                             vm.getUserById(it).observe(this,{
                                 var id=it[0].id
                                 SharedPreferencesHelper.saveUserId(this,id)
                                 startActivity(Intent(this, MainActivity::class.java))
                                 Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_LONG).show()
 
-                                var uid=SharedPreferencesHelper.getUserId(this)
-                                vm2.getOrderId(uid,uid).observe(this,{
-                                    if(it.size==0){
-                                        SharedPreferencesHelper.saveOrderId(this,"null")
-                                    }else{
-                                        var orderid=it[0].id
-                                        SharedPreferencesHelper.saveOrderId(this,orderid)
-                                    }
-                                })
-                                vm3.getUserWishByUid(uid,uid).observe(this,{
-                                    if(it.size==0){
-                                        SharedPreferencesHelper.saveWishId(this,"null")
-                                    }else{
-                                        SharedPreferencesHelper.saveWishId(this,it[0].id)
-                                    }
-                                })
+                                    var uid=SharedPreferencesHelper.getUserId(this)
+                                    vm2.getOrderId(uid,uid).observe(this,{
+                                        if(it.size==0){
+                                            SharedPreferencesHelper.saveOrderId(this,"null")
+                                        }else{
+                                            var orderid=it[0].id
+                                            SharedPreferencesHelper.saveOrderId(this,orderid)
+                                        }
+                                    })
+                                    vm3.getUserWishByUid(uid,uid).observe(this,{
+                                        if(it.size==0){
+                                            SharedPreferencesHelper.saveWishId(this,"null")
+                                        }else{
+                                            SharedPreferencesHelper.saveWishId(this,it[0].id)
+                                        }
+                                    })
 
                             })
 

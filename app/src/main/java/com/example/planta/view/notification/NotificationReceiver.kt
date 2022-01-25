@@ -9,5 +9,6 @@ class NotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val serviceIntent = Intent(context,NotificationsService::class.java)
         context.startService(serviceIntent)
-      }
+    }
 }
+

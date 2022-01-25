@@ -22,7 +22,7 @@ class NotificationsService : Service() {
     override fun onCreate() {
 
             createNotificationChannel()
-            show_notification()
+            showNotification()
 
 
     }
@@ -36,37 +36,71 @@ class NotificationsService : Service() {
 
 
 
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
+    fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Fatima"
-            val descriptionText = "Description fo my app channel "
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
+            val CHANNEL_ID = "show_dialog"
+            val channel = NotificationChannel(CHANNEL_ID, "name", importance).apply {
+                description = "descriptionText"
             }
-            // Register the channel with the system
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
-
-    fun show_notification():Unit{
-        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
+    fun showNotification(){
+        val intent = Intent(this, HomeFragment::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        var toBitMap = BitmapFactory.decodeResource(applicationContext.resources, R.mipmap.ic_launcher)
+        val builder = NotificationCompat.Builder(this, "show_dialog")
+            .setLargeIcon(toBitMap)
             .setSmallIcon(R.drawable.ic_baseline_notifications_24)
-            .setContentTitle("Where did you go?")
-            .setContentText("Your shopping cart is waiting for you!")
-            .setStyle(NotificationCompat.BigTextStyle()
-                .bigText("Complete your order now!"))
+            .setContentTitle("Look Up!")
+            .setContentText("Plants give us Oxygen for the lungs and soul.")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
+            // Set the intent that will fire when the user taps the notification
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
         with(NotificationManagerCompat.from(this)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(22, builder.build())
+            notify(1, builder.build())
         }
     }
+
+
+//
+//    private fun createNotificationChannel() {
+//        // Create the NotificationChannel, but only on API 26+ because
+//        // the NotificationChannel class is new and not in the support library
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val name = "Fatima"
+//            val descriptionText = "Description fo my app channel "
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+//                description = descriptionText
+//            }
+//            // Register the channel with the system
+//            val notificationManager: NotificationManager =
+//                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//            notificationManager.createNotificationChannel(channel)
+//        }
+//    }
+//
+//    fun show_notification():Unit{
+//        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
+//            .setSmallIcon(R.drawable.ic_baseline_notifications_24)
+//            .setContentTitle("Look Up!")
+//            .setContentText("Plants give us Oxygen for the lungs and soul.")
+//            .setStyle(NotificationCompat.BigTextStyle()
+//                .bigText("Buy now."))
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//
+//        with(NotificationManagerCompat.from(this)) {
+//            // notificationId is a unique int for each notification that you must define
+//            notify(22, builder.build())
+//        }
+//    }
 
 
 }

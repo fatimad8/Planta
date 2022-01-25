@@ -35,6 +35,8 @@ class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
         }
             return HomeFragment()
         }
+
+
     }
 
 

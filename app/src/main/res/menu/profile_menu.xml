@@ -6,7 +6,9 @@
         android:id="@+id/language"
         android:icon="@drawable/language_ic"
         android:title="language"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" >
+
+    </item>
 
 
 </menu>

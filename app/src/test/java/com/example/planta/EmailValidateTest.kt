@@ -38,11 +38,11 @@ class EmailValidateTest {
 
     @Test
     fun passwordValidator_CorrectPasswordSimple(){
-        assertTrue(ValidatorHelper().passwordValidator("1234567"))
-        assertTrue(ValidatorHelper().passwordValidator("aefbt12"))
-        assertFalse(ValidatorHelper().passwordValidator("12345"))
-        assertFalse(ValidatorHelper().passwordValidator("ertfd"))
-        assertFalse(ValidatorHelper().passwordValidator(""))
+        assertTrue(ValidatorHelper.passwordValidator("1234567"))
+        assertTrue(ValidatorHelper.passwordValidator("aefbt12"))
+        assertFalse(ValidatorHelper.passwordValidator("12345"))
+        assertFalse(ValidatorHelper.passwordValidator("ertfd"))
+        assertFalse(ValidatorHelper.passwordValidator(" "))
     }
 
 
