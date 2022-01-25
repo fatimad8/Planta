@@ -8,6 +8,7 @@ import com.example.planta.R
 import com.example.planta.util.LocalizationUtil
 import com.example.planta.util.SharedPreferencesHelper
 import com.example.planta.view.home.mainScreen.MainActivity
+import com.example.planta.view.notification.Notification
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

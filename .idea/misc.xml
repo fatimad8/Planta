@@ -19,10 +19,10 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.19270833333333334" />
-        <entry key="app/src/main/res/layout/activity_order_details.xml" value="0.4682080924855491" />
-        <entry key="app/src/main/res/layout/activity_order_summary.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_order_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_order_summary.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_outdoor.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_shipping_location.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="app/src/main/res/layout/button_shape.xml" value="0.12537993920972645" />
@@ -30,10 +30,10 @@
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_cart_container.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/fragment_cart_holder.xml" value="0.19270833333333334" />
-        <entry key="app/src/main/res/layout/fragment_empty_cart.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_empty_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_instruction.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_logged.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_logged.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_order_history.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/fragment_reset.xml" value="0.25" />

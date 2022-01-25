@@ -15,6 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Planta"
         android:usesCleartextTraffic="true">
+
+        <service
+            android:name=".view.notification.NotificationsService"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <receiver
+            android:name=".view.notification.NotificationReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".view.home.cart.OrderSummaryActivity"
             android:exported="false" />

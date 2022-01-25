@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:text="TextView"
-                android:textColor="#9EBB89"
+                android:textColor="#6D953F"
                 app:layout_constraintStart_toEndOf="@+id/textView23"
                 app:layout_constraintTop_toTopOf="@+id/textView23" />
 

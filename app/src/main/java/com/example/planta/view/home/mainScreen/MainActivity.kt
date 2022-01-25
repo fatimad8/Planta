@@ -1,5 +1,6 @@
 package com.example.planta.view.home.mainScreen
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.planta.R
 import com.example.planta.util.LocalizationUtil
 import com.example.planta.util.SharedPreferencesHelper
+import com.example.planta.view.notification.Notification
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -21,20 +23,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
         var mTablayout = findViewById<TabLayout>(R.id.mTabLayout)
         var mViewPager = findViewById<ViewPager2>(R.id.mViewPager)
         mViewPager.adapter= HomeAdapter(this)
 
 
-         mToolbar = findViewById<Toolbar>(R.id.mtoolbar2)
+        mToolbar = findViewById<Toolbar>(R.id.mtoolbar2)
         mToolbar.title=getString(R.string.planta)
         mToolbar.setTitleTextColor(Color.WHITE)
 
         setSupportActionBar(mToolbar)
-//        mToolbar.setNavigationOnClickListener {
-//            finish()
-//        }
+
 
 
 
@@ -75,13 +74,10 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-
-
-
-
-
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 }
