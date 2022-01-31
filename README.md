@@ -31,7 +31,7 @@ planta is online plant store , to sell plant and accessories.
 ![Review Order](https://user-images.githubusercontent.com/72036862/151843147-7108051b-b3b2-45ea-b551-67afcf2bf328.jpg)
 ![User Profile](https://user-images.githubusercontent.com/72036862/151843280-0c433bf0-f234-43ea-9475-a2c30ae23da0.jpg)
 -------------------
-### features to be added in next iterations*
+### features to be added *
 
 - giving the option to the user to upload avatar.
 
