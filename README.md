@@ -33,7 +33,7 @@ planta is online plant store , to sell plant and accessories.
 -------------------
 ### features to be added in next iterations*
 
-- giving the option to the user to post pictures.
+- giving the option to the user to upload avatar.
 
 
 
