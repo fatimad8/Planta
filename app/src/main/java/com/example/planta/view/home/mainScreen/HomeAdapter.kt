@@ -17,7 +17,6 @@ import com.google.firebase.ktx.Firebase
 
 class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 
-    //val vm: ProfileViewModel by viewMo
 
     override fun getItemCount(): Int {
 
@@ -29,7 +28,7 @@ class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
         when (position) {
             0 -> return HomeFragment()
             1 -> return SearchFragment()
-            2 -> return CartHolderFragment()
+            2 -> return CartFragment()
             3 -> return ProfileFragment()
 
         }

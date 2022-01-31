@@ -19,24 +19,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/profile_menu" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/mViewPager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/mTabLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtoolbar2" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/mTabLayout"
-        android:layout_width="409dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/main_bottom_navigation"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainFrameLayout"
+        app:menu="@menu/main_bottom_navigation" />
 
+    <FrameLayout
+        android:id="@+id/mainFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mtoolbar2">
 
-    </com.google.android.material.tabs.TabLayout>
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,8 +25,6 @@ class EmptyCartFragment : Fragment() {
         var v= inflater.inflate(R.layout.fragment_empty_cart, container, false)
         var start=v.findViewById<Button>(R.id.buttonStart)
 
-       // Picasso.get().load(R.drawable.empty_cart_bg).into(emptyCart)
-
         start.setOnClickListener {
             startActivity(Intent(Intent(context,MainActivity::class.java)))
          }

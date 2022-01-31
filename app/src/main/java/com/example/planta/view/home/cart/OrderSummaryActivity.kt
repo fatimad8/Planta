@@ -78,7 +78,7 @@ class OrderSummaryActivity : AppCompatActivity() {
                 .observeForever { newHistory ->
                     if (it != null) {
                         Toast.makeText(this, getString(R.string.item_added), Toast.LENGTH_SHORT).show()
-                        vm.getUserCart(uid, oid).observeForever { cartItems ->
+                        vm.userCart.observeForever { cartItems ->
                             if (cartItems != null) {
                                 for (item in cartItems) {
 
@@ -112,26 +112,6 @@ class OrderSummaryActivity : AppCompatActivity() {
 
                                                                 }.show()
                                                         }
-
-//                                                vm.deleteUserCart(uid, oid)
-//                                                    .observeForever {
-//                                                        if(it){
-//                                                            SweetAlertDialog(
-//                                                                this,
-//                                                                SweetAlertDialog.SUCCESS_TYPE
-//                                                            )
-//                                                                .setTitleText(getString(R.string.order_complete))
-//                                                                .setConfirmText(getString(R.string.ok))
-//                                                                .setConfirmClickListener {
-//                                                                    startActivity(
-//                                                                        Intent(
-//                                                                            this,
-//                                                                            MainActivity::class.java
-//                                                                        )
-//                                                                    )
-//
-//                                                                }.show()
-//                                                        }
                                                         SharedPreferencesHelper.saveOrderId(this,"null")
 
                                                     }
@@ -143,7 +123,6 @@ class OrderSummaryActivity : AppCompatActivity() {
 
                     }
                 }
-
 
 
 

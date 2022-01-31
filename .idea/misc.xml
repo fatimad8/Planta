@@ -27,7 +27,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="app/src/main/res/layout/button_shape.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/confirm_address_dialog.xml" value="0.20677083333333332" />
-        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_cart_container.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/fragment_cart_holder.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/fragment_empty_cart.xml" value="0.22" />
@@ -50,6 +50,7 @@
         <entry key="app/src/main/res/layout/raw_wishlist_item.xml" value="0.22" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/menu/details_menu.xml" value="0.20677083333333332" />
+        <entry key="app/src/main/res/menu/main_bottom_navigation.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/menu/profile_menu.xml" value="0.20677083333333332" />
       </map>

@@ -69,38 +69,4 @@ class NotificationsService : Service() {
     }
 
 
-//
-//    private fun createNotificationChannel() {
-//        // Create the NotificationChannel, but only on API 26+ because
-//        // the NotificationChannel class is new and not in the support library
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val name = "Fatima"
-//            val descriptionText = "Description fo my app channel "
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-//                description = descriptionText
-//            }
-//            // Register the channel with the system
-//            val notificationManager: NotificationManager =
-//                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//            notificationManager.createNotificationChannel(channel)
-//        }
-//    }
-//
-//    fun show_notification():Unit{
-//        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
-//            .setSmallIcon(R.drawable.ic_baseline_notifications_24)
-//            .setContentTitle("Look Up!")
-//            .setContentText("Plants give us Oxygen for the lungs and soul.")
-//            .setStyle(NotificationCompat.BigTextStyle()
-//                .bigText("Buy now."))
-//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//
-//        with(NotificationManagerCompat.from(this)) {
-//            // notificationId is a unique int for each notification that you must define
-//            notify(22, builder.build())
-//        }
-//    }
-
-
 }

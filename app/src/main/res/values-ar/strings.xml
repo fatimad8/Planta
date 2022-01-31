@@ -70,4 +70,17 @@
     <string name="search">البحث</string>
     <string name="CheckOut">الدفع</string>
     <string name="planta">نباتة</string>
+    <string name="home">الرئيسية</string>
+    <string name="cart">عربة التسوق</string>
+    <string name="profile">صفحتي</string>
+    <string name="Please_select_address">الرجاء اختيار العنوان</string>
+    <string name="Oops">عذرًا</string>
+    <string name="Please_Login_to_add_to_cart">الرجاء تسجيل الدخول لشراء</string>
+    <string name="review_your_order">مراجعة الطلب</string>
+    <string name="shipping">الشحن</string>
+    <string name="free">مجانًا</string>
+    <string name="subtotal">المبلغ الاجمالي</string>
+    <string name="shipping_address">عنوان الشحن</string>
+    <string name="buy_now">اشتري الآن</string>
+    <string name="shipped_to">شحنت الى:</string>
 </resources>

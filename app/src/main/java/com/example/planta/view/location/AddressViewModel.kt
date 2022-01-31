@@ -1,12 +1,15 @@
 package com.example.planta.view.location
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.planta.model.Address
 import com.example.planta.repository.AddressRepository
 import com.example.planta.repository.CartRepository
 
+private const val TAG = "AddressViewModel"
 class AddressViewModel:ViewModel() {
+    val userAdresses = MutableLiveData<List<Address>>()
 
     fun saveUserAddress(uid:String,address:Address):MutableLiveData<Boolean>{
         var mLiveData = MutableLiveData<Boolean>()
@@ -22,17 +25,17 @@ class AddressViewModel:ViewModel() {
         return mLiveData
     }
 
-    fun getUserAddress(uid:String):MutableLiveData<List<Address>>{
-        var mLiveData = MutableLiveData<List<Address>>()
+    fun getUserAddress(uid:String){
         AddressRepository().getUserAddress(uid)
             .observeForever {
+                Log.d(TAG,"getUserAdress is called")
                 if (it!=null) {
-                    mLiveData.postValue(it)
+                    userAdresses.postValue(it)
                 } else {
-                    mLiveData.postValue(listOf(Address("","","","","","")))
+                    userAdresses.postValue(listOf(Address("","","","","","")))
                 }
 
             }
-        return mLiveData
+
     }
 }

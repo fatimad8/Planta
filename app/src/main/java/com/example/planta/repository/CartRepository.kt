@@ -1,5 +1,6 @@
 package com.example.planta.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.planta.model.Item
@@ -12,12 +13,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+private const val TAG = "CartRepository"
+
 class CartRepository {
     val cartService = API.getInstence().create(CartService::class.java)
 
     fun createNewOrder(
         id: String,
-      order:Order
+        order: Order
     ): LiveData<Order> {
         var mLiveData = MutableLiveData<Order>()
         cartService.createNewOrder(id, order)
@@ -41,10 +44,9 @@ class CartRepository {
     }
 
 
-
-    fun addProductItem(uId: String,oId: String,item: Item):LiveData<Item>{
+    fun addProductItem(uId: String, oId: String, item: Item): LiveData<Item> {
         var mLiveData = MutableLiveData<Item>()
-        cartService.addProductItem(uId,oId,item).enqueue(object : Callback<Item> {
+        cartService.addProductItem(uId, oId, item).enqueue(object : Callback<Item> {
             override fun onResponse(call: Call<Item>, response: Response<Item>) {
                 if (response.isSuccessful) {
                     mLiveData.postValue(response.body())
@@ -87,10 +89,10 @@ class CartRepository {
     }
 
 
-    fun getOrderId(userId:String,uid:String): MutableLiveData<List<Order>> {
+    fun getOrderId(userId: String, uid: String): MutableLiveData<List<Order>> {
         var mLiveData = MutableLiveData<List<Order>>()
 
-        cartService.getOrderId(userId,uid)
+        cartService.getOrderId(userId, uid)
             .enqueue(object : Callback<List<Order>> {
                 override fun onResponse(
                     call: Call<List<Order>>,
@@ -107,37 +109,19 @@ class CartRepository {
         return mLiveData
     }
 
-    fun getUserCart(uId: String, oId: String): LiveData<List<Item>>{
-        var mutableLiveData = MutableLiveData<List<Item>>()
 
-        cartService.getUserCart(uId,oId)
-            .enqueue(object : Callback<List<Item>> {
-                override fun onResponse(
-                    call: Call<List<Item>>,
-                    response: Response<List<Item>>
-                ) {
-                    mutableLiveData.postValue(response.body())
-                }
+    fun getUserCart(uId: String, oId: String) = cartService.getUserCart(uId,oId)
 
-                override fun onFailure(call: Call<List<Item>>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-        return mutableLiveData
-
-    }
-
-    fun deleteItem(uId: String, oId: String,itemId:String):MutableLiveData<Boolean>{
+    fun deleteItem(uId: String, oId: String, itemId: String): MutableLiveData<Boolean> {
         var mutableLiveData = MutableLiveData<Boolean>()
-        cartService.deleteItem(uId,oId, itemId).enqueue(object : Callback<Item> {
+        cartService.deleteItem(uId, oId, itemId).enqueue(object : Callback<Item> {
             override fun onResponse(
                 call: Call<Item>,
                 response: Response<Item>
             ) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     mutableLiveData.postValue(true)
-                }else{
+                } else {
                     mutableLiveData.postValue(false)
 
                 }
@@ -154,16 +138,16 @@ class CartRepository {
     }
 
 
-    fun deleteUserCart(uid: String,oId: String):MutableLiveData<Boolean>{
+    fun deleteUserCart(uid: String, oId: String): MutableLiveData<Boolean> {
         var mutableLiveData = MutableLiveData<Boolean>()
-        cartService.deleteUserCart(uid,oId).enqueue(object : Callback<Item> {
+        cartService.deleteUserCart(uid, oId).enqueue(object : Callback<Item> {
             override fun onResponse(
                 call: Call<Item>,
                 response: Response<Item>
             ) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     mutableLiveData.postValue(true)
-                }else{
+                } else {
                     mutableLiveData.postValue(false)
 
                 }
@@ -178,17 +162,18 @@ class CartRepository {
         return mutableLiveData
     }
 
-    fun updateCartQun(uId: String, oId: String,itemId:String,item:Item):LiveData<Item>{
+    fun updateCartQun(uId: String, oId: String, itemId: String, item: Item): LiveData<Item> {
         var mLiveData = MutableLiveData<Item>()
-         cartService.updateCartQun(uId,oId, itemId, item).enqueue(object : Callback<Item> {
+        cartService.updateCartQun(uId, oId, itemId, item).enqueue(object : Callback<Item> {
             override fun onResponse(
                 call: Call<Item>,
                 response: Response<Item>
             ) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
+                    Log.d(TAG, "Item updated successfully!")
                     mLiveData.postValue(response.body())
-                }else{
-                    mLiveData.postValue(Item("","","","","","","","",0))
+                } else {
+                    mLiveData.postValue(Item("", "", "", "", "", "", "", "", 0))
 
                 }
 
@@ -203,29 +188,30 @@ class CartRepository {
 
     }
 
-    fun getUserOrder(uId: String, oId: String): LiveData<Order>{
-        var mutableLiveData =MutableLiveData<Order>()
+    fun updateCartQun1(uId: String, oId: String, itemId: String, item: Item) =
+        cartService.updateCartQun(uId, oId, itemId, item)
 
-        cartService.getUserOrder(uId,oId)
+    fun getUserOrder(uId: String, oId: String): LiveData<Order> {
+        var mutableLiveData = MutableLiveData<Order>()
+
+        cartService.getUserOrder(uId, oId)
             .enqueue(object : Callback<Order> {
                 override fun onResponse(
                     call: Call<Order>,
                     response: Response<Order>
                 ) {
-                    if(response.isSuccessful)
-                    mutableLiveData.postValue(response.body())
+                    if (response.isSuccessful)
+                        mutableLiveData.postValue(response.body())
                 }
 
                 override fun onFailure(call: Call<Order>, t: Throwable) {
                     t.printStackTrace()
-                 }
+                }
 
             })
         return mutableLiveData
 
     }
-
-
 
 
 }

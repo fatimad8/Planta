@@ -41,12 +41,6 @@ class HomeFragment : Fragment() {
         var v = inflater.inflate(R.layout.fragment_home, container, false)
 
 
-//            val serviceIntent = Intent(context, NotificationsService::class.java)
-//            context?.startService(serviceIntent)
-//           setNotification()
-
-
-
         var indoor = v.findViewById<CardView>(R.id.indoorCardView)
         var outdoor = v.findViewById<CardView>(R.id.outdoorCardView)
         var accessories = v.findViewById<CardView>(R.id.accesoriesCardView)

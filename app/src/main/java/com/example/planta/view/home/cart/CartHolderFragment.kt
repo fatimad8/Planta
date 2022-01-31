@@ -23,8 +23,7 @@ class CartHolderFragment : Fragment() {
         // Inflate the layout for this fragment
         var v=  inflater.inflate(R.layout.fragment_cart_holder, container, false)
         val supportFragmentManager2 = activity?.supportFragmentManager?.beginTransaction()
-//        val fragMgr: FragmentManager =  getChildFragmentManager()
-//        fragMgr.beginTransaction()
+
         val manager = childFragmentManager
         val transaction: FragmentTransaction = manager.beginTransaction()
 

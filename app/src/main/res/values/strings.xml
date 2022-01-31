@@ -69,4 +69,17 @@
     <string name="search">search</string>
     <string name="CheckOut">CheckOut</string>
     <string name="planta">Planta</string>
+    <string name="home">home</string>
+    <string name="cart">cart</string>
+    <string name="profile">profile</string>
+    <string name="Please_select_address">Please select address</string>
+    <string name="Oops">Oops...</string>
+    <string name="Please_Login_to_add_to_cart">Please Login to add to cart</string>
+    <string name="review_your_order">Review your order</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="shipping">Shipping</string>
+    <string name="free">Free</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="shipped_to">Shipped to:</string>
 </resources>

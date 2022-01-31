@@ -1,11 +1,13 @@
 package com.example.planta.view.cart
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planta.R
 import com.example.planta.model.Item
@@ -14,8 +16,10 @@ import com.example.planta.view.home.cart.CartViewModel
 import com.example.planta.view.home.cart.SwipeToDeleteCallback
 import com.squareup.picasso.Picasso
 
+private const val TAG = "CartAdapter"
 class CartAdapter(var data: List<Item>) : RecyclerView.Adapter<CartAdapterHolder>() {
-
+    var totalPrice = 0
+    var totalQun = 0
     private var listData: MutableList<Item> = data as MutableList<Item>
     var selectedList = mutableListOf<Int>()
     lateinit var swipe: SwipeToDeleteCallback
@@ -44,7 +48,7 @@ class CartAdapter(var data: List<Item>) : RecyclerView.Adapter<CartAdapterHolder
         if (selectedQuant != null) {
             var pos = adapter.getPosition(selectedQuant)
             holder.spinner.setSelection(pos)
-        }
+         }
 
 
         holder.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -64,8 +68,10 @@ class CartAdapter(var data: List<Item>) : RecyclerView.Adapter<CartAdapterHolder
                     data[position].price,
                     qun as Int
                 )
-                CartViewModel().updateCartQun(uid, oid, itemId, items)
-                println("item:$qun")
+
+                CartViewModel().updateCartQun1(uid, oid, itemId, items)
+                //CartViewModel().getUserCart(uid,oid)
+                  println("item:$qun")
 
 
             }
@@ -76,18 +82,9 @@ class CartAdapter(var data: List<Item>) : RecyclerView.Adapter<CartAdapterHolder
         }
 
 
-            //        holder.cartCard.setOnClickListener {
-//            var intent = Intent(holder.itemView.context, DetailsActivity::class.java)
-//            intent.putExtra("item", data[position])
-//
-//            holder.itemView.context.startActivity(intent)
-//        }
-
 
     }
 
-
-    //holder.spinner.=data[position].quantity
 
 
     override fun getItemCount(): Int {
@@ -99,6 +96,7 @@ class CartAdapter(var data: List<Item>) : RecyclerView.Adapter<CartAdapterHolder
         listData.removeAt(index)
         notifyDataSetChanged()
     }
+
 
 }
 

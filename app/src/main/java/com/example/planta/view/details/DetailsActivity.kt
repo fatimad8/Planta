@@ -127,9 +127,9 @@ class DetailsActivity : AppCompatActivity() {
 
         addbtn.setOnClickListener {
             if(SharedPreferencesHelper.getUserId(this).equals("null")){
-                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Oops...")
-                    .setContentText("Please Login to add to cart")
+                SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText(getString(R.string.Oops))
+                    .setContentText(getString(R.string.Please_Login_to_add_to_cart))
                     .show()}
             if (SharedPreferencesHelper.getOrderId(this) == "null") {
                 var order=Order("",date.toString(),item as Int,price,id)

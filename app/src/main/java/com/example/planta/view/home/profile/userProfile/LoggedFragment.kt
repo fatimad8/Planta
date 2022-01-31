@@ -34,8 +34,6 @@ class LoggedFragment : Fragment() {
         var name= v.findViewById<TextView>(R.id.textViewUserName)
         var email=v.findViewById<TextView>(R.id.textViewUserEmail)
 
-        //val supportFragmentManager = activity?.supportFragmentManager?.beginTransaction()
-
 
         shortName.text
 

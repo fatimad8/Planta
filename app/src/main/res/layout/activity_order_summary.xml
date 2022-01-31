@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="Review your order"
+                android:text="@string/review_your_order"
                 android:textColor="#3E535D"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Subtotal"
+                        android:text="@string/subtotal"
                         android:textColor="#3E535D"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -104,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Shipping"
+                        android:text="@string/shipping"
                         android:textColor="#6D953F"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="Free"
+                        android:text="@string/free"
                         android:textColor="#6D953F"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewSubTotal" />
@@ -173,7 +173,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Shipping Address"
+                        android:text="@string/shipping_address"
                         android:textColor="#3E535D"
                         android:textSize="16sp"
                         android:textStyle="normal"
@@ -207,7 +207,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_shape"
-        android:text="Buy Now"
+        android:text="@string/buy_now"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
