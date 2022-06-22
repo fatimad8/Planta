@@ -20,7 +20,7 @@ planta is online plant store , to sell plant and accessories.
 
 
 ### *Screenshots*
-![Splash Screan](https://user-images.githubusercontent.com/72036862/151843400-f43a2bff-1051-4433-ab48-55ff78c7e23c.jpg)
+![Splash Screen](https://user-images.githubusercontent.com/72036862/151843400-f43a2bff-1051-4433-ab48-55ff78c7e23c.jpg)
 ![Log in](https://user-images.githubusercontent.com/72036862/151841932-8256f0ac-2735-4819-84c3-cfac04c8ca50.jpg)
 ![Sign Up](https://user-images.githubusercontent.com/72036862/151842002-39ceef75-6582-44e3-8f91-c5f679f7b163.jpg)
 ![Home](https://user-images.githubusercontent.com/72036862/151842099-dc7e5089-e8c4-4eec-8d1b-c719950baaa9.jpg)
